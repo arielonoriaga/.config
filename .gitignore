@@ -1,0 +1,11 @@
+coc/
+configstore/
+darktable/
+filezilla/
+gtk-3.0/
+iterm2/
+spotify-tui/
+.DS_Store
+nvim/autoload/
+nvim/pack/
+nvim/plug-config/
