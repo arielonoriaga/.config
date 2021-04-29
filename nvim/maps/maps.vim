@@ -4,7 +4,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 "Copia la linea
-:nnoremap <silent>cl Vy 
+:nnoremap <silent>cl Vy
 "Copia la palabra actual
 :nmap <silent>cw yiw
 "Borra los traling spaces
@@ -15,8 +15,9 @@ nmap <silent>ff ,cw ,gs
 nmap <silent>sf cw fs
 "Borra la linea sin copiar
 :nnoremap <silent>dd "_dd<cr>
+:nnoremap <silent>ciw "_ciw
 "Copia y busca la palabra actual
-nmap <silent>sw * 
+nmap <silent>sw *
 "Moving lines like vscode
 vnoremap <silent>J :m '>+1<cr>gv=gv
 vnoremap <silent>K :m '<-2<cr>gv=gv
@@ -38,15 +39,16 @@ nnoremap <silent><C-n> <%
 nmap <silent>fn :let @+=expand('%:t:r')<cr> fs
 "Copia el nombre del archivo actual
 nmap <silent>cfn :let @+=expand('%:t:r')<cr>
+nmap <silent>ctn :let @+=expand('%:t:r:r')<cr>
 "Moverse entre llaves
 nmap <silent>t %
 vmap <silent>t %
 "Ordena las palabras
 vmap <silent>s :sort<cr>
 "Busar algun texto en el arbol de archivos
-noremap <silent>gs :CocSearch 
+noremap <silent>gs :CocSearch
 "Buscar Archivos
-noremap <silent>fs :GFiles<cr> 
+noremap <silent>fs :GFiles<cr>
 "Busca coincidencias
 nmap <silent>st <plug>(easymotion-s2)
 
@@ -54,11 +56,11 @@ let mapleader = ","
 "Git status
 noremap <leader>gst :GFiles?<cr>
 "Remueve ultima busqueda /
-noremap <leader>rs :noh<cr> 
+noremap <leader>rs :noh<cr>
 "Recarga el archivo de vimrc donde sea que este
 noremap <leader>reload :source ~/.vimrc<cr>
-"Copia el relative pat
-nnoremap <leader>crp :let @+=expand("%")<cr>
+"Copia el relative path
+noremap <leader>crp :let @+=expand("%")<cr>
 "Recarga haciendo referencia al archivo actual
 noremap <leader>vim :source %<cr>
 "split screen vertical
