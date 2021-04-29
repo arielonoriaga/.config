@@ -1,4 +1,4 @@
-:iabbrev sht <Esc>ctniimport { shallowMount} from "@tests/";<cr>
+:iabbrev tt@ <Esc>ctniimport { shallowMount} from "@tests/";<cr>
             \import <C-o>p from "";<cr><cr>
             \describe("<C-o>P", () => {<cr>
                 \const wrapper = shallowMount(<C-o>P);<cr><cr>
@@ -7,7 +7,12 @@
                         \wrapper.exists()
                     \).toBeTruthy();
                 \});
-            \});<Esc><Esc>,crpgg0j3WpBlv4exi@<Esc>lvu:%s/.spec.js/<cr>
+            \});<Esc>,crptgg0j3WpBlv4exi@<Esc>lvu
 
 :iabbrev tihs this
 :iabbrev heigth height
+
+:iabbrev vc@ <Esc>0vExiimport<C-o>p from "NEWCOMPONENTPATH";<Esc>
+        \/components: {<Esc>,rsA<Esc>tkA<cr><C-o>P,<Esc>V2<C-]>:%s/NEWCOMPONENTPATH/<cr>
+        \03Wli
+

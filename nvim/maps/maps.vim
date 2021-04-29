@@ -61,6 +61,7 @@ noremap <leader>rs :noh<cr>
 noremap <leader>reload :source ~/.vimrc<cr>
 "Copia el relative path
 noremap <leader>crp :let @+=expand("%")<cr>
+noremap <leader>crpt :let @+=expand("%:r:r")<cr>
 "Recarga haciendo referencia al archivo actual
 noremap <leader>vim :source %<cr>
 "split screen vertical
