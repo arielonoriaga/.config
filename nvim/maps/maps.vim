@@ -3,6 +3,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
+
 "Copia la linea
 :nnoremap <silent>cl Vy
 "Copia la palabra actual

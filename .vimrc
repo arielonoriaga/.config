@@ -21,7 +21,7 @@ set encoding=utf-8
 set showmatch
 set laststatus=2
 
-set colorcolumn=120
+set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgreky
 highlight ExtraWhitespace ctermbg=red guibg=red
 

@@ -7,12 +7,13 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-
     " Better Syntax Support
     Plug 'leafoftree/vim-vue-plugin'
 
-    " File Explorer
+    " Nerd Plugs
     Plug 'scrooloose/NERDTree'
+    "Plug 'preservim/nerdcommenter'
+
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
 
@@ -36,8 +37,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
     "themes
     Plug 'sonph/onehalf', { 'rtp': 'vim' } "onehalf
     Plug 'drewtempelmeyer/palenight.vim' "palenight
@@ -46,6 +45,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'altercation/vim-colors-solarized' "solarized
     Plug 'joshdick/onedark.vim' "onedark
     Plug 'kyoz/purify', { 'rtp': 'vim' } "purify
+    Plug 'ayu-theme/ayu-vim' "ayu
     "no airline themes
         Plug 'dracula/vim', { 'as': 'dracula' } "dracula
 
