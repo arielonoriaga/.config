@@ -16,3 +16,4 @@
         \/components: {<Esc>,rsA<Esc>tkA<cr><C-o>P,<Esc>V2<C-]>:%s/NEWCOMPONENTPATH/<cr>
         \03Wli
 
+:iabbrev tse <Esc>bvexiexpect(<cr>).toStrictEqual();<Esc>

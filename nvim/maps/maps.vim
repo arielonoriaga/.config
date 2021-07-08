@@ -31,9 +31,11 @@ vmap <silent><C-[> <<<Esc>
 vmap <silent><C-]> >><Esc>
 " Toggle nerdtree
 nnoremap <silent> <C-t> :NERDTreeToggle<CR>
+" Show on tree
+nnoremap <silent> <C-g> :NERDTreeFind<CR>
 "Ale
 nmap <silent> <C-a> :ALEToggle<cr>
-"Ident Function
+""Ident Function
 nnoremap <silent><C-m> >%
 nnoremap <silent><C-n> <%
 "Copia el nombre del archivo en el que estas y abre fzf
@@ -73,6 +75,10 @@ nmap <leader>rcw yiw :%s/
 nmap <leader>r :NERDTreeFocus<cr>R<c-w><c-p>
 nmap <leader>tree :NERDTree<cr>
 nmap <leader>dl cl<silent>p
-"Guardado y scape en modo insert
-:imap kk <Esc>
-:imap ww <Esc>:w<cr>
+"Historial
+nmap <leader>h :History<cr>
+
+nmap <leader>ts :set tabstop=2<cr>:set shiftwidth=2<cr>
+nmap <leader>vue :set tabstop=4<cr>:set shiftwidth=4<cr>
+
+

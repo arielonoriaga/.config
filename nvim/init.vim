@@ -3,12 +3,12 @@ source $HOME/.config/nvim/plug-config/coc.vim
 
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath=&runtimepath
-source ~/.vimrc
 
+so ~/.vimrc
 so ~/.config/nvim/maps/maps.vim
 so ~/.config/nvim/snippets/snippets.vim
 
-colorscheme gruvbox
+colorscheme ayu
 
 set t_Co=256
 
@@ -38,7 +38,7 @@ let g:solarized_termcolors=256
 let g:blamer_enabled = 1
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='purify'
+let g:airline_theme='ayu'
 
 let g:rainbow_active = 1
 
