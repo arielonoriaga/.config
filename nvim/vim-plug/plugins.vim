@@ -29,10 +29,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     Plug 'easymotion/vim-easymotion'
     Plug 'christoomey/vim-tmux-navigator'
-    "Plug 'terryma/vim-multiple-cursors'
+    Plug 'terryma/vim-multiple-cursors'
     Plug 'dense-analysis/ale'
     "Plug 'mbbill/undotree'
     Plug 'APZelos/blamer.nvim'
+
+    Plug 'airblade/vim-gitgutter'
 
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'

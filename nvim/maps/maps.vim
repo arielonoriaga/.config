@@ -4,6 +4,8 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
 "Copia la linea
 :nnoremap <silent>cl Vy
 "Copia la palabra actual
@@ -81,4 +83,6 @@ nmap <leader>h :History<cr>
 nmap <leader>ts :set tabstop=2<cr>:set shiftwidth=2<cr>
 nmap <leader>vue :set tabstop=4<cr>:set shiftwidth=4<cr>
 
+nmap <leader>hs <Plug>GitGutterStageHunk
+nmap <leader>hu <Plug>GitGutterUndoHunk
 
