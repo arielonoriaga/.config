@@ -40,6 +40,8 @@ nmap <silent> <C-a> :ALEToggle<cr>
 ""Ident Function
 nnoremap <silent><C-m> >%
 nnoremap <silent><C-n> <%
+
+nnoremap <silent><C-l> :ALEFix<cr>
 "Copia el nombre del archivo en el que estas y abre fzf
 nmap <silent>fn :let @+=expand('%:t:r')<cr> fs
 "Copia el nombre del archivo actual
