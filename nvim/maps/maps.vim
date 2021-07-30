@@ -4,8 +4,11 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 
-nmap ]c <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
+nmap ]c <Plug>(GitGutterNextHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
+
+nmap M <Plug>NERDCommenterToggle
+vmap M <Plug>NERDCommenterToggle
 "Copia la linea
 :nnoremap <silent>cl Vy
 "Copia la palabra actual
@@ -32,7 +35,7 @@ nnoremap <silent><C-]> >>
 vmap <silent><C-[> <<<Esc>
 vmap <silent><C-]> >><Esc>
 " Toggle nerdtree
-nnoremap <silent> <C-t> :NERDTreeToggle<CR>
+:nnoremap <silent> <C-u> :NERDTreeToggle<CR>
 " Show on tree
 nnoremap <silent> <C-g> :NERDTreeFind<CR>
 "Ale
@@ -85,6 +88,6 @@ nmap <leader>h :History<cr>
 nmap <leader>ts :set tabstop=2<cr>:set shiftwidth=2<cr>
 nmap <leader>vue :set tabstop=4<cr>:set shiftwidth=4<cr>
 
-nmap <leader>hs <Plug>GitGutterStageHunk
-nmap <leader>hu <Plug>GitGutterUndoHunk
+nmap <leader>hs <Plug>(GitGutterStageHunk)
+nmap <leader>hu <Plug>(GitGutterUndoHunk)
 

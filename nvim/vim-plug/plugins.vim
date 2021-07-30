@@ -9,11 +9,14 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
     " Better Syntax Support
     Plug 'leafoftree/vim-vue-plugin'
-
+    Plug 'pangloss/vim-javascript'
+    Plug 'vim-scripts/loremipsum'
     " Nerd Plugs
+    Plug 'ryanoasis/vim-devicons'
     Plug 'scrooloose/NERDTree'
-    "Plug 'preservim/nerdcommenter'
-
+    Plug 'preservim/nerdcommenter'
+    Plug 'wfxr/minimap.vim'
+"
     " Auto pairs for '(' '[' '{'
     Plug 'jiangmiao/auto-pairs'
 
@@ -40,16 +43,18 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-airline/vim-airline-themes'
 
     "themes
-    Plug 'sonph/onehalf', { 'rtp': 'vim' } "onehalf
-    Plug 'drewtempelmeyer/palenight.vim' "palenight
-    Plug 'mhartington/oceanic-next' "OceanicNext
-    Plug 'morhetz/gruvbox' "Gruvbox
+    Plug 'Rigellute/rigel' "rigel
     Plug 'altercation/vim-colors-solarized' "solarized
+    Plug 'ayu-theme/ayu-vim' "ayu
+    Plug 'cormacrelf/vim-colors-github' "Github
+    Plug 'dracula/vim', { 'as': 'dracula' } "dracula
+    Plug 'drewtempelmeyer/palenight.vim' "palenight
+    Plug 'ghifarit53/tokyonight-vim'
     Plug 'joshdick/onedark.vim' "onedark
     Plug 'kyoz/purify', { 'rtp': 'vim' } "purify
-    Plug 'ayu-theme/ayu-vim' "ayu
-    "no airline themes
-        Plug 'dracula/vim', { 'as': 'dracula' } "dracula
+    Plug 'lifepillar/vim-gruvbox8' "Gruvbox 8
+    Plug 'mhartington/oceanic-next' "OceanicNext
+    Plug 'sheldonldev/vim-gruvdark'
 
 call plug#end()
 

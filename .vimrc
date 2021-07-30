@@ -1,32 +1,33 @@
 syntax on
 
-autocmd InsertEnter,InsertLeave * set cul!
 set clipboard=unnamed
-set rnu
-set number
-set relativenumber
-set smartindent
-set nowrap
+set encoding=UTF-8
+set encoding=utf-8
+set et
+set incsearch
+set laststatus=2
 set nobackup
+set noerrorbells
+set nowrap
+set number
+set numberwidth=1
+set relativenumber
+set rnu
+set showcmd
+set showmatch
+set smartindent
+set sts=4
+set tabstop=4
 set undodir=~/.vim/undodir
 set undofile
-set incsearch
-set noerrorbells
-set tabstop=4
-set et
-set sts=4
-set showcmd
-set numberwidth=1
-set encoding=utf-8
-set showmatch
-set laststatus=2
-
 set colorcolumn=80
+set viminfo=""
+set background=dark
+
 highlight ColorColumn ctermbg=0 guibg=lightgreky
 highlight ExtraWhitespace ctermbg=red guibg=red
 
-let skip_defaults_vim=1
-set viminfo=""
+autocmd InsertEnter,InsertLeave * set cul!
 
-set background=dark
+let skip_defaults_vim=1
 
