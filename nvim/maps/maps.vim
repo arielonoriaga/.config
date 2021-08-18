@@ -7,6 +7,9 @@ nmap <silent> gr <Plug>(coc-references)
 nmap ]c <Plug>(GitGutterNextHunk)
 nmap [c <Plug>(GitGutterPrevHunk)
 
+nmap U <C-W>>
+nmap Y <C-W><
+
 nmap M <Plug>NERDCommenterToggle
 vmap M <Plug>NERDCommenterToggle
 "Copia la linea
@@ -18,7 +21,7 @@ nmap <silent>dts :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
 "Busca referencias en todos los archivos
 nmap <silent>ff ,cw ,gs
 "Copia la palabra actual y abre FZF
-nmap <silent>sf cw fs
+nmap <silent>sf cw ;
 "Borra la linea sin copiar
 :nnoremap <silent>dd "_dd<cr>
 :nnoremap <silent>ciw "_ciw
@@ -46,7 +49,7 @@ nnoremap <silent><C-n> <%
 
 nnoremap <silent><C-l> :ALEFix<cr>
 "Copia el nombre del archivo en el que estas y abre fzf
-nmap <silent>fn :let @+=expand('%:t:r')<cr> fs
+nmap <silent>fn :let @+=expand('%:t:r')<cr> ;
 "Copia el nombre del archivo actual
 nmap <silent>cfn :let @+=expand('%:t:r')<cr>
 nmap <silent>ctn :let @+=expand('%:t:r:r')<cr>
@@ -58,7 +61,10 @@ vmap <silent>s :sort<cr>
 "Busar algun texto en el arbol de archivos
 noremap <silent>gs :CocSearch
 "Buscar Archivos
-noremap <silent>fs :GFiles<cr>
+noremap <silent>; :GFiles<cr>
+"Historial
+noremap <silent>' :History<cr>
+
 "Busca coincidencias
 nmap <silent>st <plug>(easymotion-s2)
 
@@ -79,11 +85,9 @@ nmap <leader>v <C-w>v<cr>
 "Copia la palabra actual y prepara para hacer un replace en todo el archivo
 nmap <leader>rcw yiw :%s/
 "Recarga nerdtree
+
 nmap <leader>r :NERDTreeFocus<cr>R<c-w><c-p>
-nmap <leader>tree :NERDTree<cr>
 nmap <leader>dl cl<silent>p
-"Historial
-nmap <leader>h :History<cr>
 
 nmap <leader>ts :set tabstop=2<cr>:set shiftwidth=2<cr>
 nmap <leader>vue :set tabstop=4<cr>:set shiftwidth=4<cr>

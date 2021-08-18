@@ -1,7 +1,6 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
 export ZSH="/Users/arielonoriaga/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -43,8 +42,8 @@ alias watchpcx="~/Projects/Picallex/ && make pcx7-watch"
 alias xamppfolder="~/.bitnami/stackman/machines/xampp/volumes/root/htdocs"
 alias pcx="~/Projects/Picallex/picallex/"
 alias npmPcxReset="pcx && rm -Rf node_modules/ dist/ && npm i --only=prod; npm run prod"
-alias rebase="git stash && git pull --rebase origin master && git stash pop"
 alias lint="pcx && gcam 'temp' && npm run lint:fix && dcm"
+alias ggum="git pull --rebase origin master"
 
 export PATH="/usr/local/opt/php@7.3/bin:$PATH"
 export PATH=~/.npm-global/bin:$PATH

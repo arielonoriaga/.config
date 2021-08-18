@@ -7,42 +7,28 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-    " Better Syntax Support
-    Plug 'leafoftree/vim-vue-plugin'
-    Plug 'pangloss/vim-javascript'
-    Plug 'vim-scripts/loremipsum'
-    " Nerd Plugs
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'scrooloose/NERDTree'
-    Plug 'preservim/nerdcommenter'
-    Plug 'wfxr/minimap.vim'
-"
-    " Auto pairs for '(' '[' '{'
+    Plug 'APZelos/blamer.nvim'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'dense-analysis/ale'
+    Plug 'easymotion/vim-easymotion'
     Plug 'jiangmiao/auto-pairs'
-
-    Plug 'luochen1990/rainbow'
-    Plug 'yggdroot/indentline'
-    " Fzf
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-
-    Plug 'airblade/vim-rooter'
-
+    Plug 'leafoftree/vim-vue-plugin'
+    Plug 'luochen1990/rainbow'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-    Plug 'easymotion/vim-easymotion'
-    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'pangloss/vim-javascript'
+    Plug 'preservim/nerdcommenter'
+    Plug 'ryanoasis/vim-devicons'
+    Plug 'scrooloose/NERDTree'
     Plug 'terryma/vim-multiple-cursors'
-    Plug 'dense-analysis/ale'
-    "Plug 'mbbill/undotree'
-    Plug 'APZelos/blamer.nvim'
-
-    Plug 'airblade/vim-gitgutter'
-
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    Plug 'vim-scripts/loremipsum'
+    Plug 'wfxr/minimap.vim'
+    Plug 'yggdroot/indentline'
 
-    "themes
     Plug 'Rigellute/rigel' "rigel
     Plug 'altercation/vim-colors-solarized' "solarized
     Plug 'ayu-theme/ayu-vim' "ayu
