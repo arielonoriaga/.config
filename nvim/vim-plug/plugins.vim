@@ -16,16 +16,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'leafoftree/vim-vue-plugin'
-    Plug 'luochen1990/rainbow'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'pangloss/vim-javascript'
     Plug 'preservim/nerdcommenter'
-    Plug 'ryanoasis/vim-devicons'
     Plug 'scrooloose/NERDTree'
     Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'vim-scripts/loremipsum'
+    " Plug 'vim-scripts/loremipsum'
     Plug 'wfxr/minimap.vim'
     Plug 'yggdroot/indentline'
 
@@ -43,4 +40,3 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'sheldonldev/vim-gruvdark'
 
 call plug#end()
-

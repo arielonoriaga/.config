@@ -1,5 +1,6 @@
 :iabbrev tihs this
 :iabbrev heigth height
+:iabbrev retrun return
 
 :iabbrev vc@ <Esc>0vExiimport<C-o>p from 'NEWCOMPONENTPATH';<Esc>
   \/components: {<Esc>,rsA<Esc>tkA<cr><C-o>P,<Esc>V2<C-]>:%s/NEWCOMPONENTPATH/<cr>
@@ -25,3 +26,5 @@
   \class <C-o>p {<cr><cr>
   \}<cr><cr>
   \export default <Esc>cfni <C-o>P;<Esc>dts3kdd2k
+
+:iabbrev qr@ print_r(str_replace('`', '', vsprintf(str_replace("?", "'%s'", $query->toSql()), $query->getBindings())));die;<Esc>Exvblx

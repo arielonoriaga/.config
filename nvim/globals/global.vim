@@ -1,7 +1,7 @@
 let g:rigel_airline = 1
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'ayu'
+let g:airline_theme = 'molokai'
 
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreeFileExtensionHighlightFullName = 1
@@ -9,13 +9,17 @@ let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 let g:NERDTreePatternMatchHighlightFullName = 1
 let g:NERDTreeWinPos = "left"
 
-let g:ale_fix_on_save = 1
-let g:ale_pattern_options = {'\.php$': {'ale_enabled': 0}}
-let g:ale_fixers = {
-\    'javascript': ['eslint'],
-\    'typescript': ['eslint'],
-\    'vue': ['eslint'],
+let g:ale_pattern_options = {
+\ '\.php$': { 'ale_enabled': 0 },
 \}
+let g:ale_fixers = {
+\ '*': ['remove_trailing_lines', 'trim_whitespace'],
+\ 'javascript': ['eslint'],
+\ 'typescript': ['eslint'],
+\ 'vue': ['eslint'],
+\}
+let g:ale_linters_explicit = 1
+let g:ale_fix_on_save = 1
 
 let g:indentLine_char = '|'
 let g:indentLine_concealcursor = 'inc'
@@ -53,5 +57,6 @@ let g:blamer_delay = 250
 let g:blamer_enabled = 1
 let g:blamer_prefix = ' >> '
 
-highlight Blamer guifg=lightgrey
+let g:afterglow_blackout = 1
 
+highlight Blamer guifg=lightgrey

@@ -41,29 +41,31 @@ vmap <silent><C-]> >><Esc>
 :nnoremap <silent> <C-u> :NERDTreeToggle<CR>
 " Show on tree
 nnoremap <silent> <C-g> :NERDTreeFind<CR>
-"Ale
+" Ale
 nmap <silent> <C-a> :ALEToggle<cr>
-""Ident Function
+" Ident Function
 nnoremap <silent><C-m> >%
 nnoremap <silent><C-n> <%
 
 nnoremap <silent><C-l> :ALEFix<cr>
-"Copia el nombre del archivo en el que estas y abre fzf
+" Copia el nombre del archivo en el que estas y abre fzf
 nmap <silent>fn :let @+=expand('%:t:r')<cr> ;
-"Copia el nombre del archivo actual
+" Copia el nombre del archivo actual
 nmap <silent>cfn :let @+=expand('%:t:r')<cr>
 nmap <silent>ctn :let @+=expand('%:t:r:r')<cr>
-"Moverse entre llaves
+" Moverse entre llaves
 nmap <silent>t %
 vmap <silent>t %
-"Ordena las palabras
+" Ordena las palabras
 vmap <silent>s :sort<cr>
-"Busar algun texto en el arbol de archivos
+" Busar algun texto en el arbol de archivos
 noremap <silent>gs :CocSearch
-"Buscar Archivos
+" Buscar Archivos
 noremap <silent>; :GFiles<cr>
-"Historial
+" Historial
 noremap <silent>' :History<cr>
+" Import
+noremap <silent>ci e:ALEImport<cr>
 
 "Busca coincidencias
 nmap <silent>st <plug>(easymotion-s2)
@@ -94,4 +96,3 @@ nmap <leader>vue :set tabstop=4<cr>:set shiftwidth=4<cr>
 
 nmap <leader>hs <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
-
