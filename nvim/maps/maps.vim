@@ -96,3 +96,4 @@ nmap <leader>vue :set tabstop=4<cr>:set shiftwidth=4<cr>
 
 nmap <leader>hs <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
+nmap <leader>diff <Plug>(GitGutterPreviewHunk)

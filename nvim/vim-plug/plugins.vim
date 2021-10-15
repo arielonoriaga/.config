@@ -25,11 +25,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'kyoz/purify', { 'rtp': 'vim' } "purify
     Plug 'larsbs/vimterial_dark'
+    Plug 'leafoftree/vim-vue-plugin'
     Plug 'lifepillar/vim-gruvbox8' "Gruvbox 8
     Plug 'machakann/vim-sandwich'
     Plug 'mhartington/oceanic-next' "OceanicNext
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'othree/html5.vim'
     Plug 'othree/javascript-libraries-syntax.vim'
     Plug 'pangloss/vim-javascript'
     Plug 'preservim/nerdcommenter'
