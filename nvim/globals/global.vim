@@ -1,11 +1,11 @@
 let g:rigel_airline = 1
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'molokai'
+let g:airline_theme = 'sonokai'
 
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+let g:NERDTreeHighlightFoldersFullName = 0 " highlights the folder name
 let g:NERDTreePatternMatchHighlightFullName = 1
 let g:NERDTreeWinPos = "left"
 
@@ -34,13 +34,15 @@ let g:vim_vue_plugin_highlight_vue_keyword = 1
 let g:vim_vue_plugin_load_full_syntax = 1
 let g:vim_vue_plugin_use_typescript = 1
 
-let g:tokyonight_enable_italic = 1
-let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 0
+let g:tokyonight_style = 'storm' " available: night, storm
 
 let g:javascript_plugin_flow = 1
 
 let g:minimap_auto_start = 1
 let g:minimap_auto_start_win_enter = 1
+let g:minimap_git_colors = 1
+let g:minimap_highlight_search = 1
 let g:minimap_width = 10
 
 let g:NERDAltDelims_java = 1
@@ -58,5 +60,13 @@ let g:blamer_enabled = 1
 let g:blamer_prefix = ' >> '
 
 let g:afterglow_blackout = 1
+
+let g:used_javascript_libs = 'underscore,backbone,vue,jquery'
+
+let g:everforest_background = 'hard'
+
+let g:sonokai_style = 'andromeda'
+let g:sonokai_disable_italic_comment = 1
+let g:sonokai_enable_italic = 0
 
 highlight Blamer guifg=lightgrey

@@ -57,7 +57,7 @@ nmap <silent>ctn :let @+=expand('%:t:r:r')<cr>
 nmap <silent>t %
 vmap <silent>t %
 " Ordena las palabras
-vmap <silent>s :sort<cr>
+vmap <silent>l :sort<cr>
 " Busar algun texto en el arbol de archivos
 noremap <silent>gs :CocSearch
 " Buscar Archivos
@@ -65,7 +65,7 @@ noremap <silent>; :GFiles<cr>
 " Historial
 noremap <silent>' :History<cr>
 " Import
-noremap <silent>ci e:ALEImport<cr>
+noremap <silent>ci :ALEImport<cr>
 
 "Busca coincidencias
 nmap <silent>st <plug>(easymotion-s2)
