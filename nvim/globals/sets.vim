@@ -23,4 +23,3 @@ set tabstop=4
 set undodir=~/.vim/undodir
 set undofile
 set viminfo=""
-

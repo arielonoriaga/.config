@@ -41,7 +41,18 @@ alias wpcx="pcx && npm run watch"
 alias xamppfolder="~/.bitnami/stackman/machines/xampp/volumes/root/htdocs"
 alias gcmg="commit"
 
-function commit () { echo $1 | commitlint && git commit -m $1 }
+function commit () {
+    echo $1 | commitlint
+
+    my_branch=($(git rev-parse --abbrev-ref HEAD | tr '_' '\n'))
+
+    project=$my_branch[2]
+    issueKey=$my_branch[1]
+
+    commit="$project-$issueKey | $1"
+
+    (git commit -m $commit)
+}
 
 export PATH="/usr/local/opt/php@7.3/bin:$PATH"
 export PATH=~/.npm-global/bin:$PATH
