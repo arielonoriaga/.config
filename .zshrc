@@ -14,7 +14,7 @@ ZSH_DISABLE_COMPFIX="true"
 
 alias cfg="nvim ~/.zshrc"
 alias dcm="git reset HEAD~1"
-alias deletebranchs="git branch --merged | grep -v '^* master$' | grep -v '^ master$' | xargs git branch -d"
+alias deletebranchs="git branch --merged | grep -v '^*\smain$' | grep -v '^*\smaster$' | xargs git branch -d"
 alias ggum="git pull --rebase origin master"
 alias gpfb='git push -f'
 alias gplb='git pull origin `git branch --show-current`'

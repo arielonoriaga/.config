@@ -44,4 +44,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'wfxr/minimap.vim'
     Plug 'yggdroot/indentline'
+    Plug 'SirVer/ultisnips'
+    Plug 'mlaursen/vim-react-snippets'
+    Plug 'yaegassy/coc-volar', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
