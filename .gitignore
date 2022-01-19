@@ -10,4 +10,3 @@ spotify-tui/
 .DS_Store
 nvim/autoload/
 nvim/pack/
-nvim/plug-config/
