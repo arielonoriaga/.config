@@ -14,12 +14,12 @@ set number
 set numberwidth=1
 set relativenumber
 set rnu
-set shiftwidth=4
+set shiftwidth=2
 set showcmd
 set showmatch
 set smartindent
 set sts=4
-set tabstop=4
+set tabstop=2
 set undodir=~/.vim/undodir
 set undofile
 set viminfo=""

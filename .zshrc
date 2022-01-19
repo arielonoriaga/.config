@@ -27,6 +27,7 @@ alias nftst="~/Projects/Picallex/picallex && npm run test:full-suite"
 alias npmPcxReset="pcx && rm -Rf node_modules/ dist/ && npm i --only=prod; npm run prod"
 alias ntst='~/Projects/Picallex/picallex && npm run test:unit'
 alias o='open .'
+alias p='~/Projects/'
 alias opcoverage="open ~/Projects/Picallex/picallex/coverage/index.html"
 alias pcx="~/Projects/Picallex/picallex/"
 alias proyInit="npx license mit > LICENSE && npx gitignore node && git init && npm init -y"
