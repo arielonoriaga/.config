@@ -1,7 +1,3 @@
-" Vim color file
-" Custom1
-" Created by  with ThemeCreator (https://github.com/mswift42/themecreator)
-
 hi clear
 
 if exists("syntax on")
@@ -10,7 +6,6 @@ endif
 
 set t_Co=256
 let g:colors_name = "black"
-
 
 " Define reusable colorvariables.
 let s:bg="#001419"
@@ -147,5 +142,3 @@ exe 'hi htmlSpecialTagName guifg='s:keyword
 
 " Markdown Highlighting
 exe 'hi mkdCode guifg='s:builtin
-
-

@@ -1,5 +1,10 @@
 set background=dark
-set clipboard=unnamed
+set clipboard=unnamedplus
+
+if(has('macunix'))
+  set clipboard=unnamed
+endif
+
 set colorcolumn=80
 set encoding=UTF-8
 set et

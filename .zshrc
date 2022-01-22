@@ -1,7 +1,8 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-export ZSH="/Users/arielonoriaga/.oh-my-zsh"
+
+export ZSH="/home/ariel/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -15,6 +16,7 @@ ZSH_DISABLE_COMPFIX="true"
 alias cfg="nvim ~/.zshrc"
 alias dcm="git reset HEAD~1"
 alias deletebranchs="git branch --merged | grep -v '^*\smain$' | grep -v '^*\smaster$' | xargs git branch -d"
+alias gcmg="commit"
 alias ggum="git pull --rebase origin master"
 alias gpfb='git push -f'
 alias gplb='git pull origin `git branch --show-current`'
@@ -27,8 +29,8 @@ alias nftst="~/Projects/Picallex/picallex && npm run test:full-suite"
 alias npmPcxReset="pcx && rm -Rf node_modules/ dist/ && npm i --only=prod; npm run prod"
 alias ntst='~/Projects/Picallex/picallex && npm run test:unit'
 alias o='open .'
-alias p='~/Projects/'
 alias opcoverage="open ~/Projects/Picallex/picallex/coverage/index.html"
+alias p='~/Projects/'
 alias pcx="~/Projects/Picallex/picallex/"
 alias proyInit="npx license mit > LICENSE && npx gitignore node && git init && npm init -y"
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
@@ -40,24 +42,23 @@ alias vcfg="v ~/.vimrc"
 alias vimfolder="~/.vim/ && v"
 alias wpcx="pcx && npm run watch"
 alias xamppfolder="~/.bitnami/stackman/machines/xampp/volumes/root/htdocs"
-alias gcmg="commit"
 
 function commit () {
-    echo $1 | commitlint
+  echo $1 | commitlint
 
-    my_branch=($(git rev-parse --abbrev-ref HEAD | tr '_' '\n'))
+  my_branch=($(git rev-parse --abbrev-ref HEAD | tr '_' '\n'))
 
-    project=$my_branch[2]
-    issueKey=$my_branch[1]
+  project=$my_branch[2]
+  issueKey=$my_branch[1]
 
-    commit="$project-$issueKey | $1"
+  commit="$project-$issueKey | $1"
 
-    (git commit -m $commit)
+  (git commit -m $commit)
 }
 
 export PATH="/usr/local/opt/php@7.3/bin:$PATH"
-export PATH=~/.npm-global/bin:$PATH
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH=~/.npm-global/bin:$PATH
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

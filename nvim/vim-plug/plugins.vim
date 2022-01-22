@@ -42,7 +42,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'terryma/vim-multiple-cursors'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'wfxr/minimap.vim'
+    " Plug 'wfxr/minimap.vim'
     Plug 'yggdroot/indentline'
     Plug 'SirVer/ultisnips'
     Plug 'mlaursen/vim-react-snippets'
