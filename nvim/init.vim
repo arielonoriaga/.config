@@ -6,12 +6,12 @@ let &packpath=&runtimepath
 
 filetype plugin on
 
+so ~/.vimrc
 so ~/.config/nvim/globals/autos.vim
 so ~/.config/nvim/globals/global.vim
 so ~/.config/nvim/globals/sets.vim
 so ~/.config/nvim/maps/maps.vim
 so ~/.config/nvim/snippets/snippets.vim
-so ~/.vimrc
 
 set t_Co=256
 

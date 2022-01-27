@@ -42,6 +42,7 @@ alias vcfg="v ~/.vimrc"
 alias vimfolder="~/.vim/ && v"
 alias wpcx="pcx && npm run watch"
 alias xamppfolder="~/.bitnami/stackman/machines/xampp/volumes/root/htdocs"
+alias copy="xclip -selection c"
 
 function commit () {
   echo $1 | commitlint

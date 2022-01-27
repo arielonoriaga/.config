@@ -11,7 +11,7 @@ sudo apt-get update
 
 basics:
 ```sh
-sudo apt-get install zsh git
+sudo apt-get install -y zsh git neovim
 ```
 
 node:
@@ -25,6 +25,11 @@ yarn:
 curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
 echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update && sudo apt-get install yarn
+```
+
+oh-my-zsh:
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 Install powerlevel10k:
@@ -43,6 +48,11 @@ git clone git@github.com:arielonoriaga/Configurations.git .config
 ```
 
 ### Create symbolic links:
+
+all in one:
+```sh
+ln -sf .config/.zshrc .zshrc && ln -sf .config/.vimrc .vimrc && ln -sf .config/.p10k.zsh .p10k.zsh
+```
 
 zsh:
 ```sh
