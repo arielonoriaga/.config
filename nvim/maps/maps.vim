@@ -98,4 +98,4 @@ nmap <leader>hs <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap <leader>diff <Plug>(GitGutterPreviewHunk)
 
-map <leader>gg :LazyGit<CR>
+nnoremap <silent> <leader>lg :LazyGit<CR>
