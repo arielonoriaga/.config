@@ -7,10 +7,13 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
+  " Plug 'wfxr/minimap.vim'
   Plug 'APZelos/blamer.nvim'
   Plug 'Rigellute/rigel' "rigel
+  Plug 'SirVer/ultisnips'
   Plug 'airblade/vim-gitgutter'
   Plug 'altercation/vim-colors-solarized' "solarized
+  Plug 'kdheepak/lazygit.nvim'
   Plug 'ayu-theme/ayu-vim' "ayu
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'cormacrelf/vim-colors-github' "Github
@@ -29,6 +32,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'lifepillar/vim-gruvbox8' "Gruvbox 8
   Plug 'machakann/vim-sandwich'
   Plug 'mhartington/oceanic-next' "OceanicNext
+  Plug 'mlaursen/vim-react-snippets'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'pangloss/vim-javascript'
@@ -42,9 +46,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'terryma/vim-multiple-cursors'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  " Plug 'wfxr/minimap.vim'
-  Plug 'yggdroot/indentline'
-  Plug 'SirVer/ultisnips'
-  Plug 'mlaursen/vim-react-snippets'
   Plug 'yaegassy/coc-volar', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'yggdroot/indentline'
 call plug#end()

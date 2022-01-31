@@ -66,3 +66,4 @@ export PATH=~/.npm-global/bin:$PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 [[ -f /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
+alias lg='lazygit'
