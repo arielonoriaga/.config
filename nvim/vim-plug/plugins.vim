@@ -13,7 +13,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'SirVer/ultisnips'
   Plug 'airblade/vim-gitgutter'
   Plug 'altercation/vim-colors-solarized' "solarized
-  Plug 'kdheepak/lazygit.nvim'
   Plug 'ayu-theme/ayu-vim' "ayu
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'cormacrelf/vim-colors-github' "Github
@@ -26,6 +25,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'joshdick/onedark.vim' "onedark
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  Plug 'kdheepak/lazygit.nvim'
   Plug 'kyoz/purify', { 'rtp': 'vim' } "purify
   Plug 'larsbs/vimterial_dark'
   Plug 'leafoftree/vim-vue-plugin'
