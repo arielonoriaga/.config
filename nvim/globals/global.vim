@@ -2,7 +2,6 @@ let g:rigel_airline = 1
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'sonokai'
-
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeHighlightFoldersFullName = 0 " highlights the folder name
@@ -73,3 +72,5 @@ highlight Blamer guifg=lightgrey
 
 let g:lazygit_floating_window_winblend = 0 " transparency of floating window
 let g:lazygit_floating_window_scaling_factor = 0.9 " scaling factor for floating window
+
+let g:fzf_layout = { 'down': '40%' }

@@ -92,10 +92,23 @@ nmap <leader>r :NERDTreeFocus<cr>R<c-w><c-p>
 nmap <leader>dl cl<silent>p
 
 nmap <leader>ts :set tabstop=2<cr>:set shiftwidth=2<cr>
-nmap <leader>vue :set tabstop=4<cr>:set shiftwidth=4<cr>
+nmap <leader>vue :set syntax=vue
 
 nmap <leader>hs <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap <leader>diff <Plug>(GitGutterPreviewHunk)
 
 nnoremap <silent> <leader>lg :LazyGit<CR>
+
+" Find: Find files by content
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --smart-case --column --hidden --line-number --no-heading --color=always %s --glob "!{node_modules}" || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec, "down:50%"), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang FindByContent call RipgrepFzf(<q-args>, <bang>0)
+
+noremap <c-f> :FindByContent<CR>
