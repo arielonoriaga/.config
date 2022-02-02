@@ -8,10 +8,15 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 ENABLE_CORRECTION="false"
 
-plugins=(git)
+plugins=(
+git
+zsh-autosuggestions
+zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 ZSH_DISABLE_COMPFIX="true"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=2"
 
 alias cfg="nvim ~/.zshrc"
 alias copy="xclip -selection c"
