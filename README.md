@@ -3,10 +3,10 @@
 run:
 
 ```bash
+sudo apt-get install git
 git clone git@github.com:arielonoriaga/.config.git
-cd .config
 
-sudo ./setup.sh
+./.config/setup.sh
 ```
 
 Install powerlevel10k:
