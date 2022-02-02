@@ -14,6 +14,7 @@ source $ZSH/oh-my-zsh.sh
 ZSH_DISABLE_COMPFIX="true"
 
 alias cfg="nvim ~/.zshrc"
+alias copy="xclip -selection c"
 alias dcm="git reset HEAD~1"
 alias deletebranchs="git branch --merged | grep -v '^*\smain$' | grep -v '^*\smaster$' | xargs git branch -d"
 alias gcmg="commit"
@@ -23,26 +24,17 @@ alias gplb='git pull origin `git branch --show-current`'
 alias gplo='git pull origin master'
 alias gpm='git push origin master'
 alias laravel="~/.config/composer/vendor/bin/laravel"
-alias lint="pcx && gwip && npm run lint:fix && gunwip"
+alias ld='lazydocker'
+alias lg='lazygit'
 alias neofolder="~/.config/nvim/ && v"
-alias nftst="~/Projects/Picallex/picallex && npm run test:full-suite"
-alias npmPcxReset="pcx && rm -Rf node_modules/ dist/ && npm i --only=prod; npm run prod"
-alias ntst='~/Projects/Picallex/picallex && npm run test:unit'
 alias o='open .'
-alias opcoverage="open ~/Projects/Picallex/picallex/coverage/index.html"
 alias p='~/Projects/'
-alias pcx="~/Projects/Picallex/picallex/"
 alias proyInit="npx license mit > LICENSE && npx gitignore node && git init && npm init -y"
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
-alias startpcx="~/Projects/Picallex/ && make up"
-alias stoppcx="~/Projects/Picallex/ && make stop"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias v="nvim"
 alias vcfg="v ~/.vimrc"
 alias vimfolder="~/.vim/ && v"
-alias wpcx="pcx && npm run watch"
-alias xamppfolder="~/.bitnami/stackman/machines/xampp/volumes/root/htdocs"
-alias copy="xclip -selection c"
 
 function commit () {
   echo $1 | commitlint
@@ -66,4 +58,3 @@ export PATH=~/.npm-global/bin:$PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 [[ -f /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
-alias lg='lazygit'
