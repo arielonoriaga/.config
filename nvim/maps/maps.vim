@@ -92,11 +92,12 @@ nmap <leader>r :NERDTreeFocus<cr>R<c-w><c-p>
 nmap <leader>dl cl<silent>p
 
 nmap <leader>ts :set tabstop=2<cr>:set shiftwidth=2<cr>
-nmap <leader>vue :set syntax=vue
+nmap <leader>vue :set syntax=vue<cr>
 
 nmap <leader>hs <Plug>(GitGutterStageHunk)
 nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap <leader>diff <Plug>(GitGutterPreviewHunk)
+nmap <leader>ro :so ~/.config/nvim/init.vim<cr>
 
 nnoremap <silent> <leader>lg :LazyGit<CR>
 

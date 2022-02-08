@@ -1,6 +1,6 @@
 sudo apt-get update
 
-sudo apt-get install -y zsh gcc g++ make nodejs
+sudo apt-get install -y zsh gcc g++ make nodejs xclip
 
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 

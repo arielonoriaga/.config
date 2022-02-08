@@ -15,6 +15,7 @@ zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
+
 ZSH_DISABLE_COMPFIX="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=2"
 
@@ -31,13 +32,14 @@ alias gpm='git push origin master'
 alias laravel="~/.config/composer/vendor/bin/laravel"
 alias ld='lazydocker'
 alias lg='lazygit'
-alias neofolder="~/.config/nvim/ && v"
+alias neofolder="~/.config && v"
 alias o='open .'
 alias p='~/Projects/'
 alias proyInit="npx license mit > LICENSE && npx gitignore node && git init && npm init -y"
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias v="nvim"
+alias astudio="/usr/bin/android-studio/studio.sh"
 alias vcfg="v ~/.vimrc"
 alias vimfolder="~/.vim/ && v"
 
