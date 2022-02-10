@@ -19,10 +19,11 @@ source $ZSH/oh-my-zsh.sh
 ZSH_DISABLE_COMPFIX="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=2"
 
+alias astudio="/usr/bin/android-studio/studio.sh"
 alias cfg="nvim ~/.zshrc"
 alias copy="xclip -selection c"
 alias dcm="git reset HEAD~1"
-alias deletebranchs="git branch --merged | grep -v '^*\smain$' | grep -v '^*\smaster$' | xargs git branch -d"
+alias deletebranchs="git branch --merged | grep -v '^*\smain$' | grep -v '^*\smaster$' | grep -v '^*\sdev$' | xargs git branch -d"
 alias gcmg="commit"
 alias ggum="git pull --rebase origin master"
 alias gpfb='git push -f'
@@ -32,6 +33,7 @@ alias gpm='git push origin master'
 alias laravel="~/.config/composer/vendor/bin/laravel"
 alias ld='lazydocker'
 alias lg='lazygit'
+alias lvim="/home/ariel/.local/bin/lvim"
 alias neofolder="~/.config && v"
 alias o='open .'
 alias p='~/Projects/'
@@ -39,11 +41,10 @@ alias proyInit="npx license mit > LICENSE && npx gitignore node && git init && n
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias v="nvim"
-alias astudio="/usr/bin/android-studio/studio.sh"
 alias vcfg="v ~/.vimrc"
 alias vimfolder="~/.vim/ && v"
 
-function commit () {
+function commit() {
   echo $1 | commitlint
 
   my_branch=($(git rev-parse --abbrev-ref HEAD | tr '_' '\n'))

@@ -1,4 +1,3 @@
-autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd InsertEnter,InsertLeave * set cul!
 
 autocmd FileType php :set tabstop=4 shiftwidth=4

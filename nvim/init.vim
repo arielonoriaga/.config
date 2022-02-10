@@ -1,17 +1,15 @@
-source $HOME/.config/nvim/vim-plug/plugins.vim
-source $HOME/.config/nvim/plug-config/coc.vim
+so ~/.config/nvim/autos.vim
+so ~/.config/nvim/global.vim
+so ~/.config/nvim/maps.vim
+so ~/.config/nvim/sets.vim
+so ~/.config/nvim/snippets.vim
+so ~/.config/nvim/vim-plug/plugins.vim
+so ~/.vimrc
 
 set runtimepath^=~/.vimrc runtimepath+=~/.vim/after
 let &packpath=&runtimepath
 
 filetype plugin on
-
-so ~/.vimrc
-so ~/.config/nvim/globals/autos.vim
-so ~/.config/nvim/globals/global.vim
-so ~/.config/nvim/globals/sets.vim
-so ~/.config/nvim/maps/maps.vim
-so ~/.config/nvim/snippets/snippets.vim
 
 set t_Co=256
 
@@ -21,4 +19,4 @@ endif
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-colorscheme molakai
+colorscheme sonokai

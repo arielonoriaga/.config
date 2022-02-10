@@ -5,7 +5,9 @@ if(has('macunix'))
   set clipboard=unnamed
 endif
 
-set cmdheight=2
+set shortmess+=c
+set signcolumn=yes
+set cmdheight=1
 set splitbelow
 set splitright
 set colorcolumn=80
