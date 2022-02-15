@@ -12,12 +12,14 @@ plugins=(
 git
 zsh-autosuggestions
 zsh-syntax-highlighting
+fzf-tab
 )
 
 source $ZSH/oh-my-zsh.sh
 
 ZSH_DISABLE_COMPFIX="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=2"
+HIST_STAMPS="dd.mm.yyyy"
 
 alias astudio="/usr/bin/android-studio/studio.sh"
 alias cfg="nvim ~/.zshrc"
