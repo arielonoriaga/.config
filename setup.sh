@@ -1,30 +1,25 @@
 sudo apt-get update
 
-sudo apt-get install -y zsh gcc g++ make nodejs xclip
+sudo add-apt-repository ppa:lazygit-team/daily
 
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-
-# yarn
 curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
 echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt-get update
-sudo apt-get install yarn
 
-# oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+sudo apt-get update
+
+sudo apt-get install -y zsh gcc g++ make nodejs xclip ripgrep lazygit yarn
+
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 
 # zsh plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 
-# nvim requirements
-sudo apt-get install ripgrep
-
 # symbolic links
-ln -sf .config/.zshrc .zshrc
-ln -sf .config/.vimrc .vimrc
+ln -sf .config/.fzf.zsh .fzf.zsh
 ln -sf .config/.p10k.zsh .p10k.zsh
+ln -sf .config/.vimrc .vimrc
+ln -sf .config/.zshrc .zshrc
 
 # lazydocker
 mkdir temporals/
@@ -48,11 +43,6 @@ mv ~/temporals/nvim.appimage /usr/bin/nvim
 cd ~
 
 rm -Rf ~/temporals/
-
-#lazygit
-sudo add-apt-repository ppa:lazygit-team/daily
-sudo apt-get update
-sudo apt-get install lazygit
 
 #reload terminal
 source ~/.zshrc

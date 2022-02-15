@@ -1,7 +1,4 @@
 let g:rigel_airline = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'sonokai'
-let g:airline#extensions#tabline#enabled = 1
 
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreeFileExtensionHighlightFullName = 1
@@ -78,10 +75,11 @@ let g:fzf_layout = { 'down': '40%' }
 
 let airline#extensions#tabline#current_first = 0
 let g:airline#extensions#tabline#buffers_label = 'b'
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#formatter = 'onlyname'
 let g:airline#extensions#tabline#tabs_label = 't'
-let g:airline_section_c_only_filename = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'iceberg'
 
 let g:airline_mode_map = {
     \ '__'     : '-',

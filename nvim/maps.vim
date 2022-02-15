@@ -33,6 +33,7 @@ noremap <silent>' :History<cr>
 
 vmap <silent><C-[> <<<Esc>
 vmap <silent><C-]> >><Esc>
+vmap <silent>cl yI<cr><esc>kiconsole.log('')<esc>hi<C-o>P<esc>2li, <C-o>P<esc>
 vmap <silent>l :sort<cr>
 vmap <silent>t %
 vnoremap <silent>J :m '>+1<cr>gv=gv
