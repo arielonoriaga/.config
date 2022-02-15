@@ -1,3 +1,4 @@
+nmap <silent> <C-g> :NERDTreeFind<CR>
 nmap <silent> <C-u> :NERDTreeToggle<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -7,11 +8,24 @@ nmap <silent>st <plug>(easymotion-s2)
 nmap M <Plug>NERDCommenterToggle
 nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
-nmap <silent> <C-g> :NERDTreeFind<CR>
-vmap M <Plug>NERDCommenterToggle
-noremap <silent>gs :CocSearch
 noremap <silent>; :GFiles<cr>
+noremap <silent>gs :CocSearch
 
+vmap M <Plug>NERDCommenterToggle
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+nmap <C-i> :bn<cr>
+nmap <C-d> :bd!<cr>
 :nmap <silent>cw yiw
 :nnoremap <silent>ciw "_ciw
 :nnoremap <silent>cl Vy
