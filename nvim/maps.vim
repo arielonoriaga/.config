@@ -24,12 +24,12 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-nmap <C-i> :bn<cr>
-nmap <C-d> :bd!<cr>
 :nmap <silent>cw yiw
 :nnoremap <silent>ciw "_ciw
 :nnoremap <silent>cl Vy
 :nnoremap <silent>dd "_dd<cr>
+nmap <C-d> :bd!<cr>
+nmap <C-i> :bn<cr>
 nmap <silent>cfn :let @+=expand('%:t:r')<cr>
 nmap <silent>ctn :let @+=expand('%:t:r:r')<cr>
 nmap <silent>dts :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>

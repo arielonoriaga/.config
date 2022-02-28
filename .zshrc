@@ -38,6 +38,7 @@ alias lg='lazygit'
 alias lvim="/home/ariel/.local/bin/lvim"
 alias neofolder="~/.config && v"
 alias o='open .'
+alias open="nautilus"
 alias p='~/Projects/'
 alias proyInit="npx license mit > LICENSE && npx gitignore node && git init && npm init -y"
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
