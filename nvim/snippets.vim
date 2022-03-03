@@ -3,6 +3,7 @@
 :iabbrev retrun return
 :iabbrev tihs this
 :iabbrev reponse response
+:iabbrev cosnt const
 
 :iabbrev vc@ <Esc>0vExiimport<C-o>p from 'NEWCOMPONENTPATH';<Esc>
   \/components: {<Esc>,rsA<Esc>tkA<cr><C-o>P,<Esc>V2<C-]>:%s/NEWCOMPONENTPATH/<cr>

@@ -17,6 +17,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'leafoftree/vim-matchtag'
   Plug 'leafoftree/vim-vue-plugin'
   Plug 'machakann/vim-sandwich'
+  Plug 'mhinz/vim-startify', { 'branch': 'center' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'pangloss/vim-javascript'
   Plug 'preservim/nerdcommenter'
@@ -29,13 +30,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'yaegassy/coc-volar', {'do': 'yarn install --frozen-lockfile'}
 
   " colorschemes
-  Plug 'ghifarit53/tokyonight-vim'
-  Plug 'vim-scripts/Wombat'
   Plug 'cocopon/iceberg.vim'
+  Plug 'ghifarit53/tokyonight-vim'
   Plug 'joshdick/onedark.vim' "onedark
   Plug 'kyoz/purify', { 'rtp': 'vim' } "purify
   Plug 'larsbs/vimterial_dark'
   Plug 'morhetz/gruvbox'
+  Plug 'patstockwell/vim-monokai-tasty'
   Plug 'rakr/vim-one'
   Plug 'sainnhe/sonokai'
+  Plug 'srcery-colors/srcery-vim'
+  Plug 'vim-scripts/Wombat'
 call plug#end()

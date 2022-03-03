@@ -79,7 +79,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t:r'
 let g:airline#extensions#tabline#tabs_label = 't'
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'iceberg'
 
 let g:airline_mode_map = {
     \ '__'     : '-',
@@ -101,3 +100,17 @@ let g:airline_mode_map = {
     \ 'V'      : 'V',
     \ ''     : 'V',
     \ }
+
+let g:startify_bookmarks = [
+\ { 'C': '~/.config/' },
+\ { 'P': '~/Projects/' },
+\ ]
+let g:startify_files_number = 25
+
+let g:startify_center = 80
+
+let g:startify_lists = [
+\ { 'type': 'commands'  },
+\ { 'type': 'bookmarks' },
+\ { 'type': 'files'     },
+\ ]

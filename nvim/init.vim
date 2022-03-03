@@ -13,10 +13,7 @@ filetype plugin on
 
 set t_Co=256
 
-if (has("termguicolors"))
-   set termguicolors
-endif
-
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-colorscheme iceberg
+colorscheme srcery
+let g:airline_theme = 'google_dark'

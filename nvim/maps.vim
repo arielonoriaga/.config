@@ -10,6 +10,7 @@ nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
 noremap <silent>; :GFiles<cr>
 noremap <silent>gs :CocSearch
+nmap <c-n> :Startify<cr>
 
 vmap M <Plug>NERDCommenterToggle
 
@@ -30,6 +31,7 @@ endfunction
 :nnoremap <silent>dd "_dd<cr>
 nmap <C-d> :bd!<cr>
 nmap <C-i> :bn<cr>
+nmap <C-a> :bufdo bd<cr>
 nmap <silent>cfn :let @+=expand('%:t:r')<cr>
 nmap <silent>ctn :let @+=expand('%:t:r:r')<cr>
 nmap <silent>dts :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
@@ -47,8 +49,8 @@ noremap <silent>' :History<cr>
 
 vmap <silent><C-[> <<<Esc>
 vmap <silent><C-]> >><Esc>
+vmap <silent><C-l> :sort<cr>
 vmap <silent>cl yI<cr><esc>kiconsole.log('')<esc>hi<C-o>P<esc>2li, <C-o>P<esc>
-vmap <silent>l :sort<cr>
 vmap <silent>t %
 vnoremap <silent>J :m '>+1<cr>gv=gv
 vnoremap <silent>K :m '<-2<cr>gv=gv
