@@ -1,3 +1,4 @@
+nmap <c-n> :Startify<cr>
 nmap <silent> <C-g> :NERDTreeFind<CR>
 nmap <silent> <C-u> :NERDTreeToggle<CR>
 nmap <silent> gd <Plug>(coc-definition)
@@ -10,7 +11,8 @@ nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
 noremap <silent>; :GFiles<cr>
 noremap <silent>gs :CocSearch
-nmap <c-n> :Startify<cr>
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 vmap M <Plug>NERDCommenterToggle
 
@@ -31,7 +33,6 @@ endfunction
 :nnoremap <silent>dd "_dd<cr>
 nmap <C-d> :bd!<cr>
 nmap <C-i> :bn<cr>
-nmap <C-a> :bufdo bd<cr>
 nmap <silent>cfn :let @+=expand('%:t:r')<cr>
 nmap <silent>ctn :let @+=expand('%:t:r:r')<cr>
 nmap <silent>dts :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
