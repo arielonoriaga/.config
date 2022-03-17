@@ -105,9 +105,15 @@ let g:startify_bookmarks = [
 \ { 'C': '~/.config/' },
 \ { 'P': '~/Projects/' },
 \ ]
-let g:startify_files_number = 25
+let g:startify_files_number = 20
 
 let g:startify_center = 80
+
+let g:startify_commands = [
+\ ['Help', ':h startify'],
+\ ['SDB - Up', '!cd ~/Projects/Wizards/SDBranch/ && make dev-up'],
+\ ['SDB - Down', '!cd ~/Projects/Wizards/SDBranch/ && make dev-down'],
+\ ]
 
 let g:startify_lists = [
 \ { 'type': 'commands'  },
