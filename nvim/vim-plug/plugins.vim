@@ -13,6 +13,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'jiangmiao/auto-pairs'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/vim-easy-align'
   Plug 'kdheepak/lazygit.nvim'
   Plug 'leafoftree/vim-matchtag'
   Plug 'leafoftree/vim-vue-plugin'
