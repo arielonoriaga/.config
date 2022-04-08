@@ -33,6 +33,7 @@ endfunction
 :nnoremap <silent>dd "_dd<cr>
 nmap <C-d> :bd!<cr>
 nmap <C-i> :bn<cr>
+nmap <C-x> :bufdo bd!<cr>
 nmap <silent>cfn :let @+=expand('%:t:r')<cr>
 nmap <silent>ctn :let @+=expand('%:t:r:r')<cr>
 nmap <silent>dts :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
