@@ -21,7 +21,7 @@ ZSH_DISABLE_COMPFIX="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=2"
 HIST_STAMPS="dd.mm.yyyy"
 
-alias aruze="cat ~/.aruze-pass | xclip -selection c && ssh root@159.89.148.250"
+alias aruze="cat ~/.aruze-pass | copy && ssh root@159.89.148.250"
 alias cfg="nvim ~/.zshrc"
 alias copy="xclip -selection c"
 alias dcm="git reset HEAD~1"
@@ -37,7 +37,7 @@ alias ld='lazydocker'
 alias lg='lazygit'
 alias neofolder="~/.config && v"
 alias o='open .'
-alias open="nautilus"
+alias open="browse"
 alias p='~/Projects/'
 alias proyInit="npx license mit > LICENSE && npx gitignore node && git init && npm init -y"
 alias pw='~/Projects/Wizards/'
@@ -45,7 +45,6 @@ alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias v="nvim"
 alias vcfg="v ~/.vimrc"
-alias vimfolder="~/.vim/ && v"
 alias wifipass="nmcli device wifi show-password"
 
 function commit() {
