@@ -1,5 +1,5 @@
 sudo apt-get update
-sudo add-apt-repository ppa:lazygit-team/daily
+sudo add-apt-repository ppa:lazygit-team/release
 
 curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
 echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -11,6 +11,7 @@ sudo apt-get install -y zsh gcc g++ make nodejs xclip ripgrep lazygit yarn
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 
 # zsh plugins
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab

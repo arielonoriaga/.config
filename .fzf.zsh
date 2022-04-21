@@ -1,13 +1,13 @@
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */home/ariel/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/home/ariel/fzf/bin"
+if [[ ! "$PATH" == */home/ariel/temporals/fzf/bin* ]]; then
+  export PATH="${PATH:+${PATH}:}/home/ariel/temporals/fzf/bin"
 fi
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "/home/ariel/fzf/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "/home/ariel/temporals/fzf/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------
-source "/home/ariel/fzf/shell/key-bindings.zsh"
+source "/home/ariel/temporals/fzf/shell/key-bindings.zsh"
