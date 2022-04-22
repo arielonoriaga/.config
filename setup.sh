@@ -14,7 +14,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io zsh gcc g++ make nodejs xclip ripgrep lazygit yarn ca-certificates curl gnupg lsb-release
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io zsh gcc g++ make nodejs xclip ripgrep lazygit yarn ca-certificates curl gnupg lsb-release jq
 
 # node
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
