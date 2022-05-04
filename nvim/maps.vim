@@ -52,7 +52,7 @@ noremap <silent>' :History<cr>
 vmap <silent><C-[> <<<Esc>
 vmap <silent><C-]> >><Esc>
 vmap <silent><C-l> :sort<cr>
-vmap <silent>cl yI<cr><esc>kiconsole.log('')<esc>hi<C-o>P<esc>2li, <C-o>P<esc>
+vmap <silent>cl yA<cr>console.log('')<esc>hi<C-o>P<esc>2li, <C-o>P<esc>
 vmap <silent>t %
 vnoremap <silent>J :m '>+1<cr>gv=gv
 vnoremap <silent>K :m '<-2<cr>gv=gv
@@ -66,9 +66,9 @@ nmap <leader>hu <Plug>(GitGutterUndoHunk)
 nmap <leader>r :NERDTreeFocus<cr>R<c-w><c-p>
 nmap <leader>rcw yiw :%s/
 nmap <leader>ro :so ~/.config/nvim/init.vim<cr>
-nmap <leader>ts :set tabstop=2<cr>:set shiftwidth=2<cr>
 nmap <leader>v <C-w>v<cr>
 nmap <leader>vue :set syntax=vue<cr>
+nmap <leader>ts :set syntax=typescript<cr>
 nnoremap <silent> <leader>lg :LazyGit<CR>
 noremap <leader>crp :let @+=expand("%")<cr>
 noremap <leader>crpt :let @+=expand("%:r:r")<cr>
