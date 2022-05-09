@@ -120,3 +120,8 @@ let g:startify_lists = [
 \ { 'type': 'bookmarks' },
 \ { 'type': 'files'     },
 \ ]
+
+let g:coc_filetype_map = {
+\ 'typescript.jsx': 'typescriptreact',
+\ 'typescript.tsx': 'typescriptreact',
+\ }
