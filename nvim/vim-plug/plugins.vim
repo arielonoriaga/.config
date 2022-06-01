@@ -26,6 +26,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'sainnhe/vim-color-forest-night'
   Plug 'scrooloose/NERDTree'
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  Plug 'tomlion/vim-solidity'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'yaegassy/coc-volar', {'do': 'yarn install --frozen-lockfile'}

@@ -45,7 +45,8 @@ nmap U <C-W>>
 nmap Y <C-W><
 nnoremap <silent><C-[> <<
 nnoremap <silent><C-]> >>
-nnoremap <silent>J :m.+1<cr>gv=gv
+nnoremap <silent>J :m.1<cr>
+nnoremap <silent>K :m-2<cr>
 noremap <c-f> :FindByContent<CR>
 noremap <silent>' :History<cr>
 

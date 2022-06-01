@@ -60,6 +60,7 @@ function commit() {
   (git commit -m $commit)
 }
 
+export PATH="$(yarn global bin):$PATH"
 export PATH="/usr/local/opt/php@7.3/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH=~/.npm-global/bin:$PATH
