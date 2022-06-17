@@ -6,4 +6,5 @@
 !README.md
 !nvim/*
 !*.sh
-!*.lua
+!nvim/
+!nvim/lua/*

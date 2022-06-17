@@ -6,6 +6,7 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'APZelos/blamer.nvim'
+  Plug 'github/copilot.vim'
   Plug 'airblade/vim-gitgutter'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'dense-analysis/ale'
@@ -16,15 +17,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'junegunn/vim-easy-align'
   Plug 'kdheepak/lazygit.nvim'
   Plug 'leafoftree/vim-matchtag'
-  Plug 'leafoftree/vim-vue-plugin'
   Plug 'machakann/vim-sandwich'
   Plug 'mhinz/vim-startify', { 'branch': 'center' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'pangloss/vim-javascript'
   Plug 'preservim/nerdcommenter'
   Plug 'ryanoasis/vim-devicons'
-  Plug 'sainnhe/vim-color-forest-night'
   Plug 'scrooloose/NERDTree'
+  Plug 'sheerun/vim-polyglot'
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'tomlion/vim-solidity'
   Plug 'vim-airline/vim-airline'
@@ -35,6 +34,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'cocopon/iceberg.vim'
   Plug 'ghifarit53/tokyonight-vim'
   Plug 'joshdick/onedark.vim' "onedark
+  Plug 'sainnhe/vim-color-forest-night'
   Plug 'kyoz/purify', { 'rtp': 'vim' } "purify
   Plug 'larsbs/vimterial_dark'
   Plug 'morhetz/gruvbox'

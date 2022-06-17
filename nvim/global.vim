@@ -1,5 +1,4 @@
 let g:rigel_airline = 1
-
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeHighlightFoldersFullName = 0 " highlights the folder name

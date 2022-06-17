@@ -78,6 +78,9 @@ noremap <leader>reload :source ~/.vimrc<cr>
 noremap <leader>rs :noh<cr>
 noremap <leader>vim :source %<cr>
 
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --smart-case --column --hidden --line-number --no-heading --color=always %s --glob "!{node_modules}" || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
@@ -87,3 +90,11 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 
 command! -nargs=* -bang FindByContent call RipgrepFzf(<q-args>, <bang>0)
+
+nmap <leader>hi :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc

@@ -41,6 +41,5 @@ set splitright
 set sts=4
 set tabstop=2
 set undodir=~/.vim/undodir
-set undofile
 set updatetime=300
 set viminfo='100,n$HOME/.vim/files/info/viminfo
