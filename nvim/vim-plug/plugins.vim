@@ -5,6 +5,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
+  Plug '~/Projects/colorscheme-preview'
   Plug 'APZelos/blamer.nvim'
   Plug 'github/copilot.vim'
   Plug 'airblade/vim-gitgutter'
@@ -25,22 +26,24 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'scrooloose/NERDTree'
   Plug 'sheerun/vim-polyglot'
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-  Plug 'tomlion/vim-solidity'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'yaegassy/coc-volar', {'do': 'yarn install --frozen-lockfile'}
 
   " colorschemes
+  Plug 'ayu-theme/ayu-vim'
   Plug 'cocopon/iceberg.vim'
   Plug 'ghifarit53/tokyonight-vim'
   Plug 'joshdick/onedark.vim' "onedark
-  Plug 'sainnhe/vim-color-forest-night'
   Plug 'kyoz/purify', { 'rtp': 'vim' } "purify
   Plug 'larsbs/vimterial_dark'
   Plug 'morhetz/gruvbox'
   Plug 'patstockwell/vim-monokai-tasty'
   Plug 'rakr/vim-one'
+  Plug 'ray-x/aurora'
   Plug 'sainnhe/sonokai'
+  Plug 'sainnhe/vim-color-forest-night'
   Plug 'srcery-colors/srcery-vim'
+  Plug 'NLKNguyen/papercolor-theme'
   Plug 'vim-scripts/Wombat'
 call plug#end()

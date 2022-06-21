@@ -24,6 +24,7 @@ ln -sf ~/.config/.fzf.zsh .fzf.zsh
 ln -sf ~/.config/.p10k.zsh .p10k.zsh
 ln -sf ~/.config/.vimrc .vimrc
 ln -sf ~/.config/.zshrc .zshrc
+sudo ln -sf ~/.config/journald.conf /etc/systemd/journald.conf
 
 # lazydocker
 mkdir ~/temporals/

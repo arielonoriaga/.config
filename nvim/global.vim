@@ -1,9 +1,4 @@
 let g:rigel_airline = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeHighlightFoldersFullName = 0 " highlights the folder name
-let g:NERDTreePatternMatchHighlightFullName = 1
-let g:NERDTreeWinPos = "left"
 
 let g:ale_pattern_options = {
 \ '\.php$': { 'ale_enabled': 0 },
@@ -49,6 +44,11 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 let g:NERDDefaultAlign = 'left'
 let g:NERDSpaceDelims = 1
 let g:NERDToggleCheckAllLines = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeHighlightFoldersFullName = 0 " highlights the folder name
+let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeWinPos = "left"
 let g:NERDTrimTrailingWhitespace = 1
 
 let g:blamer_delay = 250
@@ -78,6 +78,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t:r'
 let g:airline#extensions#tabline#tabs_label = 't'
 let g:airline_powerline_fonts = 1
+
+let ayucolor="dark"
 
 let g:airline_mode_map = {
     \ '__'     : '-',

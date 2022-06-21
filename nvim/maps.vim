@@ -1,6 +1,3 @@
-nmap <c-n> :Startify<cr>
-nmap <silent> <C-g> :NERDTreeFind<CR>
-nmap <silent> <C-u> :NERDTreeToggle<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -9,12 +6,9 @@ nmap <silent>st <plug>(easymotion-s2)
 nmap M <Plug>NERDCommenterToggle
 nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
-noremap <silent>; :GFiles<cr>
-noremap <silent>gs :CocSearch
-xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
 vmap M <Plug>NERDCommenterToggle
+xmap ga <Plug>(EasyAlign)
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -31,33 +25,11 @@ endfunction
 :nnoremap <silent>ciw "_ciw
 :nnoremap <silent>cl Vy
 :nnoremap <silent>dd "_dd<cr>
-nmap <C-d> :bd!<cr>
-nmap <C-i> :bn<cr>
-nmap <C-x> :bufdo bd!<cr>
-nmap <silent>cfn :let @+=expand('%:t:r')<cr>
-nmap <silent>ctn :let @+=expand('%:t:r:r')<cr>
 nmap <silent>dts :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
-nmap <silent>fn :let @+=expand('%:t:r')<cr> ;
-nmap <silent>sf cw ;
-nmap <silent>sw *
-nmap <silent>t %
-nmap U <C-W>>
-nmap Y <C-W><
-nnoremap <silent><C-[> <<
-nnoremap <silent><C-]> >>
-nnoremap <silent>J :m.1<cr>
-nnoremap <silent>K :m-2<cr>
-noremap <c-f> :FindByContent<CR>
-noremap <silent>' :History<cr>
 
-vmap <silent><C-[> <<<Esc>
-vmap <silent><C-]> >><Esc>
-vmap <silent><C-l> :sort<cr>
 vmap <silent>cl yA<cr>console.log('')<esc>hi<C-o>P<esc>2li, <C-o>P<esc>
-vmap <silent>t %
 vnoremap <silent>J :m '>+1<cr>gv=gv
 vnoremap <silent>K :m '<-2<cr>gv=gv
-vnoremap <silent>K :m.-2<cr>gv=gv
 
 let mapleader = ","
 nmap <leader>diff <Plug>(GitGutterPreviewHunk)
