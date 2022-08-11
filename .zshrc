@@ -6,6 +6,12 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ -f /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
 
+export COMPOSE_DOCKER_CLI_BUILD=1
+export DOCKER_BUILDKIT=1
+export PATH="$(yarn global bin):$PATH"
+export PATH="/usr/local/opt/php@7.3/bin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH=~/.npm-global/bin:$PATH
 export ZSH="/home/ariel/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -25,12 +31,20 @@ ZSH_DISABLE_COMPFIX="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=2"
 HIST_STAMPS="dd.mm.yyyy"
 
+# vps
 alias aruze="cat ~/.passwords/aruze | copy && ssh root@159.89.148.250"
-alias itersea="cat ~/.passwords/intersea | copy && ssh root@api.seaong.ar"
+alias wizards="cat ~/.passwords/wizards | copy && ssh root@161.35.117.69"
+alias intersea="cat ~/.passwords/intersea | copy && ssh root@api.seaong.ar"
+
+#vpn
+alias sdgitlab="cat ~/.passwords/sdbranch | copy && fortivpn connect SDBRANCH3.0 -u aonoriaga"
+
+#alias
 alias cfg="v ~/.zshrc"
 alias copy="xclip -selection c"
 alias dcm="git reset HEAD~1"
 alias deletebranchs="git branch --merged | grep -v '^*\smain$' | grep -v '^*\smaster$' | grep -v '^*\sdev$' | xargs git branch -d"
+alias fortivpn="/opt/forticlient/fortivpn"
 alias ggum="git pull --rebase origin master"
 alias gpfb='git push -f'
 alias gplb='git pull origin `git branch --show-current`'
@@ -63,8 +77,3 @@ function commit() {
 
   (git commit -m $commit)
 }
-
-export PATH="$(yarn global bin):$PATH"
-export PATH="/usr/local/opt/php@7.3/bin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH=~/.npm-global/bin:$PATH

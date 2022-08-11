@@ -15,6 +15,10 @@ set cursorline
 set encoding=UTF-8
 set et
 set expandtab
+set foldcolumn=0
+set foldlevelstart=2
+set foldmethod=syntax
+set foldnestmax=2
 set hidden
 set hlsearch
 set ignorecase

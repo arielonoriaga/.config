@@ -8,6 +8,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug '~/Projects/colorscheme-preview'
   Plug 'APZelos/blamer.nvim'
   Plug 'github/copilot.vim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'airblade/vim-gitgutter'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'dense-analysis/ale'
@@ -24,8 +25,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'preservim/nerdcommenter'
   Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/NERDTree'
-  Plug 'sheerun/vim-polyglot'
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  " Plug 'sheerun/vim-polyglot'
+  " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'yaegassy/coc-volar', {'do': 'yarn install --frozen-lockfile'}

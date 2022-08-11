@@ -33,7 +33,7 @@ nmap('sf', 'cw ;')
 nmap('sw', '*')
 nmap('t', '%')
 
-vmap('<c-l', ':sort<cr>')
+vmap('<c-l>', ':sort<cr>')
 vmap('t', '%')
 
 vim.cmd([[
@@ -66,7 +66,7 @@ vim.cmd([[
   nmap <leader>hu <Plug>(GitGutterUndoHunk)
   nmap <leader>r :NERDTreeFocus<cr>R<c-w><c-p>
   nmap <leader>rcw yiw :%s/
-  nmap <leader>ro :so ~/.config/nvim/init.vim<cr>
+  nmap <leader>ro :so ~/.config/nvim/init.lua<cr>
   nmap <leader>v <C-w>v<cr>
   nmap <leader>vue :set syntax=vue<cr>
   nmap <leader>ts :set syntax=typescript<cr>

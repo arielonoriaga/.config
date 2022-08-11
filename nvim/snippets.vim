@@ -33,3 +33,5 @@
 :iabbrev qr@ print_r(str_replace('`', '', vsprintf(str_replace("?", "'%s'", $query->toSql()), $query->getBindings())));die;<Esc>Exvblx
 
 :iabbrev obj@ <Esc>cfniconst <C-o>p = {<cr><cr>};<cr><cr>export default <C-o>p;
+
+:iabbrev rc@ <Esc>cfniconst <C-o>p = () => {<cr>};<cr><cr>export default <C-o>p;
