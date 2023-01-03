@@ -8,9 +8,9 @@ vim.cmd('so ~/.config/nvim/snippets.vim')
 vim.cmd('so ~/.config/nvim/vim-plug/plugins.vim')
 vim.cmd('so ~/.vimrc')
 
-vim.cmd('colorscheme everforest')
+vim.cmd('colorscheme aurora')
 
-vim.g.airline_theme = 'everforest'
+vim.g.airline_theme = 'aurora'
 
 -- function! AdaptColorscheme()
 --    highlight clear CursorLine

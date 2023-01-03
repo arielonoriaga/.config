@@ -1,5 +1,6 @@
 {
     "diagnostic.displayByAle": true,
+    "volar.takeOverMode.enabled": true,
     "eslint.executeAutofix": true,
     "eslint.autoFixOnSave": true
 }

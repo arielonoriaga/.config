@@ -37,6 +37,8 @@ vmap('<c-l>', ':sort<cr>')
 vmap('t', '%')
 
 vim.cmd([[
+  imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
+
   :nmap <silent>cw yiw
   :nnoremap <silent>ciw "_ciw
   :nnoremap <silent>cl Vy

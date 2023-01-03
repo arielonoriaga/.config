@@ -25,11 +25,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'preservim/nerdcommenter'
   Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/NERDTree'
-  " Plug 'sheerun/vim-polyglot'
-  " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+
   Plug 'yaegassy/coc-volar', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'yaegassy/coc-volar-tools', {'do': 'yarn install --frozen-lockfile'}
 
   " colorschemes
   Plug 'ayu-theme/ayu-vim'

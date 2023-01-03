@@ -1,7 +1,7 @@
 # Setup fzf
 # ---------
 if [[ ! "$PATH" == */home/ariel/temporals/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/home/ariel/temporals/fzf/bin"
+  PATH="${PATH:+${PATH}:}/home/ariel/temporals/fzf/bin"
 fi
 
 # Auto-completion
@@ -10,4 +10,4 @@ fi
 
 # Key bindings
 # ------------
-source "/home/ariel/temporals/fzf/shell/key-bindings.zsh"
+# source "/home/ariel/temporals/fzf/shell/key-bindings.zsh"

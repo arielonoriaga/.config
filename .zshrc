@@ -42,14 +42,9 @@ alias sdgitlab="cat ~/.passwords/sdbranch | copy && fortivpn connect SDBRANCH3.0
 #alias
 alias cfg="v ~/.zshrc"
 alias copy="xclip -selection c"
-alias dcm="git reset HEAD~1"
 alias deletebranchs="git branch --merged | grep -v '^*\smain$' | grep -v '^*\smaster$' | grep -v '^*\sdev$' | xargs git branch -d"
+alias ds="docker stop $(docker ps -q)"
 alias fortivpn="/opt/forticlient/fortivpn"
-alias ggum="git pull --rebase origin master"
-alias gpfb='git push -f'
-alias gplb='git pull origin `git branch --show-current`'
-alias gplo='git pull origin master'
-alias gpm='git push origin master'
 alias ld='lazydocker'
 alias lg='lazygit'
 alias neofolder="~/.config && v"
@@ -59,21 +54,6 @@ alias p='~/Projects/'
 alias proyInit="npx license mit > LICENSE && npx gitignore node && git init && npm init -y"
 alias pw='~/Projects/Wizards/'
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
-alias sac="docker stop $(docker ps -q)"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias v="nvim"
 alias wifipass="nmcli device wifi show-password"
-
-# alias gcmg="commit"
-function commit() {
-  echo $1 | commitlint
-
-  my_branch=($(git rev-parse --abbrev-ref HEAD | tr '_' '\n'))
-
-  project=$my_branch[2]
-  issueKey=$my_branch[1]
-
-  commit="$project-$issueKey | $1"
-
-  (git commit -m $commit)
-}

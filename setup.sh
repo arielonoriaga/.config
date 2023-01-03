@@ -4,6 +4,8 @@ sudo add-apt-repository ppa:lazygit-team/release
 curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
 echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 # docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
@@ -14,16 +16,16 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io zsh gcc g++ make nodejs xclip ripgrep lazygit yarn ca-certificates curl gnupg lsb-release jq
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io zsh gcc g++ make nodejs xclip ripgrep yarn ca-certificates curl gnupg lsb-release jq
 
 # node
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 
 # symbolic links
-ln -sf ~/.config/.fzf.zsh .fzf.zsh
-ln -sf ~/.config/.p10k.zsh .p10k.zsh
-ln -sf ~/.config/.vimrc .vimrc
-ln -sf ~/.config/.zshrc .zshrc
+ln -sf ~/.config/.fzf.zsh ~/.fzf.zsh
+ln -sf ~/.config/.p10k.zsh ~/.p10k.zsh
+ln -sf ~/.config/.vimrc ~/.vimrc
+ln -sf ~/.config/.zshrc ~/.zshrc
 sudo ln -sf ~/.config/journald.conf /etc/systemd/journald.conf
 
 # lazydocker

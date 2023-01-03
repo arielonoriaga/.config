@@ -12,6 +12,8 @@ let g:ale_fixers = {
 let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
 
+let g:copilot_no_tab_map = v:true
+
 let g:indentLine_char = '|'
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
