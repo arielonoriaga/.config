@@ -10,4 +10,5 @@ fi
 
 # Key bindings
 # ------------
-# source "/home/ariel/temporals/fzf/shell/key-bindings.zsh"
+#
+source "/usr/share/doc/fzf/examples/key-bindings.zsh"

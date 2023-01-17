@@ -1,3 +1,6 @@
+nnoremap <silent><F12> :FloatermToggle --width=0.8<CR>
+tnoremap <silent><F12> <C-\><C-n>:FloatermToggle<CR>
+
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :

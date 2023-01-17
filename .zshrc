@@ -37,7 +37,7 @@ alias wizards="cat ~/.passwords/wizards | copy && ssh root@161.35.117.69"
 alias intersea="cat ~/.passwords/intersea | copy && ssh root@api.seaong.ar"
 
 #vpn
-alias sdgitlab="cat ~/.passwords/sdbranch | copy && fortivpn connect SDBRANCH3.0 -u aonoriaga"
+alias sdgitlab="cat ~/.passwords/sdbranch | copy && fortivpn connect acumera -u aonoriaga"
 
 #alias
 alias cfg="v ~/.zshrc"

@@ -5,7 +5,8 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-  Plug '~/Projects/colorscheme-preview'
+  " Plug '~/Projects/colorscheme-preview'
+  Plug 'voldikss/vim-floaterm'
   Plug 'APZelos/blamer.nvim'
   Plug 'github/copilot.vim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
