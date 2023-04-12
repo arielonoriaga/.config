@@ -1,3 +1,5 @@
+[ -d "$HOME/Library/Android/sdk" ] && ANDROID_HOME=$HOME/Library/Android/sdk || ANDROID_HOME=$HOME/Android/Sdk
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -6,13 +8,22 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ -f /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
 
+JAVA_HOME="/usr/lib/java"
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+export ANDROID_HOME=$ANDROID_HOME
 export COMPOSE_DOCKER_CLI_BUILD=1
 export DOCKER_BUILDKIT=1
-export PATH="$(yarn global bin):$PATH"
+# export PATH="$(yarn global bin):$PATH"
 export PATH="/usr/local/opt/php@7.3/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/usr/bin/android-studio:$PATH"
+export PATH="$PATH:$JAVA_HOME/bin"
 export PATH=~/.npm-global/bin:$PATH
 export ZSH="/home/ariel/.oh-my-zsh"
+
+PATH=$PATH:$ANDROID_SDK_ROOT/tools
+PATH=$PATH:$ANDROID_SDK_ROOT/platform-toolsexport
+GOBIN=$HOME/go/bin
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -35,6 +46,7 @@ HIST_STAMPS="dd.mm.yyyy"
 alias aruze="cat ~/.passwords/aruze | copy && ssh root@159.89.148.250"
 alias wizards="cat ~/.passwords/wizards | copy && ssh root@161.35.117.69"
 alias intersea="cat ~/.passwords/intersea | copy && ssh root@api.seaong.ar"
+alias phoenix-ssh="ssh -i ~/.ssh/phoenix-dagg.pem ec2-user@phoenix.sixthrock.network"
 
 #vpn
 alias sdgitlab="cat ~/.passwords/sdbranch | copy && fortivpn connect acumera -u aonoriaga"
@@ -57,3 +69,5 @@ alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias v="nvim"
 alias wifipass="nmcli device wifi show-password"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

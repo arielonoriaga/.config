@@ -17,9 +17,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'jiangmiao/auto-pairs'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  Plug 'junegunn/vim-easy-align'
+  " Plug 'junegunn/vim-easy-align'
   Plug 'kdheepak/lazygit.nvim'
-  Plug 'leafoftree/vim-matchtag'
+  " Plug 'leafoftree/vim-matchtag'
   Plug 'machakann/vim-sandwich'
   Plug 'mhinz/vim-startify', { 'branch': 'center' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -30,7 +30,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'vim-airline/vim-airline-themes'
 
   Plug 'yaegassy/coc-volar', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'yaegassy/coc-volar-tools', {'do': 'yarn install --frozen-lockfile'}
+  " Plug 'yaegassy/coc-volar-tools', {'do': 'yarn install --frozen-lockfile'}
 
   " colorschemes
   Plug 'ayu-theme/ayu-vim'

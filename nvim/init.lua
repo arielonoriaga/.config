@@ -8,7 +8,7 @@ vim.cmd('so ~/.config/nvim/snippets.vim')
 vim.cmd('so ~/.config/nvim/vim-plug/plugins.vim')
 vim.cmd('so ~/.vimrc')
 
-vim.cmd('colorscheme aurora')
+vim.cmd('colorscheme tokyonight')
 
 vim.g.airline_theme = 'aurora'
 
