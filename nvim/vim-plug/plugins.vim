@@ -5,9 +5,10 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
-  " Plug '~/Projects/colorscheme-preview'
   Plug 'voldikss/vim-floaterm'
-  Plug 'APZelos/blamer.nvim'
+  Plug 'leafOfTree/vim-vue-plugin'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-pack/nvim-spectre'
   Plug 'github/copilot.vim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'airblade/vim-gitgutter'
@@ -19,7 +20,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'junegunn/fzf.vim'
   " Plug 'junegunn/vim-easy-align'
   Plug 'kdheepak/lazygit.nvim'
-  " Plug 'leafoftree/vim-matchtag'
+  Plug 'leafoftree/vim-matchtag'
   Plug 'machakann/vim-sandwich'
   Plug 'mhinz/vim-startify', { 'branch': 'center' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -30,10 +31,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'vim-airline/vim-airline-themes'
 
   Plug 'yaegassy/coc-volar', {'do': 'yarn install --frozen-lockfile'}
-  " Plug 'yaegassy/coc-volar-tools', {'do': 'yarn install --frozen-lockfile'}
 
   " colorschemes
   Plug 'ayu-theme/ayu-vim'
+  Plug 'glepnir/oceanic-material'
   Plug 'cocopon/iceberg.vim'
   Plug 'ghifarit53/tokyonight-vim'
   Plug 'joshdick/onedark.vim' "onedark

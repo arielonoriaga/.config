@@ -8,9 +8,9 @@ vim.cmd('so ~/.config/nvim/snippets.vim')
 vim.cmd('so ~/.config/nvim/vim-plug/plugins.vim')
 vim.cmd('so ~/.vimrc')
 
-vim.cmd('colorscheme tokyonight')
+vim.cmd('colorscheme oceanic_material')
 
-vim.g.airline_theme = 'aurora'
+vim.g.airline_theme = 'tokyonight'
 
 -- function! AdaptColorscheme()
 --    highlight clear CursorLine

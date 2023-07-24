@@ -22,21 +22,10 @@ let g:indentLine_enabled = 1
 let g:rainbow_active = 1
 let g:solarized_termcolors=256
 
-let g:vim_vue_plugin_highlight_vue_attr = 1
-let g:vim_vue_plugin_highlight_vue_keyword = 1
-let g:vim_vue_plugin_load_full_syntax = 1
-let g:vim_vue_plugin_use_typescript = 1
-
 let g:tokyonight_enable_italic = 0
 let g:tokyonight_style = 'storm' " available: night, storm
 
 let g:javascript_plugin_flow = 1
-
-let g:minimap_auto_start = 1
-let g:minimap_auto_start_win_enter = 1
-let g:minimap_git_colors = 1
-let g:minimap_highlight_search = 1
-let g:minimap_width = 10
 
 let g:NERDAltDelims_java = 1
 let g:NERDCommentEmptyLines = 1
@@ -108,6 +97,7 @@ let g:startify_bookmarks = [
 \ { 'C': '~/.config/' },
 \ { 'P': '~/Projects/' },
 \ ]
+
 let g:startify_files_number = 20
 
 let g:startify_center = 80
@@ -128,6 +118,20 @@ let g:coc_filetype_map = {
 \ 'typescript.jsx': 'typescriptreact',
 \ 'typescript.tsx': 'typescriptreact',
 \ }
+
+let g:vim_vue_plugin_config = {
+\'syntax': {
+\   'template': ['html'],
+\   'script': ['javascript', 'typescript'],
+\   'style': ['css', 'scss', 'sass'],
+\},
+\'full_syntax': ['json'],
+\'initial_indent': ['yaml'],
+\'attribute': 1,
+\'keyword': 1,
+\'foldexpr': 0,
+\'debug': 0,
+\}
 
 let g:floaterm_height = 0.9
 let g:floaterm_width = 0.9
