@@ -125,7 +125,7 @@ let g:vim_vue_plugin_config = {
 \   'script': ['javascript', 'typescript'],
 \   'style': ['css', 'scss', 'sass'],
 \},
-\'full_syntax': ['json'],
+\'full_syntax': [],
 \'initial_indent': ['yaml'],
 \'attribute': 1,
 \'keyword': 1,

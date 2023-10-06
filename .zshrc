@@ -19,6 +19,7 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/bin/android-studio:$PATH"
 export PATH="$PATH:$JAVA_HOME/bin"
 export PATH=~/.npm-global/bin:$PATH
+export PATH="/home/ariel/go/bin:$PATH"
 export ZSH="/home/ariel/.oh-my-zsh"
 
 PATH=$PATH:$ANDROID_SDK_ROOT/tools
@@ -69,5 +70,6 @@ alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias v="nvim"
 alias wifipass="nmcli device wifi show-password"
+alias phoenix="~/Projects/Wizards/phoenix"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

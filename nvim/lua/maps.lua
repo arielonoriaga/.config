@@ -45,15 +45,23 @@ nmap('Y', '<c-w><')
 nmap('cfn', ":let @+=expand('%:t:r')<cr>")
 nmap('fn', ":let @+=expand('%:t:r')<cr> ;")
 nmap('gs', ':CocSearch')
-nmap('sf', 'cw ;')
 nmap('sw', '*')
-nmap('t', '%')
-
-vmap('<c-l>', ':sort<cr>')
-vmap('t', '%')
 
 vim.cmd([[
+  vmap <silent> <C-l> :sort<cr>
+
+  vmap <silent> <C-e> :call CocActionAsync('runCommand', 'tsserver.executeAutofix')<cr>
+  nmap <silent> <C-e> :call CocActionAsync('runCommand', 'tsserver.executeAutofix')<cr>
+
+  vmap <silent> <C-e> :call CocActionAsync('runCommand', 'editor.action.organizeImport')<cr>
+  nmap <silent> <C-e> :call CocActionAsync('runCommand', 'editor.action.organizeImport')<cr>
+
   imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
+
+  nmap t %
+  vmap t %
+
+  nmap <silent> sf cw ;
 
   :nmap <silent>cw yiw
   :nnoremap <silent>ciw "_ciw
