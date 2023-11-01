@@ -5,12 +5,13 @@ vim.cmd('so ~/.config/nvim/autos.vim')
 vim.cmd('so ~/.config/nvim/maps.vim')
 vim.cmd('so ~/.config/nvim/sets.vim')
 vim.cmd('so ~/.config/nvim/snippets.vim')
+vim.cmd('so ~/.config/nvim/ident.vim')
 vim.cmd('so ~/.config/nvim/vim-plug/plugins.vim')
 vim.cmd('so ~/.vimrc')
 
-vim.cmd('colorscheme oceanic_material')
+vim.cmd('colorscheme onedark')
 
-vim.g.airline_theme = 'tokyonight'
+vim.g.airline_theme = 'onedark'
 
 -- function! AdaptColorscheme()
 --    highlight clear CursorLine
