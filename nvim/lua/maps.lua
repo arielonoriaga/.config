@@ -53,8 +53,8 @@ vim.cmd([[
   vmap <silent> <C-e> :call CocActionAsync('runCommand', 'tsserver.executeAutofix')<cr>
   nmap <silent> <C-e> :call CocActionAsync('runCommand', 'tsserver.executeAutofix')<cr>
 
-  vmap <silent> <C-e> :call CocActionAsync('runCommand', 'editor.action.organizeImport')<cr>
-  nmap <silent> <C-e> :call CocActionAsync('runCommand', 'editor.action.organizeImport')<cr>
+  vmap <silent> <C-h> :call CocActionAsync('runCommand', 'editor.action.organizeImport')<cr>
+  nmap <silent> <C-h> :call CocActionAsync('runCommand', 'editor.action.organizeImport')<cr>
 
   imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
 

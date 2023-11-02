@@ -19,6 +19,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   " Plug 'junegunn/vim-easy-align'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'kdheepak/lazygit.nvim'
   Plug 'leafoftree/vim-matchtag'
   Plug 'machakann/vim-sandwich'
