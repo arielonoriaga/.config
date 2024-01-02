@@ -81,3 +81,4 @@ alias wifipass="nmcli device wifi show-password"
 alias phoenix="~/Projects/Wizards/phoenix"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
