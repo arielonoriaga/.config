@@ -21,6 +21,9 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io zsh gcc g++ make n
 # node
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 
+# brew
+yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 # symbolic links
 ln -sf ~/.config/.fzf.zsh ~/.fzf.zsh
 ln -sf ~/.config/.p10k.zsh ~/.p10k.zsh
