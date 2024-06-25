@@ -16,7 +16,8 @@ esac
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ -f /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
 
-JAVA_HOME="/usr/lib/java"
+# JAVA_HOME="/usr/lib/java"
+JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
 export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 export ANDROID_HOME=$ANDROID_HOME
 export COMPOSE_DOCKER_CLI_BUILD=1
@@ -82,3 +83,10 @@ alias phoenix="~/Projects/Wizards/phoenix"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# bun completions
+[ -s "/home/ariel/.bun/_bun" ] && source "/home/ariel/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
