@@ -1,5 +1,7 @@
 [ -d "$HOME/Library/Android/sdk" ] && ANDROID_HOME=$HOME/Library/Android/sdk || ANDROID_HOME=$HOME/Android/Sdk
 
+export PATH="$PATH:/opt/nvim/"
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -57,6 +59,7 @@ alias aruze="cat ~/.passwords/aruze | copy && ssh root@159.89.148.250"
 alias wizards="cat ~/.passwords/wizards | copy && ssh root@161.35.117.69"
 alias intersea="cat ~/.passwords/intersea | copy && ssh root@api.seaong.ar"
 alias phoenix-ssh="ssh -i ~/.ssh/phoenix-dagg.pem ec2-user@phoenix.sixthrock.network"
+alias hostinger="cat ~/.passwords/hostinger | copy && ssh root@217.196.62.243"
 
 #vpn
 alias sdgitlab="cat ~/.passwords/sdbranch | copy && fortivpn connect acumera -u aonoriaga"
@@ -90,3 +93,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# To customize prompt, run `p10k configure` or edit ~/.config/.p10k.zsh.
+[[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh

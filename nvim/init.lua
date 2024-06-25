@@ -9,9 +9,9 @@ vim.cmd('so ~/.config/nvim/ident.vim')
 vim.cmd('so ~/.config/nvim/vim-plug/plugins.vim')
 vim.cmd('so ~/.vimrc')
 
-vim.cmd('colorscheme onedark')
+vim.cmd('colorscheme oceanic_material')
 
-vim.g.airline_theme = 'onedark'
+vim.g.airline_theme = 'oceanic_material'
 
 -- function! AdaptColorscheme()
 --    highlight clear CursorLine

@@ -50,7 +50,7 @@ let g:afterglow_blackout = 1
 
 let g:used_javascript_libs = 'underscore,backbone,vue,jquery'
 
-let g:everforest_background = 'hard'
+let g:everforest_background = 'soft'
 
 let g:sonokai_style = 'andromeda'
 let g:sonokai_disable_italic_comment = 1
@@ -135,3 +135,5 @@ let g:vim_vue_plugin_config = {
 
 let g:floaterm_height = 0.9
 let g:floaterm_width = 0.9
+
+silent! call setwinvar(win, '&winhighlight', 'Normal:')

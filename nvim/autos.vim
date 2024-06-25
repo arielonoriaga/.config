@@ -19,3 +19,5 @@ function! OnChangeVueSyntax(syntax)
     setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
   endif
 endfunction
+
+" autocmd InsertEnter * call :NERDTreeClose<CR>

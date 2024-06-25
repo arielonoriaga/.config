@@ -6,7 +6,6 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'voldikss/vim-floaterm'
-  Plug 'leafOfTree/vim-vue-plugin'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-pack/nvim-spectre'
   Plug 'github/copilot.vim'
@@ -28,8 +27,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'preservim/nerdcommenter'
   Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/NERDTree'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-  Plug 'yaegassy/coc-volar', {'do': 'yarn install --frozen-lockfile'}
+  " vue plugings
+  Plug 'posva/vim-vue'
+  Plug 'leafOfTree/vim-vue-plugin'
+  Plug 'yaegassy/coc-volar', { 'do': 'yarn install --frozen-lockfile' }
+  " Plug 'yaegassy/coc-volar-tools', { 'do': 'yarn install --frozen-lockfile' }
 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -43,6 +47,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'kyoz/purify', { 'rtp': 'vim' } "purify
   Plug 'larsbs/vimterial_dark'
   Plug 'morhetz/gruvbox'
+  Plug 'sainnhe/everforest'
   Plug 'patstockwell/vim-monokai-tasty'
   Plug 'rakr/vim-one'
   Plug 'ray-x/aurora'

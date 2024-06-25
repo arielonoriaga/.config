@@ -33,7 +33,6 @@ nmap('<c-n>', ':Startify<cr>')
 nmap('<c-q>', ':q<cr>')
 nmap('<c-s>', ':w<cr>')
 nmap('<c-u>', ':NERDTreeToggle<cr>')
-nmap('<c-x>', ':bufdo bd!<cr>')
 
 nmap("'", ':History<cr>')
 nmap(';', ':GFiles<cr>')
