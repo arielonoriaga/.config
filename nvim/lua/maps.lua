@@ -57,9 +57,6 @@ vim.cmd([[
 
   imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
 
-  nmap t %
-  vmap t %
-
   nmap <silent> sf cw ;
 
   :nmap <silent>cw yiw
