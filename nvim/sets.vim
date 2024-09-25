@@ -14,6 +14,7 @@ set colorcolumn=80
 set cursorline
 set encoding=UTF-8
 set et
+set path+=**
 set expandtab
 set foldcolumn=0
 set foldlevelstart=2

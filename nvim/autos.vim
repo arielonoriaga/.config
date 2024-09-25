@@ -1,12 +1,5 @@
 autocmd InsertEnter,InsertLeave * set cul!
 
-autocmd FileType vue inoremap <buffer><expr> : InsertColon()
-
-function! InsertColon()
-  let tag = GetVueTag()
-  return tag == 'template' ? ':' : ': '
-endfunction
-
 function! OnChangeVueSyntax(syntax)
   echom 'Syntax is '.a:syntax
   if a:syntax == 'html'
@@ -19,5 +12,7 @@ function! OnChangeVueSyntax(syntax)
     setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
   endif
 endfunction
+
+" autocmd CursorHold * silent call CocActionAsync('diagnosticHover')
 
 " autocmd InsertEnter * call :NERDTreeClose<CR>

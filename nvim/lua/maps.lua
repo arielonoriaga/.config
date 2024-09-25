@@ -1,5 +1,6 @@
+-- Helper functions for mapping
 local function map(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, {noremap = true, silent = true})
+  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
 
 local function nmap(shortcut, command)
@@ -10,97 +11,89 @@ local function vmap(shortcut, command)
   map('v', shortcut, command)
 end
 
-vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").open()<CR>', {
-    desc = "Open Spectre"
-})
+-- Leader key setup (ensure this is set early in your config)
+vim.g.mapleader = ','  -- Set leader key to space
 
-vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-    desc = "Search current word"
-})
+-- Spectre mappings
+nmap('<leader>S', '<cmd>lua require("spectre").open()<CR>', { desc = "Open Spectre" })
+nmap('<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', { desc = "Search current word" })
+vmap('<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', { desc = "Search selected word" })
+nmap('<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', { desc = "Search in current file" })
 
-vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-    desc = "Search current word"
-})
+-- LazyGit
+nmap('<leader>lg', '<cmd>LazyGit<CR>')
 
-vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-    desc = "Search on current file"
-})
+-- Buffer management and navigation
+nmap('<C-d>', ':bd!<CR>')  -- Close buffer
+nmap('<C-i>', ':bn<CR>')    -- Next buffer
+nmap('<C-q>', ':q<CR>')     -- Quit
+nmap('<C-s>', ':w<CR>')     -- Save
 
-nmap('<c-d>', ':bd!<cr>')
-nmap('<c-g>', ':NERDTreeFind<cr>')
-nmap('<c-i>', ':bn<cr>')
-nmap('<c-n>', ':Startify<cr>')
-nmap('<c-q>', ':q<cr>')
-nmap('<c-s>', ':w<cr>')
-nmap('<c-u>', ':NERDTreeToggle<cr>')
+-- NERDTree and file navigation
+nmap('<C-u>', '<cmd>NvimTreeToggle<CR>')
+nmap('<C-g>', '<cmd>NvimTreeFindFile<CR>')
 
-nmap("'", ':History<cr>')
-nmap(';', ':GFiles<cr>')
-nmap('<c-f>', ':FindByContent<cr>')
-nmap('J', ':m.1<cr>')
-nmap('K', ':m-2<cr>')
-nmap('U', '<c-w>>')
-nmap('Y', '<c-w><')
-nmap('cfn', ":let @+=expand('%:t:r')<cr>")
-nmap('fn', ":let @+=expand('%:t:r')<cr> ;")
-nmap('gs', ':CocSearch')
-nmap('sw', '*')
+-- Startify
+nmap('<C-n>', ':Startify<CR>')
 
-vim.cmd([[
-  vmap <silent> <C-l> :sort<cr>
+-- FZF file navigation
+nmap("'", ':History<CR>')
+nmap(';', ':GFiles<CR>')
 
-  vmap <silent> <C-e> :call CocActionAsync('runCommand', 'tsserver.executeAutofix')<cr>
-  nmap <silent> <C-e> :call CocActionAsync('runCommand', 'tsserver.executeAutofix')<cr>
+-- Searching and aligning
+nmap('<C-f>', ':FindByContent<CR>')
+nmap('gs', ':CocSearch<CR>')
+nmap('sw', '*')  -- Search word under cursor
+nmap('<leader>w', ':Grepper -tool ag -cword -noprompt<CR>')
 
-  vmap <silent> <C-h> :call CocActionAsync('runCommand', 'editor.action.organizeImport')<cr>
-  nmap <silent> <C-h> :call CocActionAsync('runCommand', 'editor.action.organizeImport')<cr>
+-- Moving lines
+nmap('J', ':m .+1<CR>')
+nmap('K', ':m .-2<CR>')
 
-  imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
+-- Visual mode mappings
+local opts = { noremap = true, silent = true }
+vmap('<C-l>', ':sort<CR>', opts)
+vmap('<C-e>', ':lua require("coc").action("runCommand", "tsserver.executeAutofix")<CR>', opts)
+vmap('<C-h>', ':lua require("coc").action("runCommand", "editor.action.organizeImport")<CR>', opts)
 
-  nmap <silent> sf cw ;
+-- Normal mode mappings
+nmap('<C-e>', ':lua require("coc").action("runCommand", "tsserver.executeAutofix")<CR>', opts)
+nmap('<C-h>', ':lua require("coc").action("runCommand", "editor.action.organizeImport")<CR>', opts)
 
-  :nmap <silent>cw yiw
-  :nnoremap <silent>ciw "_ciw
-  :nnoremap <silent>cl Vy
-  :nnoremap <silent>dd "_dd<cr>
-  nmap <silent>dts :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
+-- Insert mode mapping for Copilot
+vim.api.nvim_set_keymap('i', '<C-e>', 'copilot#Accept("<CR>")', { expr = true, silent = true, noremap = true })
 
-  vmap <silent>cl yA<cr>console.log('')<esc>hi<C-o>P<esc>2li, <C-o>P<esc>
-  vnoremap <silent>J :m '>+1<cr>gv=gv
-  vnoremap <silent>K :m '<-2<cr>gv=gv
+-- Resizing windows
+nmap('U', '<C-w>>')
+nmap('Y', '<C-w><')
 
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent>st <plug>(easymotion-s2)
-  nmap M <Plug>NERDCommenterToggle
-  nmap [c <Plug>(GitGutterPrevHunk)
-  nmap ]c <Plug>(GitGutterNextHunk)
-  nmap ga <Plug>(EasyAlign)
-  vmap M <Plug>NERDCommenterToggle
-  xmap ga <Plug>(EasyAlign)
+-- Copy filename without extension
+nmap('fn', ":let @+=expand('%:t:r')<CR>")
 
-  let mapleader = ","
-  nmap <leader>diff <Plug>(GitGutterPreviewHunk)
-  nmap <leader>dl cl<silent>p
-  nmap <leader>hs <Plug>(GitGutterStageHunk)
-  nmap <leader>hu <Plug>(GitGutterUndoHunk)
-  nmap <leader>r :NERDTreeFocus<cr>R<c-w><c-p>
-  nmap <leader>rcw yiw :%s/
-  nmap <leader>ro :so ~/.config/nvim/init.lua<cr>
-  nmap <leader>v <C-w>v<cr>
-  nmap <leader>vue :set syntax=vue<cr>
-  nmap <leader>ts :set syntax=typescript<cr>
-  nnoremap <silent> <leader>lg :LazyGit<CR>
-  noremap <leader>crp :let @+=expand("%")<cr>
-  noremap <leader>crpt :let @+=expand("%:r:r")<cr>
-  noremap <leader>gst :GFiles?<cr>
-  noremap <leader>reload :source ~/.vimrc<cr>
-  noremap <leader>rs :noh<cr>
-  noremap <leader>vim :source %<cr>
-  nnoremap <leader>w :Grepper -tool ag -cword -noprompt<cr>
+-- Code refactoring and actions
+nmap('M', '<Plug>NERDCommenterToggle')  -- NERDCommenter toggle
+vmap('M', '<Plug>NERDCommenterToggle')
 
-  xmap <leader>a  <Plug>(coc-codeaction-selected)
-  nmap <leader>a  <Plug>(coc-codeaction-selected)
-]])
+-- GitGutter hunk navigation
+nmap('[c', '<Plug>(GitGutterPrevHunk)')
+nmap(']c', '<Plug>(GitGutterNextHunk)')
+
+-- EasyAlign
+nmap('ga', '<Plug>(EasyAlign)')
+vmap('ga', '<Plug>(EasyAlign)')
+
+-- Leader mappings
+nmap('<leader>diff', '<Plug>(GitGutterPreviewHunk)')
+nmap('<leader>hs', '<Plug>(GitGutterStageHunk)')
+nmap('<leader>hu', '<Plug>(GitGutterUndoHunk)')
+nmap('<leader>r', ':NERDTreeFocus<CR>R<C-w><C-p>')  -- Reload NERDTree
+nmap('<leader>ro', ':so ~/.config/nvim/init.lua<CR>')  -- Reload init.lua
+
+-- Copy <leader> file path and name
+nmap('<leader>crp', ":let @+=expand('%')<CR>")
+nmap('<leader>crpt', ":let @+=expand('%:r:r')<CR>")
+
+-- Miscellaneous
+nmap('<leader>reload', ':source ~/.vimrc<CR>')  -- Reload Vim config
+nmap('<leader>rs', ':noh<CR>')                  -- Clear search highlight
+nmap('<leader>vim', ':source %<CR>')            -- Source current file

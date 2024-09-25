@@ -1,6 +1,13 @@
 {
-    "diagnostic.displayByAle": true,
-    "volar.takeOverMode.enabled": true,
+    "diagnostic.enable": true,
+    "diagnostic.floatDelay": 500,
+    "diagnostic.floatEnable": true,
+    "diagnostic.virtualText": false,
+    "eslint.autoFixOnSave": true,
     "eslint.executeAutofix": true,
-    "eslint.autoFixOnSave": true
+    "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
+    "suggest.autoTrigger": "always",
+    "suggest.enablePreselect": true,
+    "suggest.minTriggerInputLength": 1,
+    "suggest.noselect": false
 }

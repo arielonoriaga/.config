@@ -12,8 +12,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'airblade/vim-gitgutter'
   Plug 'christoomey/vim-tmux-navigator'
-  Plug 'dense-analysis/ale'
-  Plug 'easymotion/vim-easymotion'
+  " Plug 'dense-analysis/ale'
+  " Plug 'easymotion/vim-easymotion'
   Plug 'jiangmiao/auto-pairs'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
@@ -22,15 +22,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'kdheepak/lazygit.nvim'
   Plug 'leafoftree/vim-matchtag'
   Plug 'machakann/vim-sandwich'
-  Plug 'mhinz/vim-startify', { 'branch': 'center' }
+  " Plug 'mhinz/vim-startify', { 'branch': 'center' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'preservim/nerdcommenter'
-  Plug 'ryanoasis/vim-devicons'
+  " Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/NERDTree'
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
   " vue plugings
-  Plug 'posva/vim-vue'
+  " Plug 'posva/vim-vue'
   Plug 'leafOfTree/vim-vue-plugin'
   Plug 'yaegassy/coc-volar', { 'do': 'yarn install --frozen-lockfile' }
   " Plug 'yaegassy/coc-volar-tools', { 'do': 'yarn install --frozen-lockfile' }

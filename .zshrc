@@ -1,6 +1,7 @@
 [ -d "$HOME/Library/Android/sdk" ] && ANDROID_HOME=$HOME/Library/Android/sdk || ANDROID_HOME=$HOME/Android/Sdk
 
 export PATH="$PATH:/opt/nvim/"
+export PATH="$PATH:$HOME/scripts"
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -82,7 +83,7 @@ alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias v="nvim"
 alias wifipass="nmcli device wifi show-password"
-alias phoenix="~/Projects/Wizards/phoenix"
+alias bx="cd ~/Projects/black-box"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

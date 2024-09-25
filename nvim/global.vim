@@ -1,16 +1,5 @@
 let g:rigel_airline = 1
 
-let g:ale_pattern_options = {
-\ '\.php$': { 'ale_enabled': 0 },
-\}
-let g:ale_fixers = {
-\ '*': ['remove_trailing_lines', 'trim_whitespace'],
-\ 'javascript': ['eslint'],
-\ 'typescript': ['eslint'],
-\ 'vue': ['eslint'],
-\}
-let g:ale_linters_explicit = 1
-let g:ale_fix_on_save = 1
 
 let g:copilot_no_tab_map = v:true
 
@@ -32,14 +21,11 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDCreateDefaultMappings = 1
 let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-let g:NERDDefaultAlign = 'left'
+let g:NERDDefaultAlign = 'right'
 let g:NERDSpaceDelims = 1
 let g:NERDToggleCheckAllLines = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeHighlightFoldersFullName = 0 " highlights the folder name
-let g:NERDTreePatternMatchHighlightFullName = 1
-let g:NERDTreeWinPos = "left"
+
+
 let g:NERDTrimTrailingWhitespace = 1
 
 let g:blamer_delay = 250
@@ -93,26 +79,7 @@ let g:airline_mode_map = {
     \ ''     : 'V',
     \ }
 
-let g:startify_bookmarks = [
-\ { 'C': '~/.config/' },
-\ { 'P': '~/Projects/' },
-\ ]
-
-let g:startify_files_number = 20
-
-let g:startify_center = 80
-
-let g:startify_commands = [
-\ ['Help', ':h startify'],
-\ ['SDB - Up', '!cd ~/Projects/Wizards/SDBranch/ && make dev-up'],
-\ ['SDB - Down', '!cd ~/Projects/Wizards/SDBranch/ && make dev-down'],
-\ ]
-
-let g:startify_lists = [
-\ { 'type': 'commands'  },
-\ { 'type': 'bookmarks' },
-\ { 'type': 'files'     },
-\ ]
+let g:coc_global_extensions = ['coc-tsserver', 'coc-json']
 
 let g:coc_filetype_map = {
 \ 'typescript.jsx': 'typescriptreact',
