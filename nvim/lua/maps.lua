@@ -23,6 +23,15 @@ nmap('<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=tr
 -- LazyGit
 nmap('<leader>lg', '<cmd>LazyGit<CR>')
 
+-- LazyDocker
+nmap('<leader>ld', '<cmd>FloatermNew lazydocker<CR>')
+
+-- use coc for code navigation
+nmap('gd', '<Plug>(coc-definition)')
+nmap('gy', '<Plug>(coc-type-definition)')
+nmap('gi', '<Plug>(coc-implementation)')
+nmap('gr', '<Plug>(coc-references)')
+
 -- Buffer management and navigation
 nmap('<C-d>', ':bd!<CR>')  -- Close buffer
 nmap('<C-i>', ':bn<CR>')    -- Next buffer
@@ -43,7 +52,7 @@ nmap(';', ':GFiles<CR>')
 -- Searching and aligning
 nmap('<C-f>', ':FindByContent<CR>')
 nmap('gs', ':CocSearch<CR>')
-nmap('sw', '*')  -- Search word under cursor
+nmap('sw', '*')
 nmap('<leader>w', ':Grepper -tool ag -cword -noprompt<CR>')
 
 -- Moving lines
@@ -71,21 +80,10 @@ nmap('Y', '<C-w><')
 nmap('fn', ":let @+=expand('%:t:r')<CR>")
 
 -- Code refactoring and actions
-nmap('M', '<Plug>NERDCommenterToggle')  -- NERDCommenter toggle
+nmap('M', '<Plug>NERDCommenterToggle')
 vmap('M', '<Plug>NERDCommenterToggle')
 
--- GitGutter hunk navigation
-nmap('[c', '<Plug>(GitGutterPrevHunk)')
-nmap(']c', '<Plug>(GitGutterNextHunk)')
-
--- EasyAlign
-nmap('ga', '<Plug>(EasyAlign)')
-vmap('ga', '<Plug>(EasyAlign)')
-
 -- Leader mappings
-nmap('<leader>diff', '<Plug>(GitGutterPreviewHunk)')
-nmap('<leader>hs', '<Plug>(GitGutterStageHunk)')
-nmap('<leader>hu', '<Plug>(GitGutterUndoHunk)')
 nmap('<leader>r', ':NERDTreeFocus<CR>R<C-w><C-p>')  -- Reload NERDTree
 nmap('<leader>ro', ':so ~/.config/nvim/init.lua<CR>')  -- Reload init.lua
 

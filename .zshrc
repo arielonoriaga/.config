@@ -19,6 +19,13 @@ esac
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ -f /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
 
+get_cpu_temp() {
+    # Get the CPU temperature using `sensors`, and extract the temperature value
+    temp=$(sensors | grep 'Package id 0' | awk '{print $4}')
+    # Trim the '+' character if present
+    echo "${temp:1}"
+}
+
 # JAVA_HOME="/usr/lib/java"
 JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
 export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
@@ -39,6 +46,16 @@ PATH=$PATH:$ANDROID_SDK_ROOT/platform-toolsexport
 GOBIN=$HOME/go/bin
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
+
+function custom_cpu_temp {
+    local temp=$(get_cpu_temp)
+    # Check if temp is not empty and create the output format
+    if [[ -n $temp ]]; then
+        echo "CPU: $temp°C"
+    fi
+}
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=('custom_cpu_temp')
 
 ENABLE_CORRECTION="false"
 

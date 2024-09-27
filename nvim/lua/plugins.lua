@@ -10,7 +10,6 @@ end
 
 ensure_packer()
 
--- Automatically run PackerSync after saving this file
 vim.cmd [[
   augroup packer_user_config
     autocmd!
@@ -18,9 +17,8 @@ vim.cmd [[
   augroup end
 ]]
 
--- Use packer.nvim to manage plugins
 require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim' -- Package manager
+  use 'wbthomason/packer.nvim'
 
   -- Terminal
   use 'voldikss/vim-floaterm'
@@ -35,7 +33,20 @@ require('packer').startup(function(use)
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
   -- Git integration
-  use 'airblade/vim-gitgutter'
+  -- use 'airblade/vim-gitgutter'
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('gitsigns').setup {
+        current_line_blame_opts = {
+          delay = 500,
+        },
+        current_line_blame = true,
+        numhl = true,
+      }
+    end
+  }
   use 'kdheepak/lazygit.nvim'
   use 'tpope/vim-fugitive'
 
@@ -46,7 +57,6 @@ require('packer').startup(function(use)
   use 'nvim-tree/nvim-tree.lua'
 
   use 'nvim-lua/plenary.nvim'
-  use 'zaldih/themery.nvim'
 
   -- Go development
   use {'fatih/vim-go', run = ':GoUpdateBinaries'}
@@ -56,7 +66,13 @@ require('packer').startup(function(use)
   use 'yaegassy/coc-volar'
 
   -- Pairs management
-  use 'jiangmiao/auto-pairs'
+  use {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+        require("nvim-autopairs").setup {}
+    end
+  }
 
   -- Better tag matching
   use 'leafoftree/vim-matchtag'
@@ -64,14 +80,13 @@ require('packer').startup(function(use)
 
   -- Commenting
   use 'preservim/nerdcommenter'
-  use 'numToStr/Comment.nvim'
-
-  -- File Explorer
-  use 'kyazdani42/nvim-tree.lua'
 
   -- Statusline
   use 'vim-airline/vim-airline'
   use 'vim-airline/vim-airline-themes'
+
+  -- colorscheme picker
+  use 'zaldih/themery.nvim'
 
   -- Colorschemes
   use 'ayu-theme/ayu-vim'
