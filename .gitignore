@@ -8,3 +8,6 @@
 !*.sh
 !nvim/
 !nvim/lua/*
+!alacritty/*
+!tmux/*
+tmux.conf

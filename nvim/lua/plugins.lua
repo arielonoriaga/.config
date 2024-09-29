@@ -33,7 +33,6 @@ require('packer').startup(function(use)
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
   -- Git integration
-  -- use 'airblade/vim-gitgutter'
   use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
@@ -47,6 +46,7 @@ require('packer').startup(function(use)
       }
     end
   }
+
   use 'kdheepak/lazygit.nvim'
   use 'tpope/vim-fugitive'
 
@@ -72,6 +72,12 @@ require('packer').startup(function(use)
     config = function()
         require("nvim-autopairs").setup {}
     end
+  }
+
+  use {
+      "williamboman/mason.nvim",
+      'williamboman/mason-lspconfig.nvim',
+      'neovim/nvim-lspconfig'
   }
 
   -- Better tag matching

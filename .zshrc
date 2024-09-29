@@ -101,6 +101,7 @@ alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias v="nvim"
 alias wifipass="nmcli device wifi show-password"
 alias bx="cd ~/Projects/black-box"
+alias alacritty="alacritty"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

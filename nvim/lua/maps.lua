@@ -38,6 +38,9 @@ nmap('<C-i>', ':bn<CR>')    -- Next buffer
 nmap('<C-q>', ':q<CR>')     -- Quit
 nmap('<C-s>', ':w<CR>')     -- Save
 
+-- delete withuot copying to clipboard
+nmap('dd', '"_dd')
+
 -- NERDTree and file navigation
 nmap('<C-u>', '<cmd>NvimTreeToggle<CR>')
 nmap('<C-g>', '<cmd>NvimTreeFindFile<CR>')
@@ -72,6 +75,16 @@ nmap('<C-h>', ':lua require("coc").action("runCommand", "editor.action.organizeI
 -- Insert mode mapping for Copilot
 vim.api.nvim_set_keymap('i', '<C-e>', 'copilot#Accept("<CR>")', { expr = true, silent = true, noremap = true })
 
+-- Insert mode mapping for Coc
+vim.api.nvim_set_keymap('i', '<CR>', [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], {expr = true, noremap = true})
+
+vim.api.nvim_set_keymap(
+    'n', 
+    '<leader>ef', 
+    '<cmd>EslintFixAll<CR>', 
+    { noremap = true, silent = true }
+)
+
 -- Resizing windows
 nmap('U', '<C-w>>')
 nmap('Y', '<C-w><')
@@ -94,4 +107,6 @@ nmap('<leader>crpt', ":let @+=expand('%:r:r')<CR>")
 -- Miscellaneous
 nmap('<leader>reload', ':source ~/.vimrc<CR>')  -- Reload Vim config
 nmap('<leader>rs', ':noh<CR>')                  -- Clear search highlight
-nmap('<leader>vim', ':source %<CR>')            -- Source current file
+
+-- delete trailing whitespace
+nmap('<leader>dts', ':let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar>:noh<CR>')

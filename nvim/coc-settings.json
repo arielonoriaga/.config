@@ -3,6 +3,7 @@
     "diagnostic.floatDelay": 500,
     "diagnostic.floatEnable": true,
     "diagnostic.virtualText": false,
+    "eslint.run": "onSave",
     "eslint.autoFixOnSave": true,
     "eslint.executeAutofix": true,
     "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],

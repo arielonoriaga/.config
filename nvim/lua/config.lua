@@ -85,3 +85,27 @@ require("themery").setup({
     }
   },
 })
+
+require("mason").setup()
+
+require('mason-lspconfig').setup({
+    ensure_installed = { 'eslint' }
+})
+
+local lspconfig = require('lspconfig')
+
+lspconfig.eslint.setup({
+    settings = {
+        format = { enable = true }, -- Enable formatting
+        packageManager = 'npm', -- or yarn, depending on your package manager
+    },
+    on_attach = function(client, bufnr)
+        -- Enable auto-fix on save
+        if client.server_capabilities.documentFormattingProvider then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                buffer = bufnr,
+                command = "EslintFixAll", -- Trigger ESLint auto-fix
+            })
+        end
+    end,
+})
