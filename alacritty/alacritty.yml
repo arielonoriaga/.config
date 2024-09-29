@@ -1,0 +1,10 @@
+shell:
+  program: /bin/bash
+  args:
+    - -c
+    - |
+      if [ -z "$TMUX" ]; then
+        exec tmux
+      else
+        exec bash
+      fi
