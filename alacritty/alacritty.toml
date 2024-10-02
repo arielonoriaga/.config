@@ -1,4 +1,25 @@
+[window]
+title = "Alacritty"
+dynamic_title = true
+decorations = "full"
+startup_mode = "Windowed"
+blur = true
+opacity = 0.8
+
+[font]
+normal = { family = "Source Code Pro", style = "Regular" }
+size = 12.0
+builtin_box_drawing = true
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[mouse]
+hide_when_typing = true
+
 [shell]
+program = "/bin/bash"
 args = ["-c", '''
 if [ -z "$TMUX" ]; then
   exec tmux
@@ -6,4 +27,3 @@ else
   exec bash
 fi
 ''']
-program = "/bin/bash"

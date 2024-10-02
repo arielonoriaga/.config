@@ -47,6 +47,16 @@ require('packer').startup(function(use)
     end
   }
 
+  use {
+    'echasnovski/mini.nvim',
+    version = '*'
+  }
+
+  use {
+    "folke/which-key.nvim",
+    lazy = true,
+  }
+
   use 'kdheepak/lazygit.nvim'
   use 'tpope/vim-fugitive'
 
@@ -87,9 +97,14 @@ require('packer').startup(function(use)
   -- Commenting
   use 'preservim/nerdcommenter'
 
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
+
   -- Statusline
-  use 'vim-airline/vim-airline'
-  use 'vim-airline/vim-airline-themes'
+  -- use 'vim-airline/vim-airline'
+  -- use 'vim-airline/vim-airline-themes'
 
   -- colorscheme picker
   use 'zaldih/themery.nvim'

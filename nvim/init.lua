@@ -13,5 +13,6 @@ vim.cmd('so ~/.config/nvim/ident.vim')
 require('plugins')
 require('config')
 
+require('lualine').setup()
 
 vim.cmd('so ~/.vimrc')
