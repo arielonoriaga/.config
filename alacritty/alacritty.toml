@@ -2,7 +2,7 @@
 title = "Alacritty"
 dynamic_title = true
 decorations = "full"
-startup_mode = "Windowed"
+startup_mode = "Fullscreen"
 blur = true
 opacity = 0.8
 

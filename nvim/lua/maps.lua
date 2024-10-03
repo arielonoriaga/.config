@@ -62,21 +62,8 @@ nmap('<leader>w', ':Grepper -tool ag -cword -noprompt<CR>')
 nmap('J', ':m .+1<CR>')
 nmap('K', ':m .-2<CR>')
 
--- Visual mode mappings
-local opts = { noremap = true, silent = true }
-vmap('<C-l>', ':sort<CR>', opts)
-vmap('<C-e>', ':lua require("coc").action("runCommand", "tsserver.executeAutofix")<CR>', opts)
-vmap('<C-h>', ':lua require("coc").action("runCommand", "editor.action.organizeImport")<CR>', opts)
-
--- Normal mode mappings
-nmap('<C-e>', ':lua require("coc").action("runCommand", "tsserver.executeAutofix")<CR>', opts)
-nmap('<C-h>', ':lua require("coc").action("runCommand", "editor.action.organizeImport")<CR>', opts)
-
 -- Insert mode mapping for Copilot
 vim.api.nvim_set_keymap('i', '<C-e>', 'copilot#Accept("<CR>")', { expr = true, silent = true, noremap = true })
-
--- Insert mode mapping for Coc
-vim.api.nvim_set_keymap('i', '<CR>', [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], {expr = true, noremap = true})
 
 vim.api.nvim_set_keymap(
     'n', 
@@ -85,16 +72,15 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
--- Resizing windows
-nmap('U', '<C-w>>')
-nmap('Y', '<C-w><')
-
 -- Copy filename without extension
 nmap('fn', ":let @+=expand('%:t:r')<CR>")
 
 -- Code refactoring and actions
 nmap('M', '<Plug>NERDCommenterToggle')
 vmap('M', '<Plug>NERDCommenterToggle')
+
+-- console log from selection
+vmap('cl', 'yiwjIconsole.log(<esc>p')
 
 -- Leader mappings
 nmap('<leader>r', ':NERDTreeFocus<CR>R<C-w><C-p>')  -- Reload NERDTree
@@ -110,3 +96,30 @@ nmap('<leader>rs', ':noh<CR>')                  -- Clear search highlight
 
 -- delete trailing whitespace
 nmap('<leader>dts', ':let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar>:noh<CR>')
+
+-- coc mappings
+
+local keyset = vim.keymap.set
+-- Autocomplete
+function _G.check_back_space()
+    local col = vim.fn.col('.') - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+end
+local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
+keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
+keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+
+vmap('<C-l>', ':sort<CR>', opts)
+
+keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
+
+keyset("i", "<c-space>", "coc#refresh()", {silent = true, expr = true})
+
+local opts = {silent = true, nowait = true, expr = true}
+keyset("n", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
+keyset("i", "<C-f>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
+keyset("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
+
+keyset("i", "<C-b>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
+keyset("n", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
+keyset("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
