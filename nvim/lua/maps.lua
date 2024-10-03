@@ -80,7 +80,7 @@ nmap('M', '<Plug>NERDCommenterToggle')
 vmap('M', '<Plug>NERDCommenterToggle')
 
 -- console log from selection
-vmap('cl', 'yiwjIconsole.log(<esc>p')
+vmap('cl', "yA<cr>console.log('')<esc>hi<C-o>P<esc>2li, <C-o>P<esc>")
 
 -- Leader mappings
 nmap('<leader>r', ':NERDTreeFocus<CR>R<C-w><C-p>')  -- Reload NERDTree
