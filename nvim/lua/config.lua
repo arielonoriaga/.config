@@ -2,6 +2,14 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
+require('impatient').enable_profile()
+
+require("nvim-web-devicons").setup({
+  default = true,
+})
+
+require('lualine').setup()
+
 require("nvim-tree").setup({
   sort = {
     sorter = "case_sensitive",
@@ -14,7 +22,7 @@ require("nvim-tree").setup({
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
 })
 
@@ -82,7 +90,19 @@ require("themery").setup({
     {
       name = "Yorumicolors",
       colorscheme = "yorumi",
-    }
+    },
+    {
+      name = "Gruvbox Material",
+      colorscheme = "gruvbox-material",
+    },
+    {
+      name = "Nordic",
+      colorscheme = "nordic",
+    },
+    {
+      name = "Yurumi",
+      colorscheme = "yurumi",
+    },
   },
 })
 

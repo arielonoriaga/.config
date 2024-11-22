@@ -29,8 +29,9 @@ require('packer').startup(function(use)
   -- Copilot (AI-assisted coding)
   use 'github/copilot.vim'
 
+  use 'nvim-tree/nvim-web-devicons'
   -- Treesitter for better syntax highlighting and parsing
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- Git integration
   use {
@@ -48,13 +49,9 @@ require('packer').startup(function(use)
   }
 
   use {
-    'echasnovski/mini.nvim',
-    version = '*'
-  }
-
-  use {
     "folke/which-key.nvim",
     lazy = true,
+    opts = {},
   }
 
   use 'kdheepak/lazygit.nvim'
@@ -73,7 +70,6 @@ require('packer').startup(function(use)
 
   -- Autocompletion and LSP integration
   use {'neoclide/coc.nvim', branch = 'release'}
-  use 'yaegassy/coc-volar'
 
   -- Pairs management
   use {
@@ -85,9 +81,14 @@ require('packer').startup(function(use)
   }
 
   use {
-      "williamboman/mason.nvim",
-      'williamboman/mason-lspconfig.nvim',
-      'neovim/nvim-lspconfig'
+    'romgrk/barbar.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons' }
+  }
+
+  use {
+    "williamboman/mason.nvim",
+    'williamboman/mason-lspconfig.nvim',
+    'neovim/nvim-lspconfig'
   }
 
   -- Better tag matching
@@ -97,14 +98,12 @@ require('packer').startup(function(use)
   -- Commenting
   use 'preservim/nerdcommenter'
 
+  use 'xiyaowong/transparent.nvim'
+
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
-
-  -- Statusline
-  -- use 'vim-airline/vim-airline'
-  -- use 'vim-airline/vim-airline-themes'
 
   -- colorscheme picker
   use 'zaldih/themery.nvim'
@@ -126,7 +125,9 @@ require('packer').startup(function(use)
   use 'srcery-colors/srcery-vim'
   use 'NLKNguyen/papercolor-theme'
   use 'vim-scripts/Wombat'
-  use "yorumicolors/yorumi.nvim"
+  use 'yorumicolors/yorumi.nvim'
+  use 'sainnhe/gruvbox-material'
+  use 'AlexvZyl/nordic.nvim'
 
   -- Optional: Speed up loading time
   use 'lewis6991/impatient.nvim'

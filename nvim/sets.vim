@@ -47,3 +47,4 @@ set tabstop=2
 set undodir=~/.vim/undodir
 set updatetime=300
 set viminfo='100,n$HOME/.vim/files/info/viminfo
+set laststatus=3

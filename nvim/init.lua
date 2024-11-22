@@ -13,9 +13,4 @@ vim.cmd('so ~/.config/nvim/ident.vim')
 require('plugins')
 require('config')
 
-require('mini.icons').setup()
-require('lualine').setup()
-
-require'impatient'.enable_profile()
-
 vim.cmd('so ~/.vimrc')
