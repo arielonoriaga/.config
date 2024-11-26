@@ -94,6 +94,8 @@ require('packer').startup(function(use)
     requires = { 'nvim-tree/nvim-web-devicons' }
   }
 
+  use 'jose-elias-alvarez/null-ls.nvim'
+
   use {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
@@ -133,6 +135,8 @@ require('packer').startup(function(use)
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
 
+  use 'atiladefreitas/dooing'
+
   use {
     'startup-nvim/startup.nvim',
     requires = {
@@ -150,24 +154,12 @@ require('packer').startup(function(use)
 
   -- Colorschemes
   use 'ayu-theme/ayu-vim'
-  use 'glepnir/oceanic-material'
-  use 'cocopon/iceberg.vim'
-  use 'ghifarit53/tokyonight-vim'
   use 'joshdick/onedark.vim'
-  use 'kyoz/purify'
   use 'larsbs/vimterial_dark'
   use 'morhetz/gruvbox'
   use 'sainnhe/everforest'
   use 'patstockwell/vim-monokai-tasty'
-  use 'rakr/vim-one'
-  use 'ray-x/aurora'
-  use 'sainnhe/sonokai'
-  use 'srcery-colors/srcery-vim'
-  use 'NLKNguyen/papercolor-theme'
-  use 'vim-scripts/Wombat'
-  use 'yorumicolors/yorumi.nvim'
   use 'sainnhe/gruvbox-material'
-  use 'AlexvZyl/nordic.nvim'
 
   -- Optional: Speed up loading time
   use 'lewis6991/impatient.nvim'

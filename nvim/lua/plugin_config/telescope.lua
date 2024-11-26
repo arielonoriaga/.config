@@ -37,6 +37,7 @@ telescope.setup({
       },
     },
     sorting_strategy = "ascending",
+    path_display = { "filename_first" },
     mappings = {
       i = {
         ["<C-j>"] = "move_selection_next",

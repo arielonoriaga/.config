@@ -46,18 +46,6 @@ require("themery").setup({
       colorscheme = "ayu",
     },
     {
-      name = "Oceanic Material",
-      colorscheme = "oceanic_material",
-    },
-    {
-      name = "Iceberg",
-      colorscheme = "iceberg",
-    },
-    {
-      name = "Tokyo Night",
-      colorscheme = "tokyonight",
-    },
-    {
       name = "One Dark",
       colorscheme = "onedark",
     },
@@ -78,44 +66,8 @@ require("themery").setup({
       colorscheme = "vim-monokai-tasty",
     },
     {
-      name = "Vim One",
-      colorscheme = "one",
-    },
-    {
-      name = "Aurora",
-      colorscheme = "aurora",
-    },
-    {
-      name = "Sonokai",
-      colorscheme = "sonokai",
-    },
-    {
-      name = "Srcery",
-      colorscheme = "srcery",
-    },
-    {
-      name = "Paper Color",
-      colorscheme = "PaperColor",
-    },
-    {
-      name = "Wombat",
-      colorscheme = "wombat",
-    },
-    {
-      name = "Yorumicolors",
-      colorscheme = "yorumi",
-    },
-    {
       name = "Gruvbox Material",
       colorscheme = "gruvbox-material",
-    },
-    {
-      name = "Nordic",
-      colorscheme = "nordic",
-    },
-    {
-      name = "Yurumi",
-      colorscheme = "yurumi",
     },
   },
 })
@@ -138,6 +90,31 @@ lspconfig.ts_ls.setup({
     format = { enable = true },
   },
   capabilities = capabilities,
+})
+
+local null_ls = require('null-ls')
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.diagnostics.eslint.with({
+      command = "eslint_d",  -- This uses eslint_d for faster linting
+      args = { "--fix-dry-run", "--stdin", "--stdin-filename", "$FILENAME" }
+    }),
+    null_ls.builtins.code_actions.eslint,
+  },
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+
+    if client.server_capabilities.documentFormattingProvider then
+      vim.cmd([[
+        augroup LspAutoFormat
+          autocmd! * <buffer>
+          autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
+        augroup END
+      ]])
+    end
+  end,
 })
 
 -- lspconfig.lua_ls.setup {}

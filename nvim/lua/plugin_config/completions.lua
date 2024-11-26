@@ -19,5 +19,17 @@ cmp.setup({
   }, {
     { name = 'buffer' },
     { name = 'path' },
-  })
+  }),
+  formatting = {
+    format = function(entry, vim_item)
+      -- Add type information to the completion item if available
+      if entry.source.name == 'nvim_lsp' then
+        vim_item.kind = vim_item.kind .. ' ' .. (entry.completion_item.detail or '')
+        if entry.completion_item.documentation then
+          vim_item.menu = vim_item.menu .. ' (' .. entry.completion_item.documentation .. ')'
+        end
+      end
+      return vim_item
+    end,
+  }
 })

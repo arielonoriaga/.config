@@ -61,13 +61,6 @@ nmap('<leader>w', ':Grepper -tool ag -cword -noprompt<CR>')
 -- Insert mode mapping for Copilot
 vim.api.nvim_set_keymap('i', '<C-e>', 'copilot#Accept("<CR>")', { expr = true, silent = true, noremap = true })
 
-vim.api.nvim_set_keymap(
-    'n', 
-    '<leader>ef', 
-    '<cmd>EslintFixAll<CR>', 
-    { noremap = true, silent = true }
-)
-
 -- Copy filename without extension
 nmap('fn', ":let @+=expand('%:t:r')<CR>")
 
@@ -109,8 +102,9 @@ local on_attach = function(_, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-
 end
+
+vim.api.nvim_set_keymap('n', '<leader>fa', ':Lspsaga code_action<CR>', { noremap = true, silent = true })
 
 require("mason-lspconfig").setup_handlers({
   function(server_name)
