@@ -6,8 +6,8 @@ local ensure_packer = function()
     fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
     vim.cmd [[packadd packer.nvim]]
   end
-end
 
+end
 ensure_packer()
 
 vim.cmd [[
@@ -26,12 +26,20 @@ require('packer').startup(function(use)
   -- Utility Plugins
   use 'nvim-pack/nvim-spectre'
 
+  -- use {
+    -- 'sphamba/smear-cursor.nvim',
+    -- opts = {},
+  -- }
+
   -- Copilot (AI-assisted coding)
   use 'github/copilot.vim'
 
   use 'nvim-tree/nvim-web-devicons'
   -- Treesitter for better syntax highlighting and parsing
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+  }
 
   -- Git integration
   use {
@@ -49,34 +57,35 @@ require('packer').startup(function(use)
   }
 
   use {
-    "folke/which-key.nvim",
+    'folke/which-key.nvim',
     lazy = true,
     opts = {},
   }
 
   use 'kdheepak/lazygit.nvim'
-  use 'tpope/vim-fugitive'
+  -- use 'tpope/vim-fugitive'
 
   -- Navigation
   use 'christoomey/vim-tmux-navigator'
-  use 'junegunn/fzf'
-  use 'junegunn/fzf.vim'
+
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
+
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
   use 'nvim-tree/nvim-tree.lua'
 
-  use 'nvim-lua/plenary.nvim'
-
-  -- Go development
-  use {'fatih/vim-go', run = ':GoUpdateBinaries'}
-
-  -- Autocompletion and LSP integration
-  use {'neoclide/coc.nvim', branch = 'release'}
+  use { 'p00f/nvim-ts-rainbow' }
+  use { 'nvim-treesitter/nvim-treesitter-context' }
 
   -- Pairs management
   use {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
     config = function()
-        require("nvim-autopairs").setup {}
+        require('nvim-autopairs').setup {}
     end
   }
 
@@ -86,23 +95,54 @@ require('packer').startup(function(use)
   }
 
   use {
-    "williamboman/mason.nvim",
+    'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig'
+  }
+
+  use { "glepnir/lspsaga.nvim" }
+  -- use { "j-hui/fidget.nvim", tag = "legacy" }
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'L3MON4D3/LuaSnip', -- Snippets plugin
+      'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+    }
+  }
+
+  -- Commenting
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
   }
 
   -- Better tag matching
   use 'leafoftree/vim-matchtag'
   use 'machakann/vim-sandwich'
 
-  -- Commenting
-  use 'preservim/nerdcommenter'
-
-  use 'xiyaowong/transparent.nvim'
+  -- use 'xiyaowong/transparent.nvim'
 
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
+
+  use {
+    'startup-nvim/startup.nvim',
+    requires = {
+      'nvim-telescope/telescope.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-file-browser.nvim'
+    },
+    config = function()
+      require'startup'.setup()
+    end
   }
 
   -- colorscheme picker

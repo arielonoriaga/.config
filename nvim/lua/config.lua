@@ -26,6 +26,20 @@ require("nvim-tree").setup({
   },
 })
 
+require("lspsaga").setup({
+  lightbulb = {
+    enable = true,
+    sign = true,
+  },
+})
+
+require('nvim-treesitter.configs').setup({
+  ensure_installed = { "vim", "lua", "vimdoc", "typescript" },
+  highlight = {
+    enable = true,
+  },
+})
+
 require("themery").setup({
   themes = {{
       name = "Ayu",
@@ -109,23 +123,23 @@ require("themery").setup({
 require("mason").setup()
 
 require('mason-lspconfig').setup({
-    ensure_installed = { 'eslint' }
+  ensure_installed = { 'ts_ls', 'html', 'cssls', 'lua_ls' },
 })
 
 local lspconfig = require('lspconfig')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lspconfig.eslint.setup({
-    settings = {
-        format = { enable = true }, -- Enable formatting
-        packageManager = 'npm', -- or yarn, depending on your package manager
-    },
-    on_attach = function(client, bufnr)
-        -- Enable auto-fix on save
-        if client.server_capabilities.documentFormattingProvider then
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                buffer = bufnr,
-                command = "EslintFixAll", -- Trigger ESLint auto-fix
-            })
-        end
-    end,
+lspconfig.lua_ls.setup({
+  capabilities = capabilities,
 })
+
+lspconfig.ts_ls.setup({
+  settings = {
+    format = { enable = true },
+  },
+  capabilities = capabilities,
+})
+
+-- lspconfig.lua_ls.setup {}
+
+-- require('smear_cursor').enabled = true

@@ -30,12 +30,6 @@ nmap('<leader>lg', '<cmd>LazyGit<CR>')
 -- LazyDocker
 nmap('<leader>ld', '<cmd>FloatermNew lazydocker<CR>')
 
--- use coc for code navigation
-nmap('gd', '<Plug>(coc-definition)')
-nmap('gy', '<Plug>(coc-type-definition)')
-nmap('gi', '<Plug>(coc-implementation)')
-nmap('gr', '<Plug>(coc-references)')
-
 -- Buffer management and navigation
 nmap('<C-d>', ':bd!<CR>')  -- Close buffer
 nmap('<C-q>', ':q<CR>')     -- Quit
@@ -51,22 +45,18 @@ nmap('<C-g>', '<cmd>NvimTreeFindFile<CR>')
 -- Startify
 nmap('<C-n>', ':Startify<CR>')
 
--- FZF file navigation
-nmap("'", ':History<CR>')
-nmap(';', ':GFiles<CR>')
+-- telescope file navigation
+vim.keymap.set('n', "'", "<Cmd>Telescope oldfiles<CR>", { noremap = true, silent = true })
+vim.keymap.set('n', "<C-f>", "<Cmd>Telescope live_grep<CR>", { noremap = true, silent = true })
+vim.keymap.set('n', ";", "<Cmd>Telescope git_files<CR>", { noremap = true, silent = true })
+
+vim.keymap.set('n', "<leader>f", function() require('telescope.builtin').live_grep({
+  default_text = vim.fn.expand("<cword>"),
+}) end, { noremap = true, silent = true })
 
 -- Searching and aligning
-nmap('<C-f>', ':FindByContent<CR>')
-nmap('gs', ':CocSearch<CR>')
 nmap('sw', '*')
 nmap('<leader>w', ':Grepper -tool ag -cword -noprompt<CR>')
-
--- Moving lines
-nmap('J', ':m .+1<CR>')
-nmap('K', ':m .-2<CR>')
-
--- tsserver fix from CoC
-nmap('<C-e>', ':call CocActionAsync("runCommand", "tsserver.executeAutofix")<CR>')
 
 -- Insert mode mapping for Copilot
 vim.api.nvim_set_keymap('i', '<C-e>', 'copilot#Accept("<CR>")', { expr = true, silent = true, noremap = true })
@@ -103,20 +93,29 @@ nmap('<leader>rs', ':noh<CR>')                  -- Clear search highlight
 -- delete trailing whitespace
 nmap('<leader>dts', ':let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar>:noh<CR>')
 
--- coc mappings
+vim.keymap.set('n', 'gd', function()
+  require('telescope.builtin').lsp_definitions()
+end, { noremap = true, silent = true })
 
-local keyset = vim.keymap.set
--- Autocomplete
-function _G.check_back_space()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+vim.keymap.set('n', 'gr', function()
+  require('telescope.builtin').lsp_references()
+end, { noremap = true, silent = true })
+
+vim.keymap.set('n', 'gi', function()
+  require('telescope.builtin').lsp_implementations()
+end, { noremap = true, silent = true })
+
+local on_attach = function(_, bufnr)
+  local opts = { noremap = true, silent = true, buffer = bufnr }
+
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+
 end
-local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
-keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
-keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 
-vmap('<C-l>', ':sort<CR>', opts)
-
-keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-
-keyset("i", "<c-space>", "coc#refresh()", {silent = true, expr = true})
+require("mason-lspconfig").setup_handlers({
+  function(server_name)
+    require("lspconfig")[server_name].setup({
+      on_attach = on_attach,
+    })
+  end,
+})
