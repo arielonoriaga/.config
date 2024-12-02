@@ -84,6 +84,7 @@ alias sdgitlab="cat ~/.passwords/sdbranch | copy && fortivpn connect acumera -u 
 
 #alias
 alias cfg="v ~/.zshrc"
+alias v="nvim"
 alias copy="xclip -selection c"
 alias deletebranchs="git branch --merged | grep -v '^*\smain$' | grep -v '^*\smaster$' | grep -v '^*\sdev$' | xargs git branch -d"
 alias ds="docker stop $(docker ps -q)"
@@ -98,11 +99,8 @@ alias proyInit="npx license mit > LICENSE && npx gitignore node && git init && n
 alias pw='~/Projects/Wizards/'
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
-alias v="nvim"
 alias wifipass="nmcli device wifi show-password"
 alias bx="cd ~/Projects/black-box"
-alias alacritty="alacritty"
-alias tmuxwiz="tmux attach-session -t wiz || tmux new-session -s wiz"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -120,3 +118,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
+#   startx
+# fi

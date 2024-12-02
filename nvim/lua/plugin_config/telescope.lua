@@ -1,5 +1,5 @@
-local h_pct = 0.90
-local w_pct = 0.80
+local h_pct = 0.9
+local w_pct = 0.95
 
 local telescope = require('telescope')
 
@@ -21,7 +21,7 @@ telescope.setup({
           return math.floor(rows * h_pct)
         end,
         preview_cutoff = 10,
-        preview_width = 0.5,
+        preview_width = 0.7,
       },
       vertical = {
         mirror = true,
@@ -33,7 +33,7 @@ telescope.setup({
           return math.floor(rows * h_pct)
         end,
         preview_cutoff = 10,
-        preview_height = 0.5,
+        preview_height = 0.7,
       },
     },
     sorting_strategy = "ascending",
@@ -43,11 +43,13 @@ telescope.setup({
         ["<C-j>"] = "move_selection_next",
         ["<C-k>"] = "move_selection_previous",
         ["<Esc>"] = require('telescope.actions').close,
+        ["<C-h>"] = "which_key",
       },
       n = {
         ["<C-j>"] = "move_selection_next",
         ["<C-k>"] = "move_selection_previous",
         ["<Esc>"] = require('telescope.actions').close,
+        ["<C-h>"] = "which_key",
       },
     },
   },

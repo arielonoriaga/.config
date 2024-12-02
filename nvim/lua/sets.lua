@@ -7,7 +7,7 @@ opt.termguicolors = vim.fn.has("termguicolors") == 1
 
 -- Editor appearance and behavior
 opt.cmdheight = 1
-opt.colorcolumn = "80"
+opt.colorcolumn = '80'
 opt.cursorline = true
 opt.encoding = "UTF-8"
 opt.expandtab = true
@@ -20,7 +20,7 @@ opt.hidden = true
 opt.hlsearch = true
 opt.ignorecase = true
 opt.incsearch = true
-opt.laststatus = 3  -- Combined statusline for all windows
+opt.laststatus = 3
 opt.backup = false
 opt.errorbells = false
 opt.wrap = false
@@ -33,15 +33,16 @@ opt.shortmess:append("c")
 opt.showcmd = true
 opt.showmatch = true
 opt.showtabline = 2
-opt.signcolumn = "yes"
+opt.signcolumn = "no"
 opt.smartcase = true
 opt.smartindent = true
 opt.splitbelow = true
 opt.splitright = true
-opt.softtabstop = 4
+opt.softtabstop = 2
 opt.tabstop = 2
-opt.undodir = vim.fn.expand("~/.vim/undodir")
 opt.updatetime = 300
 opt.viminfo = "'100,n" .. vim.fn.expand("$HOME/.vim/files/info/viminfo")
 
 vim.api.nvim_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+vim.g.loaded_node_provider = 0

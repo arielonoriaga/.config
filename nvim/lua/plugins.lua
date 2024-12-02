@@ -19,31 +19,20 @@ vim.cmd [[
 
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-
-  -- Terminal
   use 'voldikss/vim-floaterm'
-
-  -- Utility Plugins
   use 'nvim-pack/nvim-spectre'
-
-  -- use {
-    -- 'sphamba/smear-cursor.nvim',
-    -- opts = {},
-  -- }
-
-  -- Copilot (AI-assisted coding)
   use 'github/copilot.vim'
-
   use 'nvim-tree/nvim-web-devicons'
-  -- Treesitter for better syntax highlighting and parsing
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
   }
 
-  -- Git integration
+  use 'xiyaowong/transparent.nvim'
+
   use {
     'lewis6991/gitsigns.nvim',
+    lazy = true,
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('gitsigns').setup {
@@ -59,14 +48,12 @@ require('packer').startup(function(use)
   use {
     'folke/which-key.nvim',
     lazy = true,
-    opts = {},
+    opts = {
+      preset = "modern"
+    },
   }
 
   use 'kdheepak/lazygit.nvim'
-  -- use 'tpope/vim-fugitive'
-
-  -- Navigation
-  use 'christoomey/vim-tmux-navigator'
 
   use {
     'nvim-telescope/telescope.nvim',
@@ -74,13 +61,9 @@ require('packer').startup(function(use)
   }
 
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-
   use 'nvim-tree/nvim-tree.lua'
-
-  use { 'p00f/nvim-ts-rainbow' }
   use { 'nvim-treesitter/nvim-treesitter-context' }
 
-  -- Pairs management
   use {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -94,8 +77,6 @@ require('packer').startup(function(use)
     requires = { 'nvim-tree/nvim-web-devicons' }
   }
 
-  use 'jose-elias-alvarez/null-ls.nvim'
-
   use {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
@@ -103,7 +84,15 @@ require('packer').startup(function(use)
   }
 
   use { "glepnir/lspsaga.nvim" }
-  -- use { "j-hui/fidget.nvim", tag = "legacy" }
+
+  use {
+    "L3MON4D3/LuaSnip",
+    run = "make install_jsregexp",
+    dependecies = {
+      "rafamadriz/friendly-snippets"
+    }
+  }
+
   use {
     'hrsh7th/nvim-cmp',
     requires = {
@@ -111,12 +100,11 @@ require('packer').startup(function(use)
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
-      'L3MON4D3/LuaSnip', -- Snippets plugin
-      'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip'
     }
   }
 
-  -- Commenting
   use {
     'numToStr/Comment.nvim',
     config = function()
@@ -124,11 +112,8 @@ require('packer').startup(function(use)
     end
   }
 
-  -- Better tag matching
   use 'leafoftree/vim-matchtag'
   use 'machakann/vim-sandwich'
-
-  -- use 'xiyaowong/transparent.nvim'
 
   use {
     'nvim-lualine/lualine.nvim',
@@ -149,17 +134,21 @@ require('packer').startup(function(use)
     end
   }
 
+  use {
+    'folke/noice.nvim',
+    requires = {
+      'MunifTanjim/nui.nvim',
+      'rcarriga/nvim-notify'
+    }
+  }
+
   -- colorscheme picker
   use 'zaldih/themery.nvim'
 
   -- Colorschemes
   use 'ayu-theme/ayu-vim'
-  use 'joshdick/onedark.vim'
-  use 'larsbs/vimterial_dark'
-  use 'morhetz/gruvbox'
-  use 'sainnhe/everforest'
-  use 'patstockwell/vim-monokai-tasty'
   use 'sainnhe/gruvbox-material'
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   -- Optional: Speed up loading time
   use 'lewis6991/impatient.nvim'

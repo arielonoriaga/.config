@@ -8,6 +8,9 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
+  completion = {
+    completeopt = 'menu,menuone',
+  },
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
@@ -16,20 +19,65 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-  }, {
     { name = 'buffer' },
+    { name = 'nvim_lua' },
     { name = 'path' },
   }),
   formatting = {
     format = function(entry, vim_item)
-      -- Add type information to the completion item if available
-      if entry.source.name == 'nvim_lsp' then
-        vim_item.kind = vim_item.kind .. ' ' .. (entry.completion_item.detail or '')
-        if entry.completion_item.documentation then
-          vim_item.menu = vim_item.menu .. ' (' .. entry.completion_item.documentation .. ')'
-        end
-      end
+      vim_item.menu = ({
+        nvim_lsp = '[LSP]',
+        luasnip = '[LuaSnip]',
+        buffer = '[Buffer]',
+        nvim_lua = '[Lua]',
+        path = '[Path]',
+      })[entry.source.name]
       return vim_item
     end,
-  }
+  },
+})
+
+require("lspsaga").setup({
+  lightbulb = {
+    enable = true,
+    sign = true,
+  },
+})
+
+require('nvim-treesitter.configs').setup({
+  sync_install = false,
+  modules = {},
+  ignore_install = {},
+  ensure_installed = { "javascript", "typescript", "lua", "vimdoc" },
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  ident = {
+    enable = false,
+  },
+})
+
+vim.opt.lazyredraw = true
+
+require("mason").setup()
+
+require('mason-lspconfig').setup({
+  ensure_installed = { 'ts_ls', 'html', 'cssls', 'lua_ls' },
+})
+
+local lspconfig = require('lspconfig')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+lspconfig.lua_ls.setup({
+  capabilities = capabilities,
+})
+
+lspconfig.ts_ls.setup({
+  settings = {
+    format = { enable = true },
+    completions = { completeFunctionCalls = true },
+  },
+  capabilities = capabilities,
 })

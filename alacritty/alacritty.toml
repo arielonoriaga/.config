@@ -1,14 +1,13 @@
 [window]
 title = "Alacritty"
-dynamic_title = true
-decorations = "full"
-startup_mode = "Fullscreen"
+# dynamic_title = true
+# startup_mode = "Fullscreen"
 blur = true
-opacity = 0.98
+opacity = 0.8
 
 [font]
 normal = { family = "Source Code Pro", style = "Regular" }
-size = 12.0
+size = 9
 builtin_box_drawing = true
 
 [scrolling]

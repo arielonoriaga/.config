@@ -59,14 +59,10 @@ nmap('sw', '*')
 nmap('<leader>w', ':Grepper -tool ag -cword -noprompt<CR>')
 
 -- Insert mode mapping for Copilot
-vim.api.nvim_set_keymap('i', '<C-e>', 'copilot#Accept("<CR>")', { expr = true, silent = true, noremap = true })
+vim.api.nvim_set_keymap('i', '<C-j>', 'copilot#Accept("<CR>")', { expr = true, silent = true, noremap = true })
 
 -- Copy filename without extension
 nmap('fn', ":let @+=expand('%:t:r')<CR>")
-
--- Code refactoring and actions
-nmap('M', '<Plug>NERDCommenterToggle')
-vmap('M', '<Plug>NERDCommenterToggle')
 
 -- console log from selection
 vmap('cl', "yA<cr>console.log('')<esc>hi<C-o>P<esc>2li, <C-o>P<esc>")
