@@ -18,17 +18,48 @@ vim.cmd [[
 ]]
 
 require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  use 'voldikss/vim-floaterm'
-  use 'nvim-pack/nvim-spectre'
-  use 'github/copilot.vim'
-  use 'nvim-tree/nvim-web-devicons'
+  use {
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'neovim/nvim-lspconfig',
+    'glepnir/lspsaga.nvim',
+    'MunifTanjim/nui.nvim',
+    'wbthomason/packer.nvim',
+    'voldikss/vim-floaterm',
+    'kdheepak/lazygit.nvim',
+    'nvim-pack/nvim-spectre',
+    'nvim-tree/nvim-web-devicons',
+    'stevearc/dressing.nvim',
+    'nvim-tree/nvim-tree.lua',
+    'nvim-lua/plenary.nvim',
+    'nvim-treesitter/nvim-treesitter-context',
+    'leafoftree/vim-matchtag',
+    'machakann/vim-sandwich',
+    'atiladefreitas/dooing'
+  }
+
+  use {
+    'MeanderingProgrammer/render-markdown.nvim',
+    after = { 'nvim-treesitter' },
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+    config = function()
+      require('render-markdown').setup({})
+    end,
+  }
+
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
   }
 
-  use 'xiyaowong/transparent.nvim'
+  use {
+    'yetone/avante.nvim',
+    requires = {
+      'stevearc/dressing.nvim',
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+    },
+  }
 
   use {
     'lewis6991/gitsigns.nvim',
@@ -53,16 +84,12 @@ require('packer').startup(function(use)
     },
   }
 
-  use 'kdheepak/lazygit.nvim'
-
   use {
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim' }
   }
 
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use 'nvim-tree/nvim-tree.lua'
-  use { 'nvim-treesitter/nvim-treesitter-context' }
 
   use {
     'windwp/nvim-autopairs',
@@ -78,17 +105,9 @@ require('packer').startup(function(use)
   }
 
   use {
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-    'neovim/nvim-lspconfig'
-  }
-
-  use { "glepnir/lspsaga.nvim" }
-
-  use {
     "L3MON4D3/LuaSnip",
     run = "make install_jsregexp",
-    dependecies = {
+    requires = {
       "rafamadriz/friendly-snippets"
     }
   }
@@ -112,15 +131,10 @@ require('packer').startup(function(use)
     end
   }
 
-  use 'leafoftree/vim-matchtag'
-  use 'machakann/vim-sandwich'
-
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
-
-  use 'atiladefreitas/dooing'
 
   use {
     'startup-nvim/startup.nvim',

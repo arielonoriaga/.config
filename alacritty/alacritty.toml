@@ -1,13 +1,20 @@
+import = [
+  "~/.config/alacritty/themes/themes/catppuccin-macchiato.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+
 [window]
-title = "Alacritty"
-# dynamic_title = true
-# startup_mode = "Fullscreen"
 blur = true
-opacity = 0.8
+opacity = 0.85
+startup_mode = "Maximized"
+dynamic_padding = true
+decorations = "None"
 
 [font]
-normal = { family = "Source Code Pro", style = "Regular" }
-size = 9
+normal = { family = "MesloLGMDZ Nerd Font", style = "Regular" }
+size = 9.1
 builtin_box_drawing = true
 
 [scrolling]

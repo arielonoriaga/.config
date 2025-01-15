@@ -1,4 +1,4 @@
--- General settings
+-- General settingsj
 local opt = vim.opt  -- Shorter alias for global options
 
 opt.background = "dark"
@@ -42,6 +42,8 @@ opt.softtabstop = 2
 opt.tabstop = 2
 opt.updatetime = 300
 opt.viminfo = "'100,n" .. vim.fn.expand("$HOME/.vim/files/info/viminfo")
+
+vim.o.lazyredraw = false
 
 vim.api.nvim_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 

@@ -11,8 +11,8 @@ local function vmap(shortcut, command)
   map('v', shortcut, command)
 end
 
--- Leader key setup (ensure this is set early in your config)
-vim.g.mapleader = ','  -- Set leader key to space
+--sset leader
+vim.g.mapleader = ','
 
 -- Spectre mappings
 nmap('<leader>S', '<cmd>lua require("spectre").open()<CR>', { desc = "Open Spectre" })
@@ -58,9 +58,6 @@ vim.keymap.set('n', "<leader>f", function() require('telescope.builtin').live_gr
 nmap('sw', '*')
 nmap('<leader>w', ':Grepper -tool ag -cword -noprompt<CR>')
 
--- Insert mode mapping for Copilot
-vim.api.nvim_set_keymap('i', '<C-j>', 'copilot#Accept("<CR>")', { expr = true, silent = true, noremap = true })
-
 -- Copy filename without extension
 nmap('fn', ":let @+=expand('%:t:r')<CR>")
 
@@ -101,6 +98,13 @@ local on_attach = function(_, bufnr)
 end
 
 vim.api.nvim_set_keymap('n', '<leader>fa', ':Lspsaga code_action<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap(
+    'n',
+    '<leader>o',
+    ':!thunar %:p:h<CR><CR>',
+    { noremap = true, silent = true }
+)
 
 require("mason-lspconfig").setup_handlers({
   function(server_name)

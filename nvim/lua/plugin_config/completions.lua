@@ -19,6 +19,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'render-markdown' },
     { name = 'buffer' },
     { name = 'nvim_lua' },
     { name = 'path' },
@@ -64,7 +65,7 @@ vim.opt.lazyredraw = true
 require("mason").setup()
 
 require('mason-lspconfig').setup({
-  ensure_installed = { 'ts_ls', 'html', 'cssls', 'lua_ls' },
+  ensure_installed = { 'ts_ls', 'html', 'cssls', 'lua_ls', 'rust_analyzer' },
 })
 
 local lspconfig = require('lspconfig')
@@ -81,3 +82,37 @@ lspconfig.ts_ls.setup({
   },
   capabilities = capabilities,
 })
+
+lspconfig.rust_analyzer.setup({
+  capabilities = capabilities,
+  settings = {
+    ["rust-analyzer"] = {
+      checkOnSave = {
+        command = "clippy", -- Enable Clippy for linting
+      },
+    },
+  },
+})
+
+-- require("copilot").setup({
+--   panel = {
+--     auto_refresh = false,
+--     keymap = {
+--       accept = "<CR>",
+--       jump_prev = "[[",
+--       jump_next = "]]",
+--       refresh = "gr",
+--       open = "<M-CR>",
+--     },
+--   },
+--   suggestion = {
+--     auto_trigger = true,
+--     keymap = {
+--       accept = "<M-l>",
+--       prev = "<M-[>",
+--       next = "<M-]>",
+--       dismiss = "<C-]>",
+--     },
+--   },
+-- })
+
