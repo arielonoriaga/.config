@@ -30,6 +30,17 @@ themery.setup({
     {
       name = "Dark - Catppuccino - Mocha",
       colorscheme = "catppuccin-mocha",
+    },
+    {
+      name = 'Dark - Everforest',
+      colorscheme = 'everforest',
+    },
+    {
+      name = 'Light - Everforest',
+      colorscheme = 'everforest',
+      before = [[
+        vim.opt.background = "light"
+      ]],
     }
   },
 })

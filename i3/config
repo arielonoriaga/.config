@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -193,6 +193,13 @@ exec --no-startup-id picom
 
 exec --no-ssartup-id polybar
 exec --no-startup-id bash ~/.config/polybar/launch.sh --docky
+
+# exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --rate 60 --output HDMI-2 --mode 1920x1080 --rate 144 --above eDP-1
+#
+# workspace 1 output HDMI1
+# workspace 2 output eDP1
+
+focus_follows_mouse yes
 
 smart_gaps on
 smart_gaps inverse_outer

@@ -67,9 +67,7 @@ require('packer').startup(function(use)
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('gitsigns').setup {
-        current_line_blame_opts = {
-          delay = 500,
-        },
+        current_line_blame_opts = { delay = 500 },
         current_line_blame = true,
         numhl = true,
       }
@@ -163,6 +161,12 @@ require('packer').startup(function(use)
   use 'ayu-theme/ayu-vim'
   use 'sainnhe/gruvbox-material'
   use { "catppuccin/nvim", as = "catppuccin" }
+  use({
+    "neanias/everforest-nvim",
+    config = function()
+      require("everforest").setup()
+    end,
+  })
 
   -- Optional: Speed up loading time
   use 'lewis6991/impatient.nvim'
