@@ -1,5 +1,9 @@
-nnoremap <silent><F12> :FloatermToggle --width=0.8<CR>
-tnoremap <silent><F12> <C-\><C-n>:FloatermToggle<CR>
+nnoremap <silent><F12> :FloatermToggle --name=cmd<CR>
+tnoremap <silent><F12> <C-\><C-n>:FloatermToggle --name=cmd<CR>
+
+let g:floaterm_height = 0.9
+let g:floaterm_width = 0.9
+let g:floaterm_autoclose = 2
 
 function! s:check_back_space() abort
   let col = col('.') - 1

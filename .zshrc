@@ -1,4 +1,4 @@
-[ -d "$HOME/Library/Android/sdk" ] && ANDROID_HOME=$HOME/Library/Android/sdk || ANDROID_HOME=$HOME/Android/Sdk
+# [ -d "$HOME/Library/Android/sdk" ] && ANDROID_HOME=$HOME/Library/Android/sdk || ANDROID_HOME=$HOME/Android/Sdk
 
 export PATH="$PATH:/opt/nvim/"
 export PATH="$PATH:$HOME/scripts"
@@ -28,21 +28,21 @@ get_cpu_temp() {
 
 # JAVA_HOME="/usr/lib/java"
 JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
-export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
-export ANDROID_HOME=$ANDROID_HOME
+# export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+# export ANDROID_HOME=$ANDROID_HOME
 export COMPOSE_DOCKER_CLI_BUILD=1
 export DOCKER_BUILDKIT=1
 # export PATH="$(yarn global bin):$PATH"
 export PATH="/usr/local/opt/php@7.3/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/usr/bin/android-studio:$PATH"
+# export PATH="/usr/bin/android-studio:$PATH"
 export PATH="$PATH:$JAVA_HOME/bin"
 export PATH=~/.npm-global/bin:$PATH
 export PATH="/home/ariel/go/bin:$PATH"
 export ZSH="/home/ariel/.oh-my-zsh"
 
-PATH=$PATH:$ANDROID_SDK_ROOT/tools
-PATH=$PATH:$ANDROID_SDK_ROOT/platform-toolsexport
+# PATH=$PATH:$ANDROID_SDK_ROOT/tools
+# PATH=$PATH:$ANDROID_SDK_ROOT/platform-toolsexport
 GOBIN=$HOME/go/bin
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -122,3 +122,7 @@ export NVM_DIR="$HOME/.nvm"
 if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
   startx
 fi
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh

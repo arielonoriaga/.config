@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 -- Replace this with Lua plugin setup
 require('config')
 require('maps')
@@ -13,7 +15,9 @@ g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 
 -- Load other configs
-vim.cmd('so ~/.config/nvim/autos.vim')
 vim.cmd('so ~/.config/nvim/maps.vim')
 
 vim.cmd('so ~/.vimrc')
+
+-- vim.lsp.set_log_level("debug")
+vim.cmd("highlight ColorColumn guibg=#3c3c3c")

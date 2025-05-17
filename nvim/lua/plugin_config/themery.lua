@@ -41,6 +41,10 @@ themery.setup({
       before = [[
         vim.opt.background = "light"
       ]],
+    },
+    {
+      name = "Dark - Kanagawa",
+      colorscheme = 'kanagawa'
     }
   },
 })
