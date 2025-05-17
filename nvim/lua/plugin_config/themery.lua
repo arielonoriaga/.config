@@ -1,6 +1,6 @@
 local themery = require('themery')
 
-function create_theme(name, colorscheme, backgroundmode)
+local function create_theme(name, colorscheme, backgroundmode)
   return {
     name = string.format("%s - %s", backgroundmode:gsub("^%l", string.upper), name),
     colorscheme = colorscheme,
@@ -41,6 +41,7 @@ themery.setup({
     },
     create_theme("Everforest", "everforest", "dark"),
     create_theme("Everforest", "everforest", "light"),
-    create_theme("Horizon", "horizon", "dark")
+    create_theme("Horizon", "horizon", "dark"),
+    create_theme("Electron Vue", "electron-vue", "dark")
   },
 })

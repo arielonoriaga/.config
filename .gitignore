@@ -10,4 +10,7 @@
 !nvim/lua/*
 !alacritty/*
 !tmux/*
+!i3/*
+!polybar/*
+!rofi/*
 tmux.conf

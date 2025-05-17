@@ -14,11 +14,25 @@ require('lazy').setup({
   { 'nvim-lua/plenary.nvim' },
 
   -- UI and utilities
-  { 'glepnir/lspsaga.nvim', lazy = true },
+  {
+    'glepnir/lspsaga.nvim',
+    lazy = true,
+    config = function ()
+      require('lspsaga').setup({})
+    end
+  },
   { 'kdheepak/lazygit.nvim', cmd = 'LazyGit' },
-  { 'leafoftree/vim-matchtag', event = 'BufRead' },
   { 'machakann/vim-sandwich', event = 'BufRead' },
-  { 'nvim-pack/nvim-spectre', cmd = 'Spectre' },
+  {
+    'nvim-pack/nvim-spectre',
+    cmd = 'Spectre',
+    config = function ()
+      local spectre = require('spectre')
+      vim.keymap.set('n', '<leader>S', function ()
+        spectre.open()
+      end, { desc = "Open Spectre" })
+    end
+  },
 
   -- Treesitter and related
   {
@@ -31,6 +45,8 @@ require('lazy').setup({
         ensure_installed = {
           "vue", "lua", "javascript", "typescript", "html", "css", "json", "bash",
         },
+        modules = {},
+        ignore_install = {},
         auto_install = true,
         highlight = {
           enable = true,
@@ -65,25 +81,34 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
+    cmd = 'Telescope',
     lazy = false,
     config = function()
-      vim.keymap.set('n', "'", '<Cmd>Telescope oldfiles<CR>', { noremap = true, silent = true })
-      vim.keymap.set('n', '<C-f>', '<Cmd>Telescope live_grep<CR>', { noremap = true, silent = true })
-      vim.keymap.set('n', ';', '<Cmd>Telescope git_files<CR>', { noremap = true, silent = true })
+      require("telescope").setup()
+
+      local builtin = require('telescope.builtin')
+
+      vim.keymap.set('n', ';', function()
+        builtin.git_files()
+      end, { noremap = true, silent = true })
+
+      vim.keymap.set('n', '<C-f>', function()
+        builtin.live_grep()
+      end, { noremap = true, silent = true })
 
       vim.keymap.set('n', 'gd', function()
-        require('telescope.builtin').lsp_definitions()
+        builtin.lsp_definitions()
       end, { noremap = true, silent = true })
 
       vim.keymap.set('n', 'gr', function()
-        require('telescope.builtin').lsp_references()
+        builtin.lsp_references()
       end, { noremap = true, silent = true })
 
       vim.keymap.set('n', 'gi', function()
-        require('telescope.builtin').lsp_implementations()
+        builtin.lsp_implementations()
       end, { noremap = true, silent = true })
 
-      vim.keymap.set('n', '<leader>f', function() require('telescope.builtin').live_grep({
+      vim.keymap.set('n', '<leader>f', function() builtin.live_grep({
         default_text = vim.fn.expand('<cword>'),
       }) end, { noremap = true, silent = true })
     end
@@ -125,7 +150,10 @@ require('lazy').setup({
   { 'nvim-tree/nvim-web-devicons', lazy = true },
 
   -- LSP and Mason
-  { 'neovim/nvim-lspconfig', event = 'BufReadPre' },
+  {
+    'neovim/nvim-lspconfig',
+    event = 'BufReadPre',
+  },
   { 'williamboman/mason.nvim', cmd = 'Mason', event = 'VeryLazy' },
   { 'williamboman/mason-lspconfig.nvim', event = 'BufReadPre', dependencies = { 'williamboman/mason.nvim' } },
 
@@ -139,6 +167,9 @@ require('lazy').setup({
           tsserver_file_preferences = {
             organizeImportsCaseFirst = 'upper',
             quotePreference = 'single',
+          },
+          tsserver_plugins = {
+            "@styled/typescript-styled-plugin",
           }
           -- tsserver_format_options = {}
         }
@@ -204,15 +235,10 @@ require('lazy').setup({
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
-      'L3MON4D3/LuaSnip',
+      { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp', event = 'InsertEnter' },
       'saadparwaiz1/cmp_luasnip',
-      'rafamadriz/friendly-snippets',
+      { 'rafamadriz/friendly-snippets', lazy = true },
     },
-  },
-  {
-    'L3MON4D3/LuaSnip',
-    build = 'make install_jsregexp',
-    event = 'InsertEnter',
   },
 
   -- Commenting
@@ -240,6 +266,10 @@ require('lazy').setup({
   { 'sainnhe/gruvbox-material', lazy = true },
   { 'catppuccin/nvim', name = 'catppuccin', lazy = true },
   { "akinsho/horizon.nvim", version = "*", lazy = true },
+  {
+      "antonyz89/electron-vue.nvim",
+      dependencies = { "rktjmp/lush.nvim" }
+  },
   {
     'neanias/everforest-nvim',
     lazy = true,

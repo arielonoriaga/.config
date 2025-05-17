@@ -78,3 +78,5 @@ vim.o.timeoutlen = 500
 vim.o.ttimeoutlen = 10
 
 opt.shortmess:append({ I = true, s = true })  -- skip the intro and search count
+
+vim.lsp.enable('tailwindcss')

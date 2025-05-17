@@ -3,7 +3,6 @@ local cmp = require('cmp')
 local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
--- local util = require("lspconfig.util")
 
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
@@ -28,16 +27,12 @@ cmp.setup({
     format = function(entry, vim_item)
       vim_item.menu = ({
         nvim_lsp = '[LSP]',
-        -- luasnip = '[LuaSnip]',
         buffer = '[Buffer]',
         nvim_lua = '[Lua]',
         path = '[Path]',
       })[entry.source.name]
       return vim_item
     end,
-  },
-  experimental = {
-    ghost_text = true,
   },
 })
 
@@ -54,12 +49,16 @@ require("lspsaga").setup({
 
 lspconfig.lua_ls.setup({
   capabilities = capabilities,
-  diagnostics = {
-    globals = { "vim" },
-  },
-  workspace = {
-    library = vim.api.nvim_get_runtime_file("", true),
-    checkThirdParty = false,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+    },
   },
 })
 
@@ -91,35 +90,26 @@ lspconfig.eslint.setup({
   },
 })
 
--- Initialize Mason
 mason.setup()
 
--- Configure Mason-LSPConfig
 mason_lspconfig.setup({
   ensure_installed = { "lua_ls", "html", "cssls" },
+  automatic_enable = true,
   automatic_installation = true,
 })
 
 -- Configure Volar
 lspconfig.volar.setup({
-  filetypes = { "vue" },
-  cmd = { "vue-language-server", "--stdio" },
-  root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+  filetypes = { 'vue', 'typescript', 'javascript' },
   init_options = {
-    typescript = { tsdk = "" },
+    plugins = {
+      {
+        name = '@vue/typescript-plugin',
+        location = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server',
+        languages = { 'javascript', 'typescript', 'vue' },
+      },
+    },
   },
-})
-
--- Configure Treesitter
-require("typescript-tools").setup({
-  settings = {
-    tsserver = {
-      tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
-    }
-  },
-  root_dir = function(fname)
-    return require("lspconfig.util").root_pattern("tsconfig.json", ".git")(fname)
-  end,
 })
 
 vim.opt.foldmethod = "expr"
@@ -130,10 +120,3 @@ vim.diagnostic.config({
   virtual_text = true,
   signs = true,
 })
-
--- vim.api.nvim_create_autocmd('LspDetach', {
---   callback = function()
---     local client_id = vim.api.nvim_get_vvar('lsp_client_id')
---     vim.lsp.start_client(client_id)
---   end,
--- })

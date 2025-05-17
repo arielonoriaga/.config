@@ -1,0 +1,9 @@
+configuration {
+  modes: [ combi ];
+  combi-modes: [ window, drun, run ];
+}
+
+// @theme "/home/ariel/.config/rofi/themes/rounded-orange-dark.rasi"
+//@theme "/home/ariel/.config/rofi/themes/tokyonight.rasi"
+//@theme "/home/ariel/.local/share/rofi/themes/squared-nord.rasi"
+@theme "/home/ariel/.local/share/rofi/themes/spotlight-dark.rasi"

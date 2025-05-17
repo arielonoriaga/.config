@@ -10,15 +10,8 @@ local function vmap(shortcut, command)
   map('v', shortcut, command)
 end
 
-vim.g.mapleader = ','
-
-nmap('<leader>S', '<cmd>lua require("spectre").open()<CR>', { desc = "Open Spectre" })
-nmap('<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', { desc = "Search current word" })
-vmap('<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', { desc = "Search selected word" })
-nmap('<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', { desc = "Search in current file" })
-
-nmap('<F2>', '<cmd>BufferNext<CR>')
-nmap('<F3>', '<cmd>BufferPrevious<CR>')
+-- nmap('<F2>', '<cmd>BufferNext<CR>')
+-- nmap('<F3>', '<cmd>BufferPrevious<CR>')
 
 nmap('<leader>lg', '<cmd>LazyGit<CR>')
 
@@ -29,9 +22,6 @@ nmap('<C-q>', ':q<CR>')
 nmap('<C-s>', ':w<CR>')
 
 nmap('dd', '"_dd')
-
-nmap('sw', '*')
-nmap('<leader>w', ':Grepper -tool ag -cword -noprompt<CR>')
 
 nmap('fn', ":let @+=expand('%:t:r')<CR>")
 
