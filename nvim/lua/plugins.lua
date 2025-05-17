@@ -24,28 +24,42 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { 'BufRead' },
     config = function()
       require('nvim-treesitter.configs').setup({
         sync_install = false,
         ensure_installed = {
-          "lua", "javascript", "typescript", "vue", "html", "css", "json", "bash",
+          "vue", "lua", "javascript", "typescript", "html", "css", "json", "bash",
         },
         auto_install = true,
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
           disable = function(_, buf)
-            local max = 100 * 1024
+            local max = 50 * 1024
             local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
             return ok and stats and stats.size > max
           end,
         },
         indent = { enable = true },
+        context_commentstring = {
+          enable = true,
+          enable_autocmd = false,
+        },
       })
     end
   },
-  { 'nvim-treesitter/nvim-treesitter-context', event = 'BufRead' },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    after = 'nvim-treesitter',
+    config = function ()
+      require('treesitter-context').setup({})
+    end
+  },
+  {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    lazy = true,
+  },
 
   -- Telescope and extensions
   {
@@ -74,13 +88,17 @@ require('lazy').setup({
       }) end, { noremap = true, silent = true })
     end
   },
-  { 'nvim-telescope/telescope-file-browser.nvim', cmd = 'Telescope' },
+  {
+      "nvim-telescope/telescope-file-browser.nvim",
+      dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', cmd = 'Telescope' },
 
   -- File explorer and icons
   {
     'nvim-tree/nvim-tree.lua',
-    lazy = false,
+    cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
+    event = "VeryLazy",
     config = function()
       require('nvim-tree').setup({
         sort = {
@@ -108,7 +126,7 @@ require('lazy').setup({
 
   -- LSP and Mason
   { 'neovim/nvim-lspconfig', event = 'BufReadPre' },
-  { 'williamboman/mason.nvim', cmd = 'Mason' },
+  { 'williamboman/mason.nvim', cmd = 'Mason', event = 'VeryLazy' },
   { 'williamboman/mason-lspconfig.nvim', event = 'BufReadPre', dependencies = { 'williamboman/mason.nvim' } },
 
   -- Typescript tools
@@ -136,24 +154,13 @@ require('lazy').setup({
     event = { 'BufReadPre', 'BufNewFile' },
   },
 
-  -- Markdown rendering
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    after = 'nvim-treesitter',
-    lazy = true,
-    ft = { 'markdown' },
-    config = function()
-      require('render-markdown').setup({})
-    end,
-  },
-
   -- UI enhancements
   { 'stevearc/dressing.nvim', event = 'VeryLazy' },
   { 'voldikss/vim-floaterm', cmd = 'FloatermToggle' },
   {
     'lewis6991/gitsigns.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    event = 'BufRead',
+    event = 'VeryLazy',
     config = function()
       require('gitsigns').setup {
         current_line_blame = true,
@@ -180,8 +187,13 @@ require('lazy').setup({
   },
 
   -- Statusline and bufferline
-  { 'romgrk/barbar.nvim', event = 'BufRead' },
-  { 'nvim-lualine/lualine.nvim', event = 'BufRead' },
+  {
+    'nvim-lualine/lualine.nvim',
+    event = 'UIEnter',
+    config = function ()
+    	require("lualine").setup()
+    end
+  },
 
   -- Completion and snippets
   {
@@ -227,6 +239,7 @@ require('lazy').setup({
   { 'ayu-theme/ayu-vim', lazy = true },
   { 'sainnhe/gruvbox-material', lazy = true },
   { 'catppuccin/nvim', name = 'catppuccin', lazy = true },
+  { "akinsho/horizon.nvim", version = "*", lazy = true },
   {
     'neanias/everforest-nvim',
     lazy = true,

@@ -122,6 +122,9 @@ require("typescript-tools").setup({
   end,
 })
 
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
 -- Diagnostic settings
 vim.diagnostic.config({
   virtual_text = true,

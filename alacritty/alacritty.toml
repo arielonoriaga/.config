@@ -1,20 +1,21 @@
-import = [
-  "~/.config/alacritty/themes/themes/catppuccin-macchiato.toml"
-]
-
 [env]
 TERM = "xterm-256color"
 
 [window]
 blur = true
-opacity = 0.85
-startup_mode = "Maximized"
-dynamic_padding = true
+opacity = 0.8
+# startup_mode = "Maximized"
+dynamic_padding = false
 decorations = "None"
+resize_increments = false
+padding.y = 0
+padding.x = 0
 
 [font]
 normal = { family = "MesloLGMDZ Nerd Font", style = "Regular" }
-size = 9.1
+size = 8
+offset.x = 0
+offset.y = 0
 builtin_box_drawing = true
 
 [scrolling]
@@ -23,13 +24,3 @@ multiplier = 3
 
 [mouse]
 hide_when_typing = true
-
-[shell]
-program = "/bin/bash"
-args = ["-c", '''
-if [ -z "$TMUX" ]; then
-  exec tmux
-else
-  exec bash
-fi
-''']

@@ -1,5 +1,13 @@
 local themery = require('themery')
 
+function create_theme(name, colorscheme, backgroundmode)
+  return {
+    name = string.format("%s - %s", backgroundmode:gsub("^%l", string.upper), name),
+    colorscheme = colorscheme,
+    before = string.format([[vim.opt.background = "%s"]], backgroundmode),
+  }
+end
+
 themery.setup({
   livePreview = true,
   themes = {
@@ -31,20 +39,8 @@ themery.setup({
       name = "Dark - Catppuccino - Mocha",
       colorscheme = "catppuccin-mocha",
     },
-    {
-      name = 'Dark - Everforest',
-      colorscheme = 'everforest',
-    },
-    {
-      name = 'Light - Everforest',
-      colorscheme = 'everforest',
-      before = [[
-        vim.opt.background = "light"
-      ]],
-    },
-    {
-      name = "Dark - Kanagawa",
-      colorscheme = 'kanagawa'
-    }
+    create_theme("Everforest", "everforest", "dark"),
+    create_theme("Everforest", "everforest", "light"),
+    create_theme("Horizon", "horizon", "dark")
   },
 })

@@ -126,3 +126,18 @@ fi
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [[ -f /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh
+
+# Define the temp file nnn will write the last selected directory to
+export NNN_TMPFILE="${XDG_CACHE_HOME:-$HOME/.cache}/nnn/.lastd"
+
+nnn() {
+  command nnn "$@"
+  if [ -f "$NNN_TMPFILE" ]; then
+    local d
+    d=$(cat "$NNN_TMPFILE")
+    rm -f "$NNN_TMPFILE"
+    if [ -d "$d" ]; then
+      cd "$d"
+    fi
+  fi
+}

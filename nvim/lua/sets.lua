@@ -1,50 +1,80 @@
--- General settingsj
-local opt = vim.opt  -- Shorter alias for global options
+local opt = vim.opt
 
-opt.background = "dark"
-opt.clipboard = vim.fn.has("macunix") == 1 and "unnamed" or "unnamedplus"
-opt.termguicolors = vim.fn.has("termguicolors") == 1
+-- Interface
+local ui = {
+  background     = "dark",
+  termguicolors  = true,
+  cmdheight      = 1,
+  laststatus     = 3,
+  showcmd        = true,
+  cursorline     = true,
+  colorcolumn    = "80",
+  wrap           = false,
+  scrolloff      = 8,
+  -- number         = true,
+  -- relativenumber = true,
+  signcolumn     = "yes",
+}
 
--- Editor appearance and behavior
-opt.cmdheight = 1
-opt.colorcolumn = '80'
-opt.cursorline = true
-opt.encoding = "UTF-8"
-opt.expandtab = true
+-- Tabs, Indents & Folding
+local indent = {
+  expandtab      = true,
+  tabstop        = 2,
+  shiftwidth     = 2,
+  softtabstop    = 2,
+  smartindent    = true,
+  foldmethod     = "syntax",
+  foldlevelstart = 2,
+  foldnestmax    = 2,
+  foldcolumn     = "0",
+}
+
+-- Search
+local search = {
+  hlsearch   = true,
+  incsearch  = true,
+  ignorecase = true,
+  smartcase  = true,
+}
+
+-- Performance & Files
+local perf = {
+  hidden     = true,
+  updatetime = 300,
+  backup     = false,
+  swapfile   = false,
+  undofile   = true,
+}
+
+for _, group in ipairs({ui, indent, search, perf}) do
+  if type(group) == "table" then
+    for k, v in pairs(group) do
+      opt[k] = v
+    end
+  end
+end
+
+-- Path & Providers
 opt.path:append("**")
-opt.foldcolumn = "0"
-opt.foldlevelstart = 2
-opt.foldmethod = "syntax"
-opt.foldnestmax = 2
-opt.hidden = true
-opt.hlsearch = true
-opt.ignorecase = true
-opt.incsearch = true
-opt.laststatus = 3
-opt.backup = false
-opt.errorbells = false
-opt.wrap = false
-opt.number = true
-opt.numberwidth = 1
-opt.relativenumber = true
-opt.scrolloff = 8
-opt.shiftwidth = 2
-opt.shortmess:append("c")
-opt.showcmd = true
-opt.showmatch = true
-opt.showtabline = 2
-opt.signcolumn = "no"
-opt.smartcase = true
-opt.smartindent = true
-opt.splitbelow = true
-opt.splitright = true
-opt.softtabstop = 2
-opt.tabstop = 2
-opt.updatetime = 300
-opt.viminfo = "'100,n" .. vim.fn.expand("$HOME/.vim/files/info/viminfo")
+vim.g.loaded_node_provider  = 0
+vim.g.loaded_perl_provider  = 0
+vim.g.loaded_ruby_provider  = 0
 
-vim.o.lazyredraw = false
+opt.completeopt = { "menuone", "noinsert", "noselect" }
+opt.wildmenu     = true
+opt.wildmode     = "longest:full,full"
 
-vim.api.nvim_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+vim.o.clipboard = vim.fn.has("macunix") == 1 and "unnamed" or "unnamedplus"
 
-vim.g.loaded_node_provider = 0
+-- LSP completion
+vim.o.omnifunc = "v:lua.vim.lsp.omnifunc"
+
+local data_dir = vim.fn.stdpath("data")
+opt.undodir = data_dir .. "/undo"
+vim.o.viminfo = "'100," .. "n" .. data_dir .. "/viminfo"
+
+vim.o.lazyredraw = true
+vim.o.timeoutlen = 500
+vim.o.ttimeoutlen = 10
+
+opt.shortmess:append({ I = true, s = true })  -- skip the intro and search count
