@@ -11,7 +11,8 @@ local ui = {
   colorcolumn    = "80",
   wrap           = false,
   scrolloff      = 8,
-  -- number         = true,
+  number         = true,
+  numberwidth    = 2,
   -- relativenumber = true,
   signcolumn     = "yes",
 }

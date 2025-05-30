@@ -36,17 +36,6 @@ cmp.setup({
   },
 })
 
-require("lspsaga").setup({
-  lightbulb = {
-    enable = true,
-  },
-  diagnostic = {
-    show_code_action = true,
-    show_source = true,
-    virtual_text = true,
-  },
-})
-
 lspconfig.lua_ls.setup({
   capabilities = capabilities,
   settings = {
@@ -100,14 +89,10 @@ mason_lspconfig.setup({
 
 -- Configure Volar
 lspconfig.volar.setup({
-  filetypes = { 'vue', 'typescript', 'javascript' },
+  filetypes = { 'vue' },
   init_options = {
-    plugins = {
-      {
-        name = '@vue/typescript-plugin',
-        location = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server',
-        languages = { 'javascript', 'typescript', 'vue' },
-      },
+    vue = {
+      hybridMode = false,
     },
   },
 })

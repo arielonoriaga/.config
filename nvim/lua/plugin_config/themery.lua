@@ -42,6 +42,7 @@ themery.setup({
     create_theme("Everforest", "everforest", "dark"),
     create_theme("Everforest", "everforest", "light"),
     create_theme("Horizon", "horizon", "dark"),
-    create_theme("Electron Vue", "electron-vue", "dark")
+    create_theme("Heatherfield", "heatherfield", "dark"),
+    create_theme("Sonokai", "sonokai", "dark"),
   },
 })

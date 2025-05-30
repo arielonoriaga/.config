@@ -13,13 +13,88 @@ require('lazy').setup({
   { 'MunifTanjim/nui.nvim' },
   { 'nvim-lua/plenary.nvim' },
 
+  {
+    "zbirenbaum/copilot.lua",
+    event = "VeryLazy",
+    config = function ()
+      local copilot = require("copilot")
+      copilot.setup({
+        suggestion = {
+          auto_trigger = true,
+          debounce = 75,
+          keymap = {
+            accept = "<A-f>",
+            accept_word = "<A-w>",
+            accept_line = "<A-a>",
+            next = "<A-e>",
+            prev = "<A-r>",
+            dismiss = "<A-c>",
+          },
+        },
+        panel = {
+          enabled = false,
+        },
+      })
+    end
+  },
+
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      "zbirenbaum/copilot.lua",
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      window = {
+        layout = 'float',
+        relative = "editor",
+        border = "double",
+        width = 0.35,
+        height = 0.85,
+        col = 130
+      },
+      show_help = true,
+      prompts = {
+        Explain = "Explain how this code works.",
+        Review = "Review this code for issues.",
+        Refactor = "Refactor this code to improve clarity and efficiency.",
+        Tests = "Write tests for this code.",
+      },
+    },
+    keys = {
+      { "<leader>cc", "<cmd>CopilotChat<CR>", desc = "Start Copilot Chat" },
+      { "<leader>ce", "<cmd>CopilotChatExplain<CR>", desc = "Explain code" },
+      { "<leader>cr", "<cmd>CopilotChatRefactor<CR>", desc = "Refactor code" },
+      { "<leader>ct", "<cmd>CopilotChatTests<CR>", desc = "Generate tests" },
+      { "<leader>cv", "<cmd>CopilotChatVisual<CR>", mode = "v", desc = "Chat on selected code" },
+    },
+  },
+
   -- UI and utilities
   {
     'glepnir/lspsaga.nvim',
-    lazy = true,
     config = function ()
-      require('lspsaga').setup({})
-    end
+      require('lspsaga').setup({
+        symbol_in_winbar = {
+          enable = true
+        },
+        lightbulb = {
+          enable = true
+        },
+        diagnostic = {
+          show_code_action = true,
+          show_source = true,
+          virtual_text = true,
+        },
+        hover = {
+          enable = false,
+        },
+        ui = {
+          border = "rounded"
+        }
+      })
+    end,
+    event = 'LspAttach'
   },
   { 'kdheepak/lazygit.nvim', cmd = 'LazyGit' },
   { 'machakann/vim-sandwich', event = 'BufRead' },
@@ -38,12 +113,14 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    -- cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     event = { 'BufRead' },
     config = function()
       require('nvim-treesitter.configs').setup({
         sync_install = false,
         ensure_installed = {
           "vue", "lua", "javascript", "typescript", "html", "css", "json", "bash",
+          "markdown", "markdown_inline",
         },
         modules = {},
         ignore_install = {},
@@ -68,6 +145,7 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter-context',
     after = 'nvim-treesitter',
+    event = "BufWinEnter",
     config = function ()
       require('treesitter-context').setup({})
     end
@@ -80,11 +158,48 @@ require('lazy').setup({
   -- Telescope and extensions
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-fzf-native.nvim',
+      'nvim-telescope/telescope-file-browser.nvim'
+    },
+    build = {
+      ['nvim-telescope/telescope-fzf-native.nvim'] = 'make'
+    },
     cmd = 'Telescope',
-    lazy = false,
+    -- lazy = false,
     config = function()
-      require("telescope").setup()
+      local telescope = require('telescope')
+
+      telescope.load_extension("fzf")
+      telescope.load_extension("file_browser")
+
+      telescope.setup({
+        defaults = {
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case"
+          },
+          file_ignore_patterns = { "node_modules", ".git/", "dist", "build" },
+          sorting_strategy = "ascending",
+          layout_config = {
+            prompt_position = "top"
+          },
+        },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          }
+        }
+      })
 
       local builtin = require('telescope.builtin')
 
@@ -113,11 +228,6 @@ require('lazy').setup({
       }) end, { noremap = true, silent = true })
     end
   },
-  {
-      "nvim-telescope/telescope-file-browser.nvim",
-      dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-  },
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', cmd = 'Telescope' },
 
   -- File explorer and icons
   {
@@ -152,38 +262,10 @@ require('lazy').setup({
   -- LSP and Mason
   {
     'neovim/nvim-lspconfig',
-    event = 'BufReadPre',
+    event = { "BufReadPre", "BufNewFile" },
   },
   { 'williamboman/mason.nvim', cmd = 'Mason', event = 'VeryLazy' },
   { 'williamboman/mason-lspconfig.nvim', event = 'BufReadPre', dependencies = { 'williamboman/mason.nvim' } },
-
-  -- Typescript tools
-  {
-    'pmizio/typescript-tools.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    config = function()
-      require('typescript-tools').setup {
-        settings = {
-          tsserver_file_preferences = {
-            organizeImportsCaseFirst = 'upper',
-            quotePreference = 'single',
-          },
-          tsserver_plugins = {
-            "@styled/typescript-styled-plugin",
-          }
-          -- tsserver_format_options = {}
-        }
-      }
-
-      vim.keymap.set('n', '<leader>tf', function()
-        vim.cmd('TSToolsAddMissingImports')
-        vim.cmd('TSToolsOrganizeImports')
-        vim.cmd('TSToolsFixAll')
-        vim.cmd('TSToolsRemoveUnused')
-      end, { desc = 'Run all TS tools' })
-    end,
-    event = { 'BufReadPre', 'BufNewFile' },
-  },
 
   -- UI enhancements
   { 'stevearc/dressing.nvim', event = 'VeryLazy' },
@@ -266,9 +348,13 @@ require('lazy').setup({
   { 'sainnhe/gruvbox-material', lazy = true },
   { 'catppuccin/nvim', name = 'catppuccin', lazy = true },
   { "akinsho/horizon.nvim", version = "*", lazy = true },
+  { "sainnhe/sonokai", lazy = true },
   {
-      "antonyz89/electron-vue.nvim",
-      dependencies = { "rktjmp/lush.nvim" }
+    'egerhether/heatherfield.nvim',
+    lazy = true,
+    config = function()
+      require('heatherfield').setup()
+    end,
   },
   {
     'neanias/everforest-nvim',

@@ -1,86 +1,77 @@
-# [ -d "$HOME/Library/Android/sdk" ] && ANDROID_HOME=$HOME/Library/Android/sdk || ANDROID_HOME=$HOME/Android/Sdk
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-export PATH="$PATH:/opt/nvim/"
-export PATH="$PATH:$HOME/scripts"
+zinit ice from"gh-r" 
+
+zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+zinit light romkatv/powerlevel10k
+zinit light agkozak/zsh-z
+
+autoload -U compinit && compinit
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+
+pathadd() {
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *) PATH="$1:$PATH" ;;
+  esac
+}
+
+export BUN_INSTALL="$HOME/.bun"
+
+# bun completions
+[ -s "/home/ariel/.bun/_bun" ] && source "/home/ariel/.bun/_bun"
+
+pathadd "/opt/nvim"
+pathadd "$HOME/scripts"
+pathadd "$PNPM_HOME"
+pathadd "$HOME/.npm-global/bin"
+pathadd "$HOME/go/bin"
+pathadd "$HOME/.config/yarn/global/node_modules/.bin"
+pathadd "$BUN_INSTALL/bin"
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# pnpm
-export PNPM_HOME="/home/ariel/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+[[ -f /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[[ -f /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/arielonoriaga/.npm-global/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
 
 get_cpu_temp() {
-    # Get the CPU temperature using `sensors`, and extract the temperature value
-    temp=$(sensors | grep 'Package id 0' | awk '{print $4}')
-    # Trim the '+' character if present
-    echo "${temp:1}"
+  temp=$(sensors | grep 'Package id 0' | awk '{print $4}')
+  echo "${temp:1}"
 }
 
-# JAVA_HOME="/usr/lib/java"
-JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
-# export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
-# export ANDROID_HOME=$ANDROID_HOME
 export COMPOSE_DOCKER_CLI_BUILD=1
 export DOCKER_BUILDKIT=1
-# export PATH="$(yarn global bin):$PATH"
-export PATH="/usr/local/opt/php@7.3/bin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-# export PATH="/usr/bin/android-studio:$PATH"
-export PATH="$PATH:$JAVA_HOME/bin"
-export PATH=~/.npm-global/bin:$PATH
-export PATH="/home/ariel/go/bin:$PATH"
-export ZSH="/home/ariel/.oh-my-zsh"
-
-# PATH=$PATH:$ANDROID_SDK_ROOT/tools
-# PATH=$PATH:$ANDROID_SDK_ROOT/platform-toolsexport
-GOBIN=$HOME/go/bin
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
 
 function custom_cpu_temp {
-    local temp=$(get_cpu_temp)
-    # Check if temp is not empty and create the output format
-    if [[ -n $temp ]]; then
-        echo "CPU: $temp°C"
-    fi
+  local temp=$(get_cpu_temp)
+  if [[ -n $temp ]]; then
+    echo "CPU: $temp°C"
+  fi
 }
 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=('custom_cpu_temp')
 
 ENABLE_CORRECTION="false"
-
-plugins=(
-git
-zsh-autosuggestions
-zsh-syntax-highlighting
-fzf-tab
-)
-
-source $ZSH/oh-my-zsh.sh
-
 ZSH_DISABLE_COMPFIX="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=2"
 HIST_STAMPS="dd.mm.yyyy"
 
 # vps
-alias aruze="cat ~/.passwords/aruze | copy && ssh root@159.89.148.250"
-alias wizards="cat ~/.passwords/wizards | copy && ssh root@161.35.117.69"
-alias intersea="cat ~/.passwords/intersea | copy && ssh root@api.seaong.ar"
-alias phoenix-ssh="ssh -i ~/.ssh/phoenix-dagg.pem ec2-user@phoenix.sixthrock.network"
 alias hostinger="cat ~/.passwords/hostinger | copy && ssh root@217.196.62.243"
-
-#vpn
-alias sdgitlab="cat ~/.passwords/sdbranch | copy && fortivpn connect acumera -u aonoriaga"
 
 #alias
 alias cfg="v ~/.zshrc"
@@ -88,29 +79,19 @@ alias v="nvim"
 alias copy="xclip -selection c"
 alias deletebranchs="git branch --merged | grep -v '^*\smain$' | grep -v '^*\smaster$' | grep -v '^*\sdev$' | xargs git branch -d"
 alias ds="docker stop $(docker ps -q)"
-alias fortivpn="/opt/forticlient/fortivpn"
 alias ld='lazydocker'
 alias lg='lazygit'
-alias neofolder="~/.config && v"
+alias neofolder="cd ~/.config && v"
 alias o='open .'
 alias open="browse"
-alias p='~/Projects/'
+alias p='cd ~/Projects/'
 alias proyInit="npx license mit > LICENSE && npx gitignore node && git init && npm init -y"
-alias pw='~/Projects/Wizards/'
+alias pw='cd ~/Projects/Wizards/'
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias wifipass="nmcli device wifi show-password"
 alias bx="cd ~/Projects/black-box"
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# bun completions
-[ -s "/home/ariel/.bun/_bun" ] && source "/home/ariel/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+alias ls="ls --color"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/.p10k.zsh.
 [[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
@@ -123,21 +104,16 @@ if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
   startx
 fi
 
-# tabtab source for electron-forge package
-# uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[[ -f /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh
+# Where to save history
+HISTFILE=~/.zsh_history
+HISTSIZE=10000        # Commands stored in memory
+SAVEHIST=10000        # Commands written to file
 
-# Define the temp file nnn will write the last selected directory to
-export NNN_TMPFILE="${XDG_CACHE_HOME:-$HOME/.cache}/nnn/.lastd"
-
-nnn() {
-  command nnn "$@"
-  if [ -f "$NNN_TMPFILE" ]; then
-    local d
-    d=$(cat "$NNN_TMPFILE")
-    rm -f "$NNN_TMPFILE"
-    if [ -d "$d" ]; then
-      cd "$d"
-    fi
-  fi
-}
+# Zsh options to manage history behavior
+setopt HIST_IGNORE_ALL_DUPS      # Don’t record a command if it’s a duplicate
+setopt HIST_REDUCE_BLANKS        # Remove superfluous spaces
+setopt INC_APPEND_HISTORY        # Append commands as they are typed
+setopt SHARE_HISTORY             # Share history across all sessions
+setopt EXTENDED_HISTORY          # Timestamp each command
+setopt HIST_SAVE_NO_DUPS         # When writing out history, don’t write duplicates
+setopt HIST_FIND_NO_DUPS         # Don’t show duplicates in search

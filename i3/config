@@ -14,8 +14,8 @@ set $mod Mod4
 # is used in the bar {} block below.
 font pango:monospace 8
 
-gaps outer 2
-gaps inner 2
+gaps outer 8
+gaps inner 8
 
 for_window [class=".*"] border pixel 0
 
@@ -190,7 +190,8 @@ bindsym $mod+r mode "resize"
 
 # notebook background
 # exec --no-startup-id feh --bg-scale ~/Backgrounds/gojo-satoru-jujutsu-kaisen-4k-wallpaper-uhdpaper.com-204@2@a.jpg
-exec --no-startup-id feh --bg-scale ~/Backgrounds/sung-jin-woo-solo-leveling-anime-4k-wallpaper-uhdpaper.com-161@5@d.jpg
+# exec --no-startup-id feh --bg-scale ~/Backgrounds/sung-jin-woo-solo-leveling-anime-4k-wallpaper-uhdpaper.com-161@5@d.jpg
+exec --no-startup-id feh --bg-scale ~/Backgrounds/nebula.jpg
 
 exec --no-startup-id picom
 
@@ -209,6 +210,8 @@ focus_follows_mouse yes
 # smart_gaps on
 smart_gaps inverse_outer
 hide_edge_borders smart_no_gaps
+
+bindsym Print exec --no-startup-id spectacle -r -n -b
 
 # bindsym $mod+Shift+p exec --no-startup-id killall picom && picom
 

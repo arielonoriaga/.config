@@ -3,7 +3,7 @@ TERM = "xterm-256color"
 
 [window]
 blur = true
-opacity = 0.8
+opacity = 0.96
 # startup_mode = "Maximized"
 dynamic_padding = false
 decorations = "None"
@@ -13,13 +13,13 @@ padding.x = 0
 
 [font]
 normal = { family = "MesloLGMDZ Nerd Font", style = "Regular" }
-size = 8
+size = 7.2
 offset.x = 0
 offset.y = 0
 builtin_box_drawing = true
 
 [scrolling]
-history = 10000
+history = 1000
 multiplier = 3
 
 [mouse]
