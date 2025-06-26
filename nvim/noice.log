@@ -1,0 +1,202 @@
+{
+  event = "msg_showcmd",
+  kind = {}
+}
+{
+  event = "msg_showcmd",
+  kind = { { 0, "j", 0 } }
+}
+{
+  event = "msg_showcmd",
+  kind = {}
+}
+{ false,
+  event = "cmdline_hide",
+  kind = 1
+}
+{
+  event = "msg_showcmd",
+  kind = { { 0, ":", 0 } }
+}
+{ 0, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "" } }
+}
+{ 1, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "N" } }
+}
+{ 2, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "No" } }
+}
+{ 3, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "Noi" } }
+}
+{ -1, 0, 0, -1,
+  event = "popupmenu_show",
+  kind = { { "Noice", "", "", "" }, { "NoiceAll", "", "", "" }, { "NoiceConfig", "", "", "" }, { "NoiceDebug", "", "", "" }, { "NoiceDisable", "", "", "" }, { "NoiceDismiss", "", "", "" }, { "NoiceEnable", "", "", "" }, { "NoiceErrors", "", "", "" }, { "NoiceFzf", "", "", "" }, { "NoiceHistory", "", "", "" }, { "NoiceLast", "", "", "" }, { "NoiceLog", "", "", "" }, { "NoicePick", "", "", "" }, { "NoiceRoutes", "", "", "" }, { "NoiceSnacks", "", "", "" }, { "NoiceStats", "", "", "" }, { "NoiceTelescope", "", "", "" }, { "NoiceViewstats", "", "", "" } }
+}
+{ 5, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "Noice" } }
+}
+{ 5, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "Noice" } }
+}
+{
+  event = "popupmenu_hide"
+}
+{ true,
+  event = "cmdline_hide",
+  kind = 1
+}
+{
+  event = "msg_showcmd",
+  kind = {}
+}
+{
+  event = "msg_showcmd",
+  kind = { { 0, ":", 0 } }
+}
+{ 0, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "" } }
+}
+{ 1, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "c" } }
+}
+{ 2, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "cl" } }
+}
+{ 3, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "cle" } }
+}
+{ 4, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "clea" } }
+}
+{ 5, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "clear" } }
+}
+{ false,
+  event = "cmdline_hide",
+  kind = 1
+}
+{
+  event = "msg_showcmd",
+  kind = {}
+}
+{
+  event = "msg_showcmd",
+  kind = { { 0, ":", 0 } }
+}
+{ 0, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "" } }
+}
+{ 1, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!" } }
+}
+{ 2, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!c" } }
+}
+{ 3, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!cl" } }
+}
+{ 4, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!cla" } }
+}
+{ 5, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!clau" } }
+}
+{ 6, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claud" } }
+}
+{ 7, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude" } }
+}
+{ 8, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude " } }
+}
+{ 9, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude -" } }
+}
+{ 10, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude --" } }
+}
+{ 11, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude --c" } }
+}
+{ 12, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude --co" } }
+}
+{ 13, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude --con" } }
+}
+{ 14, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude --cont" } }
+}
+{ 15, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude --conti" } }
+}
+{ 16, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude --contin" } }
+}
+{ 17, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude --continu" } }
+}
+{ 18, ":", "", 0, 1, 0,
+  event = "cmdline_show",
+  kind = { { 0, "!claude --continue" } }
+}
+{ false,
+  event = "cmdline_hide",
+  kind = 1
+}
+{ { { 0, ":!claude --continue\r\n", 0 } }, false, false,
+  event = "msg_show",
+  kind = "list_cmd"
+}
+{ { { 93, "zsh:1: command not found: claude\n", 6 } }, false, false,
+  event = "msg_show",
+  kind = "shell_err"
+}
+{ { { 0, "\nshell returned 127\n\n", 0 } }, false, false,
+  event = "msg_show",
+  kind = "shell_ret"
+}
+{
+  event = "msg_clear"
+}
+{
+  event = "msg_showcmd",
+  kind = {}
+}
+{ false,
+  event = "cmdline_hide",
+  kind = 1
+}

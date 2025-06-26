@@ -16,6 +16,14 @@ noice.setup({
       },
       opts = { skip = true },
     },
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "lazyredraw",
+      },
+      opts = { skip = true },
+    },
   },
   presets = {
     bottom_search = true,

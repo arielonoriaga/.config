@@ -14,59 +14,48 @@ require('lazy').setup({
   { 'nvim-lua/plenary.nvim' },
 
   {
-    "zbirenbaum/copilot.lua",
-    event = "VeryLazy",
-    config = function ()
-      local copilot = require("copilot")
-      copilot.setup({
-        suggestion = {
-          auto_trigger = true,
-          debounce = 75,
-          keymap = {
-            accept = "<A-f>",
-            accept_word = "<A-w>",
-            accept_line = "<A-a>",
-            next = "<A-e>",
-            prev = "<A-r>",
-            dismiss = "<A-c>",
-          },
+    "supermaven-inc/supermaven-nvim",
+    event = "InsertEnter",
+    config = function()
+      require("supermaven-nvim").setup({
+        keymaps = {
+          accept_suggestion = "<A-f>",
+          accept_word = "<C-j>",
+          clear_suggestion = "<C-]>",
         },
-        panel = {
-          enabled = false,
+        ignore_filetypes = {
+          cpp = true,
+        },
+        color = {
+          suggestion_color = "#ffffff",
+          cterm = 244,
         },
       })
-    end
+    end,
   },
 
+  -- Claude Code integration (requires Claude Code CLI)
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = {
-      "zbirenbaum/copilot.lua",
-      "nvim-lua/plenary.nvim",
-    },
-    opts = {
-      window = {
-        layout = 'float',
-        relative = "editor",
-        border = "double",
-        width = 0.35,
-        height = 0.85,
-        col = 130
-      },
-      show_help = true,
-      prompts = {
-        Explain = "Explain how this code works.",
-        Review = "Review this code for issues.",
-        Refactor = "Refactor this code to improve clarity and efficiency.",
-        Tests = "Write tests for this code.",
-      },
-    },
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    config = true,
     keys = {
-      { "<leader>cc", "<cmd>CopilotChat<CR>", desc = "Start Copilot Chat" },
-      { "<leader>ce", "<cmd>CopilotChatExplain<CR>", desc = "Explain code" },
-      { "<leader>cr", "<cmd>CopilotChatRefactor<CR>", desc = "Refactor code" },
-      { "<leader>ct", "<cmd>CopilotChatTests<CR>", desc = "Generate tests" },
-      { "<leader>cv", "<cmd>CopilotChatVisual<CR>", mode = "v", desc = "Chat on selected code" },
+      { "<leader>a", nil, desc = "AI/Claude Code" },
+      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+      { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+      { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+      { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+      { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+      {
+        "<leader>as",
+        "<cmd>ClaudeCodeTreeAdd<cr>",
+        desc = "Add file",
+        ft = { "NvimTree", "neo-tree", "oil" },
+      },
+      -- Diff management
+      { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+      { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
     },
   },
 
@@ -113,8 +102,7 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    -- cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    event = { 'BufRead' },
+    event = { 'BufReadPost', 'BufNewFile' },
     config = function()
       require('nvim-treesitter.configs').setup({
         sync_install = false,
@@ -124,7 +112,7 @@ require('lazy').setup({
         },
         modules = {},
         ignore_install = {},
-        auto_install = true,
+        auto_install = false,  -- Disabled for performance
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
@@ -144,8 +132,8 @@ require('lazy').setup({
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
-    after = 'nvim-treesitter',
-    event = "BufWinEnter",
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    event = "BufReadPost",
     config = function ()
       require('treesitter-context').setup({})
     end
@@ -167,7 +155,11 @@ require('lazy').setup({
       ['nvim-telescope/telescope-fzf-native.nvim'] = 'make'
     },
     cmd = 'Telescope',
-    -- lazy = false,
+    keys = {
+      { ';', function() require('telescope.builtin').git_files() end, desc = 'Git files' },
+      { '<C-f>', function() require('telescope.builtin').live_grep() end, desc = 'Live grep' },
+      { '<leader>f', function() require('telescope.builtin').live_grep({ default_text = vim.fn.expand('<cword>') }) end, desc = 'Search word under cursor' },
+    },
     config = function()
       local telescope = require('telescope')
 
@@ -201,31 +193,12 @@ require('lazy').setup({
         }
       })
 
+      -- LSP keymaps (not telescope-dependent)
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, silent = true })
+      
       local builtin = require('telescope.builtin')
-
-      vim.keymap.set('n', ';', function()
-        builtin.git_files()
-      end, { noremap = true, silent = true })
-
-      vim.keymap.set('n', '<C-f>', function()
-        builtin.live_grep()
-      end, { noremap = true, silent = true })
-
-      vim.keymap.set('n', 'gd', function()
-        builtin.lsp_definitions()
-      end, { noremap = true, silent = true })
-
-      vim.keymap.set('n', 'gr', function()
-        builtin.lsp_references()
-      end, { noremap = true, silent = true })
-
-      vim.keymap.set('n', 'gi', function()
-        builtin.lsp_implementations()
-      end, { noremap = true, silent = true })
-
-      vim.keymap.set('n', '<leader>f', function() builtin.live_grep({
-        default_text = vim.fn.expand('<cword>'),
-      }) end, { noremap = true, silent = true })
+      vim.keymap.set('n', 'gr', builtin.lsp_references, { noremap = true, silent = true })
+      vim.keymap.set('n', 'gi', builtin.lsp_implementations, { noremap = true, silent = true })
     end
   },
 
@@ -233,7 +206,10 @@ require('lazy').setup({
   {
     'nvim-tree/nvim-tree.lua',
     cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
-    event = "VeryLazy",
+    keys = {
+      { '<C-u>', '<cmd>NvimTreeToggle<CR>', desc = 'Toggle file tree' },
+      { '<C-g>', '<cmd>NvimTreeFindFile<CR>', desc = 'Find file in tree' },
+    },
     config = function()
       require('nvim-tree').setup({
         sort = {
@@ -253,8 +229,7 @@ require('lazy').setup({
         },
       })
 
-      vim.keymap.set('n', '<C-u>', '<cmd>NvimTreeToggle<CR>', { noremap = true, silent = true })
-      vim.keymap.set('n', '<C-g>', '<cmd>NvimTreeFindFile<CR>', { noremap = true, silent = true })
+      -- Keymaps moved to lazy keys configuration
     end
   },
   { 'nvim-tree/nvim-web-devicons', lazy = true },
@@ -264,7 +239,7 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     event = { "BufReadPre", "BufNewFile" },
   },
-  { 'williamboman/mason.nvim', cmd = 'Mason', event = 'VeryLazy' },
+  { 'williamboman/mason.nvim', cmd = 'Mason' },
   { 'williamboman/mason-lspconfig.nvim', event = 'BufReadPre', dependencies = { 'williamboman/mason.nvim' } },
 
   -- UI enhancements
@@ -273,7 +248,7 @@ require('lazy').setup({
   {
     'lewis6991/gitsigns.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    event = 'VeryLazy',
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       require('gitsigns').setup {
         current_line_blame = true,
@@ -310,16 +285,26 @@ require('lazy').setup({
 
   -- Completion and snippets
   {
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp', event = 'InsertEnter' },
-      'saadparwaiz1/cmp_luasnip',
-      { 'rafamadriz/friendly-snippets', lazy = true },
+    'saghen/blink.cmp',
+    lazy = false,
+    dependencies = 'rafamadriz/friendly-snippets',
+    version = 'v0.*',
+    opts = {
+      keymap = { preset = 'default' },
+      appearance = {
+        use_nvim_cmp_as_default = true,
+        nerd_font_variant = 'mono'
+      },
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+      completion = {
+        menu = {
+          draw = {
+            columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+          },
+        },
+      },
     },
   },
 

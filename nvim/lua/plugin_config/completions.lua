@@ -1,43 +1,10 @@
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local cmp = require('cmp')
 local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 
-cmp.setup({
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  }),
-  completion = {
-    completeopt = 'menu,menuone',
-  },
-  snippet = {},
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'render-markdown' },
-    { name = 'buffer', keyboard_length = 3 },
-    { name = 'nvim_lua' },
-    { name = 'path' },
-  }),
-  formatting = {
-    format = function(entry, vim_item)
-      vim_item.menu = ({
-        nvim_lsp = '[LSP]',
-        buffer = '[Buffer]',
-        nvim_lua = '[Lua]',
-        path = '[Path]',
-      })[entry.source.name]
-      return vim_item
-    end,
-  },
-})
-
+-- LSP configuration using blink.cmp capabilities
 lspconfig.lua_ls.setup({
-  capabilities = capabilities,
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
   settings = {
     Lua = {
       diagnostics = {
@@ -52,6 +19,7 @@ lspconfig.lua_ls.setup({
 })
 
 lspconfig.eslint.setup({
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
   on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
@@ -89,6 +57,7 @@ mason_lspconfig.setup({
 
 -- Configure Volar
 lspconfig.volar.setup({
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
   filetypes = { 'vue' },
   init_options = {
     vue = {

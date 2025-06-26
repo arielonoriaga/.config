@@ -117,3 +117,13 @@ setopt SHARE_HISTORY             # Share history across all sessions
 setopt EXTENDED_HISTORY          # Timestamp each command
 setopt HIST_SAVE_NO_DUPS         # When writing out history, don’t write duplicates
 setopt HIST_FIND_NO_DUPS         # Don’t show duplicates in search
+
+# pnpm
+export PNPM_HOME="/home/ariel/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+alias claude="/home/ariel/.claude/local/claude"

@@ -98,3 +98,5 @@ end, { noremap = true, silent = true, desc = 'Display hover doc' })
 vim.keymap.set('n', '<leader>doc', function ()
   vim.cmd('Lspsaga outgoing_calls')
 end, { noremap = true, silent = true, desc = 'Display outgoing Callhierarchy' })
+
+-- CodeCompanion mappings removed - plugin requires paid API
