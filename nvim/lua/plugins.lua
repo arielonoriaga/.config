@@ -35,28 +35,47 @@ require('lazy').setup({
   },
 
   -- Claude Code integration (requires Claude Code CLI)
+  -- {
+  --   "coder/claudecode.nvim",
+  --   dependencies = { "folke/snacks.nvim" },
+  --   config = true,
+  --   keys = {
+  --     { "<leader>a", nil, desc = "AI/Claude Code" },
+  --     { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+  --     { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+  --     { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+  --     { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+  --     { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+  --     { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+  --     {
+  --       "<leader>as",
+  --       "<cmd>ClaudeCodeTreeAdd<cr>",
+  --       desc = "Add file",
+  --       ft = { "NvimTree", "neo-tree", "oil" },
+  --     },
+  --     -- Diff management
+  --     { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+  --     { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+  --   },
+  -- },
+
   {
-    "coder/claudecode.nvim",
-    dependencies = { "folke/snacks.nvim" },
-    config = true,
-    keys = {
-      { "<leader>a", nil, desc = "AI/Claude Code" },
-      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-      { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-      { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
-      { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-      { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-      { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
-      {
-        "<leader>as",
-        "<cmd>ClaudeCodeTreeAdd<cr>",
-        desc = "Add file",
-        ft = { "NvimTree", "neo-tree", "oil" },
-      },
-      -- Diff management
-      { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-      { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+    "greggh/claude-code.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- Required for git operations
     },
+    config = function()
+      require("claude-code").setup({
+        window = {
+          split_ratio = 0.4,
+          position = "vertical",
+          hide_numbers = true,
+          enter_insert = true,
+          hide_signcolumn = true,
+        },
+        command = "/home/ariel/.claude/local/claude"
+      })
+    end
   },
 
   -- UI and utilities
@@ -107,7 +126,7 @@ require('lazy').setup({
       require('nvim-treesitter.configs').setup({
         sync_install = false,
         ensure_installed = {
-          "vue", "lua", "javascript", "typescript", "html", "css", "json", "bash",
+          "lua", "javascript", "typescript", "html", "css", "json", "bash",
           "markdown", "markdown_inline",
         },
         modules = {},
@@ -195,7 +214,7 @@ require('lazy').setup({
 
       -- LSP keymaps (not telescope-dependent)
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, silent = true })
-      
+
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', 'gr', builtin.lsp_references, { noremap = true, silent = true })
       vim.keymap.set('n', 'gi', builtin.lsp_implementations, { noremap = true, silent = true })
@@ -274,6 +293,26 @@ require('lazy').setup({
     end,
   },
 
+  -- Vue-specific enhancements
+  -- {
+  --   'windwp/nvim-ts-autotag',
+  --   event = 'InsertEnter',
+  --   config = function()
+  --     require('nvim-ts-autotag').setup({
+  --       opts = {
+  --         enable_close = true,
+  --         enable_rename = true,
+  --         enable_close_on_slash = false,
+  --       },
+  --       per_filetype = {
+  --         ['vue'] = {
+  --           enable_close = true,
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- },
+
   -- Statusline and bufferline
   {
     'nvim-lualine/lualine.nvim',
@@ -288,21 +327,53 @@ require('lazy').setup({
     'saghen/blink.cmp',
     lazy = false,
     dependencies = 'rafamadriz/friendly-snippets',
-    version = 'v0.*',
+    version = '1.*',
     opts = {
-      keymap = { preset = 'default' },
-      appearance = {
-        use_nvim_cmp_as_default = true,
-        nerd_font_variant = 'mono'
+      keymap = {
+        preset = 'default',
+        ['<CR>'] = { 'accept', 'fallback' },
       },
+      appearance = { nerd_font_variant = 'mono' },
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'path', 'lsp', 'snippets', 'buffer' },
+        providers = {
+          buffer = {
+            opts = {
+              blocked_filetypes = { 'NvimTree' },
+            },
+          },
+          lsp = {
+            opts = {
+              blocked_filetypes = { 'NvimTree' },
+            },
+          },
+        },
       },
       completion = {
         menu = {
           draw = {
-            columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+            columns = { 
+              { "label", "label_description", gap = 1 }, 
+              { "kind_icon", "kind" },
+              { "source_name", gap = 1 }
+            },
+            components = {
+              label_description = {
+                width = { max = 30 },
+                text = function(ctx)
+                  local detail = ctx.item.detail
+                  if detail and detail ~= "" then
+                    return detail
+                  end
+                  return ctx.item.labelDetails and ctx.item.labelDetails.description or ""
+                end,
+              },
+            },
           },
+        },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 200,
         },
       },
     },
