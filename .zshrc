@@ -160,3 +160,8 @@ esac
 # pnpm end
 
 alias claude="/home/ariel/.claude/local/claude"
+
+export EDITOR=nvim
+
+setopt COMPLETE_ALIASES
+export PATH="$HOME/Desktop/custom-cli:$PATH"

@@ -293,25 +293,19 @@ require('lazy').setup({
     end,
   },
 
-  -- Vue-specific enhancements
-  -- {
-  --   'windwp/nvim-ts-autotag',
-  --   event = 'InsertEnter',
-  --   config = function()
-  --     require('nvim-ts-autotag').setup({
-  --       opts = {
-  --         enable_close = true,
-  --         enable_rename = true,
-  --         enable_close_on_slash = false,
-  --       },
-  --       per_filetype = {
-  --         ['vue'] = {
-  --           enable_close = true,
-  --         },
-  --       },
-  --     })
-  --   end,
-  -- },
+  {
+    'windwp/nvim-ts-autotag',
+    event = 'InsertEnter',
+    config = function()
+      require('nvim-ts-autotag').setup({
+        opts = {
+          enable_close = true,
+          enable_rename = true,
+          enable_close_on_slash = false,
+        },
+      })
+    end,
+  },
 
   -- Statusline and bufferline
   {
@@ -352,8 +346,8 @@ require('lazy').setup({
       completion = {
         menu = {
           draw = {
-            columns = { 
-              { "label", "label_description", gap = 1 }, 
+            columns = {
+              { "label", "label_description", gap = 1 },
               { "kind_icon", "kind" },
               { "source_name", gap = 1 }
             },
