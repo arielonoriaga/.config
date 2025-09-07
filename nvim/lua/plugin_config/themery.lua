@@ -44,5 +44,11 @@ themery.setup({
     create_theme("Horizon", "horizon", "dark"),
     create_theme("Heatherfield", "heatherfield", "dark"),
     create_theme("Sonokai", "sonokai", "dark"),
+    {
+      name = "Spring Night",
+      colorscheme = "spring-night",
+    },
+    create_theme("Cyberdream", "cyberdream", "dark"),
+    create_theme("Cyberdream", "cyberdream", "light"),
   },
 })

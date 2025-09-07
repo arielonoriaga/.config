@@ -50,7 +50,8 @@ pathadd "/opt/nvim"
 pathadd "$HOME/scripts"
 pathadd "$PNPM_HOME"
 pathadd "$HOME/.npm-global/bin"
-pathadd "$HOME/go/bin"
+
+export PATH=$PATH:/usr/local/go/bin
 pathadd "$HOME/.config/yarn/global/node_modules/.bin"
 pathadd "$BUN_INSTALL/bin"
 
@@ -135,6 +136,11 @@ npm() {
 
 if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
   startx
+fi
+
+# Auto-start tmux
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
 fi
 
 # Where to save history

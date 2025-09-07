@@ -1,5 +1,14 @@
 local lspconfig = require("lspconfig")
 
+lspconfig.oxlint = {
+  default_config = {
+    cmd = { "oxlint", "lsp" },
+    filetypes = { "vue" },
+    root_dir = lspconfig.util.root_pattern("package.json", ".git"),
+    single_file_support = true,
+  },
+}
+
 lspconfig.rust_analyzer.setup({
   settings = {
     ['rust-analyzer'] = {

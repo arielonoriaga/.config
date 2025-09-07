@@ -400,6 +400,11 @@ require('lazy').setup({
   { "akinsho/horizon.nvim", version = "*", lazy = true },
   { "sainnhe/sonokai", lazy = true },
   {
+      "scottmckendry/cyberdream.nvim",
+      lazy = false,
+      priority = 1000,
+  },
+  {
     'egerhether/heatherfield.nvim',
     lazy = true,
     config = function()
