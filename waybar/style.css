@@ -1,0 +1,152 @@
+@define-color bar-bg rgba(24, 24, 37, 0.95);
+@define-color main-bg rgba(49, 50, 68, 1);
+@define-color main-fg rgba(205, 214, 244, 1);
+@define-color text-color rgba(186, 194, 222, 1);
+@define-color accent-color rgba(137, 180, 250, 0.8);
+@define-color hover-color rgba(137, 180, 250, 0.2);
+@define-color warning-color rgba(249, 226, 175, 1);
+@define-color critical-color rgba(243, 139, 168, 1);
+@define-color good-color rgba(166, 227, 161, 1);
+
+* {
+  font-family: monospace;
+  font-size: 14px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background: @bar-bg;
+  margin: 0;
+  padding: 0;
+}
+
+/* Workspaces styling */
+#workspaces {
+  background: transparent;
+  border-radius: 12px;
+  padding: 4px 8px;
+  margin: 4px 0;
+}
+
+#workspaces button {
+  padding: 4px 8px;
+  margin: 2px;
+  border-radius: 8px;
+  color: rgba(255,255,255,0.4);
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 20px;
+}
+
+#workspaces button.focused {
+  color: @main-bg;
+  background: @main-fg;
+}
+
+#workspaces button.active {
+  color: @main-bg;
+  background: @main-fg;
+}
+
+#workspaces button:hover {
+  color: @text-color;
+  background: @accent-color;
+}
+
+/* Clock - center time display */
+#clock {
+  color: @main-fg;
+  background: transparent;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+/* Power button */
+#custom-power {
+  color: rgba(255,255,255,0.6);
+  background: transparent;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#custom-power:hover {
+  color: @critical-color;
+  background: rgba(243, 139, 168, 0.1);
+}
+
+/* Network module */
+#network {
+  color: @text-color;
+  background: transparent;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+#network.disconnected {
+  color: @critical-color;
+}
+
+/* Battery module */
+#battery {
+  color: @text-color;
+  background: transparent;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+#battery.warning {
+  color: @warning-color;
+}
+
+#battery.critical {
+  color: @critical-color;
+}
+
+#battery.good {
+  color: @good-color;
+}
+
+/* CPU and Memory modules */
+#cpu, #memory {
+  color: @text-color;
+  background: @main-bg;
+  padding: 4px 12px;
+  margin: 4px;
+  border-radius: 8px;
+}
+
+#cpu:hover, #memory:hover {
+  background: @hover-color;
+}
+
+/* Update workspaces for hyprland */
+#workspaces {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+#workspaces button {
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  color: @text-color;
+  background: transparent;
+  min-width: 20px;
+}
+
+#workspaces button.active {
+  color: @main-bg;
+  background: @accent-color;
+}
+
+#workspaces button:hover {
+  color: @main-bg;
+  background: @hover-color;
+}
