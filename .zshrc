@@ -170,3 +170,7 @@ export EDITOR=nvim
 
 setopt COMPLETE_ALIASES
 export PATH="$HOME/Desktop/custom-cli:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
