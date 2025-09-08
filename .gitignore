@@ -2,3 +2,7 @@ BraveSoftware/Brave-Browser
 go/telemetry/local
 pnpm
 pulse
+Thunar
+dconf
+git
+xfce4/xfconf/xfce-perchannel-xml

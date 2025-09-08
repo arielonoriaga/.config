@@ -1,0 +1,50 @@
+[env]
+TERM = "xterm-256color"
+
+[window]
+blur = true
+opacity = 0.92
+# startup_mode = "Maximized"
+dynamic_padding = false
+decorations = "None"
+resize_increments = false
+padding.y = 0
+padding.x = 0
+
+[font]
+size = 14
+offset.x = 0
+offset.y = 0
+builtin_box_drawing = true
+
+[scrolling]
+history = 1000
+multiplier = 3
+
+[mouse]
+hide_when_typing = true
+
+# Dracula Dark theme colors
+[colors.primary]
+background = '#282a36'
+foreground = '#f8f8f2'
+
+[colors.normal]
+black   = '#000000'
+red     = '#ff5555'
+green   = '#6db3f2'
+yellow  = '#f1fa8c'
+blue    = '#bd93f9'
+magenta = '#ff79c6'
+cyan    = '#8be9fd'
+white   = '#bfbfbf'
+
+[colors.bright]
+black   = '#4d4d4d'
+red     = '#ff6e67'
+green   = '#7cc7ff'
+yellow  = '#f4f99d'
+blue    = '#caa9fa'
+magenta = '#ff92d0'
+cyan    = '#9aedfe'
+white   = '#e6e6e6'
