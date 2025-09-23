@@ -4,7 +4,6 @@ TERM = "xterm-256color"
 [window]
 blur = true
 opacity = 0.92
-# startup_mode = "Maximized"
 dynamic_padding = false
 decorations = "None"
 resize_increments = false
@@ -12,10 +11,22 @@ padding.y = 0
 padding.x = 0
 
 [font]
-size = 14
+size = 12
 offset.x = 0
 offset.y = 0
 builtin_box_drawing = true
+
+[font.normal]
+family = "JetBrainsMonoNL Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMonoNL Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMonoNL Nerd Font"
+style = "Italic"
 
 [scrolling]
 history = 1000
@@ -24,27 +35,39 @@ multiplier = 3
 [mouse]
 hide_when_typing = true
 
-# Dracula Dark theme colors
+# Catppuccin Mocha colors to match waybar
 [colors.primary]
-background = '#282a36'
-foreground = '#f8f8f2'
+background = '#1e1e2e'
+foreground = '#cdd6f4'
+
+[colors.cursor]
+text = '#1e1e2e'
+cursor = '#f5e0dc'
+
+[colors.vi_mode_cursor]
+text = '#1e1e2e'
+cursor = '#b4befe'
+
+[colors.selection]
+text = '#1e1e2e'
+background = '#f5e0dc'
 
 [colors.normal]
-black   = '#000000'
-red     = '#ff5555'
-green   = '#6db3f2'
-yellow  = '#f1fa8c'
-blue    = '#bd93f9'
-magenta = '#ff79c6'
-cyan    = '#8be9fd'
-white   = '#bfbfbf'
+black   = '#45475a'
+red     = '#f38ba8'
+green   = '#a6e3a1'
+yellow  = '#f9e2af'
+blue    = '#89b4fa'
+magenta = '#f5c2e7'
+cyan    = '#94e2d5'
+white   = '#bac2de'
 
 [colors.bright]
-black   = '#4d4d4d'
-red     = '#ff6e67'
-green   = '#7cc7ff'
-yellow  = '#f4f99d'
-blue    = '#caa9fa'
-magenta = '#ff92d0'
-cyan    = '#9aedfe'
-white   = '#e6e6e6'
+black   = '#585b70'
+red     = '#f38ba8'
+green   = '#a6e3a1'
+yellow  = '#f9e2af'
+blue    = '#89b4fa'
+magenta = '#f5c2e7'
+cyan    = '#94e2d5'
+white   = '#a6adc8'

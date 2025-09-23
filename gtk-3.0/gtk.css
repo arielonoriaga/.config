@@ -1,0 +1,258 @@
+/* Catppuccin-inspired Thunar theme to match waybar */
+
+/* Main window styling */
+.thunar .background {
+    background-color: rgba(30, 30, 46, 0.95);
+    color: rgba(205, 214, 244, 1);
+}
+
+/* Sidebar styling */
+.thunar .sidebar {
+    background-color: rgba(49, 50, 68, 0.8);
+    color: rgba(186, 194, 222, 1);
+    border-right: 1px solid rgba(137, 180, 250, 0.2);
+}
+
+.thunar .sidebar row:selected {
+    background-color: rgba(137, 180, 250, 0.3);
+    color: rgba(137, 180, 250, 1);
+}
+
+.thunar .sidebar row:hover {
+    background-color: rgba(137, 180, 250, 0.1);
+}
+
+/* Toolbar styling */
+.thunar toolbar {
+    background-color: rgba(49, 50, 68, 0.9);
+    border-bottom: 1px solid rgba(137, 180, 250, 0.2);
+    color: rgba(205, 214, 244, 1);
+}
+
+.thunar toolbar button {
+    background-color: transparent;
+    color: rgba(186, 194, 222, 1);
+    border: none;
+    border-radius: 6px;
+    margin: 2px;
+    padding: 6px 8px;
+}
+
+.thunar toolbar button:hover {
+    background-color: rgba(137, 180, 250, 0.2);
+    color: rgba(137, 180, 250, 1);
+}
+
+.thunar toolbar button:active {
+    background-color: rgba(137, 180, 250, 0.4);
+}
+
+/* Location bar */
+.thunar .location-bar {
+    background-color: rgba(49, 50, 68, 0.6);
+    border: 1px solid rgba(137, 180, 250, 0.3);
+    border-radius: 8px;
+    color: rgba(205, 214, 244, 1);
+}
+
+/* File view area */
+.thunar .view {
+    background-color: rgba(30, 30, 46, 0.7);
+    color: rgba(205, 214, 244, 1);
+}
+
+/* File selection */
+.thunar .view:selected,
+.thunar .view row:selected {
+    background-color: rgba(137, 180, 250, 0.3);
+    color: rgba(137, 180, 250, 1);
+}
+
+/* Status bar */
+.thunar statusbar {
+    background-color: rgba(49, 50, 68, 0.8);
+    color: rgba(186, 194, 222, 1);
+    border-top: 1px solid rgba(137, 180, 250, 0.2);
+}
+
+/* Context menu */
+.thunar menu {
+    background-color: rgba(49, 50, 68, 0.95);
+    border: 1px solid rgba(137, 180, 250, 0.3);
+    border-radius: 8px;
+    color: rgba(205, 214, 244, 1);
+}
+
+.thunar menuitem {
+    color: rgba(186, 194, 222, 1);
+    border-radius: 4px;
+    margin: 1px;
+}
+
+.thunar menuitem:hover {
+    background-color: rgba(137, 180, 250, 0.2);
+    color: rgba(137, 180, 250, 1);
+}
+
+/* Scrollbars */
+.thunar scrollbar {
+    background-color: rgba(49, 50, 68, 0.3);
+}
+
+.thunar scrollbar slider {
+    background-color: rgba(137, 180, 250, 0.6);
+    border-radius: 10px;
+}
+
+.thunar scrollbar slider:hover {
+    background-color: rgba(137, 180, 250, 0.8);
+}
+
+/* Fix specific white background areas */
+
+/* Route/path bar */
+.path-bar, .pathbar, .breadcrumb, entry.path-bar {
+    background-color: #313244 !important;
+    color: #cdd6f4 !important;
+    border: 1px solid #89b4fa !important;
+    border-radius: 6px !important;
+}
+
+/* Action buttons bar */
+.action-area, .button-box, .dialog-action-area {
+    background-color: #313244 !important;
+}
+
+/* Fix headerbar */
+headerbar, .header-bar {
+    background-color: #313244 !important;
+    color: #cdd6f4 !important;
+    border-bottom: 1px solid #89b4fa !important;
+}
+
+/* Entry fields */
+entry {
+    background-color: #313244 !important;
+    color: #cdd6f4 !important;
+    border: 1px solid #6c7086 !important;
+    border-radius: 6px !important;
+}
+
+entry:focus {
+    border-color: #89b4fa !important;
+}
+
+/* Buttons in action area */
+.action-area button, .button-box button {
+    background-color: #45475a !important;
+    color: #cdd6f4 !important;
+    border: 1px solid #6c7086 !important;
+    border-radius: 6px !important;
+    margin: 2px !important;
+}
+
+.action-area button:hover, .button-box button:hover {
+    background-color: #89b4fa !important;
+    color: #1e1e2e !important;
+}
+
+/* Dialog backgrounds */
+dialog, .dialog {
+    background-color: #1e1e2e !important;
+    color: #cdd6f4 !important;
+}
+
+/* Box containers */
+box {
+    background-color: transparent !important;
+}
+
+/* Thunar-specific white background fixes */
+
+/* Primary route/path bar container - this is often the culprit */
+window.thunar toolbar box.horizontal {
+    background-color: #313244 !important;
+}
+
+/* Path bar buttons and separators */
+window.thunar toolbar .path-bar button,
+window.thunar toolbar .path-bar separator {
+    background-color: #313244 !important;
+    color: #cdd6f4 !important;
+    border: none !important;
+}
+
+/* Location entry in edit mode */
+window.thunar toolbar entry.location-entry {
+    background-color: #313244 !important;
+    color: #cdd6f4 !important;
+    border: 1px solid #6c7086 !important;
+}
+
+/* Action buttons container (bottom bar) */
+window.thunar .dialog-action-area,
+window.thunar actionbar,
+window.thunar .action-bar {
+    background-color: #313244 !important;
+    border-top: 1px solid #6c7086 !important;
+}
+
+/* Specific Thunar toolbar styling */
+window.thunar toolbar {
+    background: linear-gradient(to bottom, #313244, #313244) !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Thunar headerbar override */
+window.thunar headerbar {
+    background: linear-gradient(to bottom, #313244, #313244) !important;
+    border-bottom: 1px solid #6c7086 !important;
+    box-shadow: none !important;
+}
+
+/* Force specific widget types commonly white in Thunar */
+window.thunar box,
+window.thunar grid,
+window.thunar eventbox {
+    background-color: transparent !important;
+}
+
+/* Thunar-specific treeview/listview headers */
+window.thunar treeview header button {
+    background-color: #45475a !important;
+    color: #cdd6f4 !important;
+    border: 1px solid #6c7086 !important;
+}
+
+/* Override any remaining white containers in Thunar */
+window.thunar widget {
+    background-color: inherit !important;
+}
+
+/* Nuclear option for persistent white backgrounds */
+window.thunar * {
+    background-image: none !important;
+    background: #313244 !important;
+}
+
+/* Restore transparency for specific elements that should be transparent */
+window.thunar .view,
+window.thunar .view *,
+window.thunar treeview,
+window.thunar iconview,
+window.thunar scrolledwindow viewport {
+    background: transparent !important;
+}
+
+/* Ensure proper Thunar main content area */
+window.thunar .view {
+    background-color: #1e1e2e !important;
+    color: #cdd6f4 !important;
+}
+
+/* Fix potential theme inheritance issues */
+window.thunar {
+    background-color: #1e1e2e !important;
+    color: #cdd6f4 !important;
+}
