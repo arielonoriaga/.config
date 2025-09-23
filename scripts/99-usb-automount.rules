@@ -1,0 +1,14 @@
+# Udev rule for auto-mounting USB/SD devices
+# Copy to /etc/udev/rules.d/ with sudo privileges
+
+# Auto-mount USB storage devices
+KERNEL=="sd[a-z][0-9]", SUBSYSTEM=="block", ENV{ID_FS_TYPE}!="", RUN+="/home/ariel/.config/scripts/auto-mount-usb.sh add %E{DEVNAME}"
+
+# Auto-unmount USB storage devices on removal
+KERNEL=="sd[a-z][0-9]", SUBSYSTEM=="block", ACTION=="remove", RUN+="/home/ariel/.config/scripts/auto-mount-usb.sh remove %E{DEVNAME}"
+
+# Auto-mount MMC/SD card devices
+KERNEL=="mmcblk[0-9]p[0-9]", SUBSYSTEM=="block", ENV{ID_FS_TYPE}!="", RUN+="/home/ariel/.config/scripts/auto-mount-usb.sh add %E{DEVNAME}"
+
+# Auto-unmount MMC/SD card devices on removal
+KERNEL=="mmcblk[0-9]p[0-9]", SUBSYSTEM=="block", ACTION=="remove", RUN+="/home/ariel/.config/scripts/auto-mount-usb.sh remove %E{DEVNAME}"

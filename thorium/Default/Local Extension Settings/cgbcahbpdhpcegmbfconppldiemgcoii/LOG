@@ -1,0 +1,24 @@
+2025/09/17-13:26:04.509 e5e3 Reusing MANIFEST /home/ariel/.config/thorium/Default/Local Extension Settings/cgbcahbpdhpcegmbfconppldiemgcoii/MANIFEST-000001
+2025/09/17-13:26:04.509 e5e3 Recovering log #10
+2025/09/17-13:26:04.511 e5e3 Reusing old log /home/ariel/.config/thorium/Default/Local Extension Settings/cgbcahbpdhpcegmbfconppldiemgcoii/000010.log 
+2025/09/17-13:26:10.497 e5da Level-0 table #14: started
+2025/09/17-13:26:10.521 e5da Level-0 table #14: 4455050 bytes OK
+2025/09/17-13:26:10.523 e5da Delete type=0 #10
+2025/09/17-13:27:05.924 e5db Level-0 table #16: started
+2025/09/17-13:27:05.965 e5db Level-0 table #16: 5026525 bytes OK
+2025/09/17-13:27:05.967 e5db Delete type=0 #13
+2025/09/17-13:27:05.968 e5db Compacting 4@0 + 1@1 files
+2025/09/17-13:27:05.983 e5db Generated table #17@0: 6 keys, 2587991 bytes
+2025/09/17-13:27:06.003 e5db Generated table #18@0: 8 keys, 3144742 bytes
+2025/09/17-13:27:06.022 e5db Generated table #19@0: 6 keys, 2887013 bytes
+2025/09/17-13:27:06.048 e5db Generated table #20@0: 11 keys, 1277552 bytes
+2025/09/17-13:27:06.048 e5db Compacted 4@0 + 1@1 files => 9897298 bytes
+2025/09/17-13:27:06.050 e5db compacted to: files[ 0 4 1 0 0 0 0 ]
+2025/09/17-13:27:06.050 e5db Delete type=2 #7
+2025/09/17-13:27:06.050 e5db Delete type=2 #16
+2025/09/17-13:27:06.050 e5db Delete type=2 #9
+2025/09/17-13:27:06.050 e5db Delete type=2 #14
+2025/09/17-13:27:06.050 e5db Delete type=2 #11
+2025/09/17-13:27:09.592 e5db Level-0 table #22: started
+2025/09/17-13:27:09.636 e5db Level-0 table #22: 5637920 bytes OK
+2025/09/17-13:27:09.638 e5db Delete type=0 #15

@@ -100,3 +100,6 @@ vim.keymap.set('n', '<leader>doc', function ()
 end, { noremap = true, silent = true, desc = 'Display outgoing Callhierarchy' })
 
 -- CodeCompanion mappings removed - plugin requires paid API
+
+-- Terminal mode mappings for floatterm
+vim.keymap.set('t', '<C-r>', '<C-r>', { noremap = false, silent = true, desc = 'Enable Ctrl+R in terminal' })

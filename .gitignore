@@ -6,3 +6,9 @@ Thunar
 dconf
 git
 xfce4/xfconf/xfce-perchannel-xml
+configstore/
+pavucontrol.ini
+htop/htoprc
+*.log
+*.cache
+*.tmp
