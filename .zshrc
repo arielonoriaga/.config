@@ -47,7 +47,7 @@ export BUN_INSTALL="$HOME/.bun"
 [ -s "/home/ariel/.bun/_bun" ] && source "/home/ariel/.bun/_bun"
 
 pathadd "/opt/nvim"
-pathadd "$HOME/scripts"
+pathadd "$HOME/.config/scripts"
 pathadd "$PNPM_HOME"
 pathadd "$HOME/.npm-global/bin"
 
@@ -110,7 +110,7 @@ alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias wifipass="nmcli device wifi show-password"
 alias bx="cd ~/Projects/black-box"
-alias ls="ls --color"
+alias ls="ls --color -la"
 
 # Remove duplicate p10k config loading (already loaded via ~/.p10k.zsh on line 48)
 
@@ -134,6 +134,11 @@ npm() {
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   npm "$@"
 }
+
+# NVIDIA GPU environment variables for better performance
+export __NV_PRIME_RENDER_OFFLOAD=1
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export WLR_DRM_DEVICES=/dev/dri/card1
 
 if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
   startx

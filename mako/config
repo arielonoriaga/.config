@@ -1,0 +1,124 @@
+# Mako Configuration - Enhanced Notification System
+
+# Positioning and layout
+anchor=top-right
+margin=10
+width=400
+height=150
+
+# Text and content
+max-visible=5
+sort=-time
+max-history=50
+text-alignment=left
+markup=1
+actions=1
+format=<b>%s</b>\n%b
+font=Inter 11
+
+# Colors and styling (dark theme)
+background-color=#1e1e2e
+text-color=#cdd6f4
+border-color=#89b4fa
+progress-color=#89b4fa
+
+# Border and effects
+border-size=2
+border-radius=10
+
+# Urgency levels
+[urgency=low]
+background-color=#181825
+text-color=#a6adc8
+border-color=#6c7086
+default-timeout=4000
+
+[urgency=normal]
+background-color=#1e1e2e
+text-color=#cdd6f4
+border-color=#89b4fa
+default-timeout=8000
+
+[urgency=critical]
+background-color=#f38ba8
+text-color=#11111b
+border-color=#f38ba8
+default-timeout=0
+
+# App-specific styling
+[app-name="Brave"]
+background-color=#313244
+border-color=#f9e2af
+text-color=#f9e2af
+
+[app-name="Firefox"]
+background-color=#313244
+border-color=#fab387
+text-color=#fab387
+
+[app-name="Discord"]
+background-color=#313244
+border-color=#b4befe
+text-color=#b4befe
+
+[app-name="Spotify"]
+background-color=#313244
+border-color=#a6e3a1
+text-color=#a6e3a1
+
+[app-name="Steam"]
+background-color=#313244
+border-color=#74c7ec
+text-color=#74c7ec
+
+# Volume and brightness notifications
+[app-name="Volume"]
+background-color=#313244
+border-color=#f9e2af
+text-color=#f9e2af
+format=<b>%s</b>\n%b
+default-timeout=2000
+
+[app-name="Brightness"]
+background-color=#313244
+border-color=#fab387
+text-color=#fab387
+format=<b>%s</b>\n%b
+default-timeout=2000
+
+# Email and communication
+[app-name="Thunderbird"]
+background-color=#313244
+border-color=#cba6f7
+text-color=#cba6f7
+default-timeout=10000
+
+[app-name="Signal"]
+background-color=#313244
+border-color=#94e2d5
+text-color=#94e2d5
+default-timeout=8000
+
+# Development tools
+[app-name="VS Code"]
+background-color=#313244
+border-color=#89b4fa
+text-color=#89b4fa
+
+[app-name="Terminal"]
+background-color=#313244
+border-color=#a6e3a1
+text-color=#a6e3a1
+
+# System notifications
+[app-name="System"]
+background-color=#313244
+border-color=#f38ba8
+text-color=#f38ba8
+
+# Network notifications
+[app-name="NetworkManager"]
+background-color=#313244
+border-color=#74c7ec
+text-color=#74c7ec
+format=<b>Network</b>\n%b
