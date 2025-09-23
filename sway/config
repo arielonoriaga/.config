@@ -18,15 +18,36 @@ set $term foot
 # Your preferred application launcher
 set $menu wmenu-run
 
-# Modern appearance settings
-default_border none
-default_floating_border none
-hide_edge_borders both
-gaps inner 8
-gaps outer 0
+# Modern appearance settings with Catppuccin colors
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders smart
+gaps inner 10
+gaps outer 2
 title_align center
 titlebar_border_thickness 0
 for_window [class=".*"] title_format ""
+
+# SwayFX rounded corners (5px radius) - requires SwayFX
+# corner_radius 5
+# shadows enable
+# shadow_blur_radius 10
+# shadow_color #00000080
+
+# Optional: Additional SwayFX effects (uncomment to enable)
+# blur enable
+# blur_radius 5
+# blur_passes 3
+# scratchpad_minimize enable
+
+# Catppuccin Mocha window colors
+# class                 border    background text      indicator child_border
+client.focused          #89b4fa   #89b4fa    #1e1e2e   #f5c2e7   #89b4fa
+client.focused_inactive #6c7086   #6c7086    #cdd6f4   #f5c2e7   #6c7086
+client.unfocused        #45475a   #313244    #bac2de   #f5c2e7   #45475a
+client.urgent           #f38ba8   #f38ba8    #1e1e2e   #f5c2e7   #f38ba8
+client.placeholder      #313244   #313244    #bac2de   #f5c2e7   #313244
+client.background       #1e1e2e
 
 ### Output configuration
 #
@@ -38,6 +59,9 @@ exec_always ~/.config/sway/set_wallpaper.sh
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+# Reduced max_render_time for lower input lag while maintaining sync
+output HDMI-A-2 position 0 0 mode 1920x1080@120Hz adaptive_sync on max_render_time 3
+output eDP-1 position 0 1080 mode 1920x1080@60Hz adaptive_sync off max_render_time 8
 
 ### Idle configuration
 #
@@ -218,8 +242,10 @@ bindsym $mod+r mode "resize"
     # Special keys to adjust brightness via brightnessctl
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-    # Special key to take a screenshot with grim
-    bindsym Print exec grim
+    # Screenshot key bindings
+    bindsym Print exec ~/.config/scripts/screenshot.sh area
+    bindsym Shift+Print exec ~/.config/scripts/screenshot.sh fullscreen
+    bindsym $mod+Print exec ~/.config/scripts/screenshot.sh window
 
 #
 # Status Bar:
@@ -228,13 +254,46 @@ bindsym $mod+r mode "resize"
 # Ultra minimal and elegant swaybar
 # Add this to ~/.config/sway/config
 
-exec_always --no-startup-id killall waybar; waybar
+exec_always {
+    pkill waybar
+    sleep 0.1
+    waybar
+}
 
-# Workspace names for dots effect
-workspace 1 output *
-workspace 2 output *
-workspace 3 output *
-workspace 4 output *
-workspace 5 output *
+# Workspace assignments
+workspace 1 output eDP-1
+workspace 2 output eDP-1
+workspace 3 output HDMI-A-2
+workspace 4 output HDMI-A-2
+workspace 5 output HDMI-A-2
+
+# Performance optimizations for hybrid NVIDIA/Intel graphics with low latency
+exec_always {
+    export WLR_DRM_DEVICES="/dev/dri/card0:/dev/dri/card1"
+    export WLR_NO_HARDWARE_CURSORS=1
+    export LIBVA_DRIVER_NAME=nvidia
+    export GBM_BACKEND=nvidia-drm
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export WLR_RENDERER=vulkan
+    # Fix flickering/tearing issues
+    export WLR_DRM_NO_ATOMIC=1
+    export WLR_DRM_NO_MODIFIERS=1
+    export NVIDIA_WAYLAND_USE_DISPLAYLINK=0
+    # Low-latency optimizations
+    export __GL_SYNC_TO_VBLANK=0
+    export __GL_THREADED_OPTIMIZATIONS=1
+    export XWAYLAND_NO_GLAMOR=1
+}
+
+# Improve scrolling performance and prevent flickering
+exec_always swaymsg "for_window [app_id=\"brave-browser\"] inhibit_idle fullscreen"
+exec_always swaymsg "for_window [class=\"Brave-browser\"] inhibit_idle fullscreen"
+
+# Global compositor optimizations to prevent tearing/flickering
+exec_always {
+    # Optimized render timing for low latency while preventing tearing
+    swaymsg output HDMI-A-2 max_render_time 3
+    swaymsg output eDP-1 max_render_time 8
+}
 
 include /etc/sway/config.d/*
