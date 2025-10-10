@@ -35,6 +35,10 @@ lspconfig.lua_ls.setup({
 
 lspconfig.eslint.setup({
   capabilities = require('blink.cmp').get_lsp_capabilities(),
+  filetypes = {
+    'javascript', 'javascriptreact', 'typescript', 'typescriptreact',
+    'vue', 'svelte', 'astro'
+  },
   on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
@@ -62,20 +66,22 @@ lspconfig.eslint.setup({
   },
 })
 
+-- Vue + TypeScript setup
 local vue_language_server_path = '/home/ariel/.local/share/pnpm/global/5/node_modules/@vue/language-server'
-local vue_plugin = {
-  name = '@vue/typescript-plugin',
-  location = vue_language_server_path,
-  languages = { 'vue' },
-  configNamespace = 'typescript',
-}
 
+-- Configure vtsls only for Vue files (with TypeScript plugin)
 local vtsls_config = {
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
   settings = {
     vtsls = {
       tsserver = {
         globalPlugins = {
-          vue_plugin,
+          {
+            name = '@vue/typescript-plugin',
+            location = vue_language_server_path,
+            languages = { 'vue' },
+            configNamespace = 'typescript',
+          },
         },
       },
     },
@@ -83,7 +89,9 @@ local vtsls_config = {
   filetypes = { 'vue' },
 }
 
+-- Configure Volar for Vue files
 local vue_ls_config = {
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
   on_init = function(client)
     client.handlers['tsserver/request'] = function(_, result, context)
       local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })
@@ -96,7 +104,7 @@ local vue_ls_config = {
       local param = unpack(result)
       local id, command, payload = unpack(param)
       ts_client:exec_cmd({
-        title = 'vue_request_forward', -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
+        title = 'vue_request_forward',
         command = 'typescript.tsserverRequest',
         arguments = {
           command,
@@ -109,10 +117,9 @@ local vue_ls_config = {
         end)
     end
   end,
+  filetypes = { 'vue' },
 }
 
 vim.lsp.config('vtsls', vtsls_config)
-
 vim.lsp.config('vue_ls', vue_ls_config)
-
 vim.lsp.enable({'vtsls', 'vue_ls'})

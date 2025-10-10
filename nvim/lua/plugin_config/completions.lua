@@ -5,8 +5,16 @@ local mason_lspconfig = require("mason-lspconfig")
 mason.setup()
 
 mason_lspconfig.setup({
-  automatic_enable = true,
   automatic_installation = true,
+  handlers = {
+    -- Disable ts_ls in favor of vtsls
+    function(server_name)
+      if server_name == "ts_ls" or server_name == "tsserver" then
+        return
+      end
+      require("lspconfig")[server_name].setup({})
+    end,
+  },
 })
 
 vim.opt.foldmethod = "expr"

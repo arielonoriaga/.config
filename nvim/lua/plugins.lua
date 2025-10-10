@@ -127,7 +127,7 @@ require('lazy').setup({
         sync_install = false,
         ensure_installed = {
           "lua", "javascript", "typescript", "html", "css", "json", "bash",
-          "markdown", "markdown_inline",
+          "markdown", "markdown_inline", "vue", "tsx",
         },
         modules = {},
         ignore_install = {},
@@ -216,10 +216,9 @@ require('lazy').setup({
         }
       })
 
-      -- LSP keymaps (not telescope-dependent)
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, silent = true })
-
+      -- LSP keymaps with Telescope
       local builtin = require('telescope.builtin')
+      vim.keymap.set('n', 'gd', builtin.lsp_definitions, { noremap = true, silent = true })
       vim.keymap.set('n', 'gr', builtin.lsp_references, { noremap = true, silent = true })
       vim.keymap.set('n', 'gi', builtin.lsp_implementations, { noremap = true, silent = true })
     end
