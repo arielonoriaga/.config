@@ -13,3 +13,6 @@ htop/htoprc
 *.cache
 *.tmp
 google-chrome
+obs-studio
+thorium
+vlc
