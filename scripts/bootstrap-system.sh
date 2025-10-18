@@ -74,7 +74,6 @@ install_base_packages() {
         man-db
         man-pages
         htop
-        neofetch
     )
 
     print_step "Installing base packages..."
@@ -154,34 +153,86 @@ install_sway_wayland() {
     print_success "Sway + Wayland environment installed"
 }
 
-install_nvidia_drivers() {
-    print_header "NVIDIA Driver Setup"
+detect_and_install_gpu_drivers() {
+    print_header "GPU Driver Detection and Setup"
 
-    # Check if NVIDIA GPU exists
-    if ! lspci | grep -i nvidia &> /dev/null; then
-        print_warning "No NVIDIA GPU detected, skipping NVIDIA driver installation"
-        return
+    # Detect GPU type
+    local has_nvidia=$(lspci | grep -i nvidia)
+    local has_amd=$(lspci | grep -i "vga.*amd\|vga.*radeon")
+    local has_intel=$(lspci | grep -i "vga.*intel")
+
+    echo "Detected GPUs:"
+    if [ -n "$has_nvidia" ]; then
+        echo "  - NVIDIA GPU detected"
+    fi
+    if [ -n "$has_amd" ]; then
+        echo "  - AMD GPU detected"
+    fi
+    if [ -n "$has_intel" ]; then
+        echo "  - Intel GPU detected"
+    fi
+    echo ""
+
+    # Install NVIDIA drivers
+    if [ -n "$has_nvidia" ]; then
+        print_step "Installing NVIDIA drivers..."
+
+        local nvidia_packages=(
+            nvidia
+            nvidia-utils
+            nvidia-settings
+            lib32-nvidia-utils
+            egl-wayland
+        )
+
+        sudo pacman -S --needed --noconfirm "${nvidia_packages[@]}"
+
+        # Enable nvidia-drm modeset
+        if [ -x "$HOME/.config/scripts/enable-nvidia-modeset.sh" ]; then
+            print_step "Enabling NVIDIA DRM modeset..."
+            sudo "$HOME/.config/scripts/enable-nvidia-modeset.sh"
+        fi
+
+        print_success "NVIDIA drivers installed"
     fi
 
-    print_step "NVIDIA GPU detected, installing drivers..."
+    # Install AMD drivers
+    if [ -n "$has_amd" ]; then
+        print_step "Installing AMD drivers..."
 
-    local packages=(
-        nvidia
-        nvidia-utils
-        nvidia-settings
-        lib32-nvidia-utils
-        egl-wayland
-    )
+        local amd_packages=(
+            mesa
+            lib32-mesa
+            vulkan-radeon
+            lib32-vulkan-radeon
+        )
 
-    sudo pacman -S --needed --noconfirm "${packages[@]}"
-
-    # Enable nvidia-drm modeset
-    if [ -x "$HOME/.config/scripts/enable-nvidia-modeset.sh" ]; then
-        print_step "Enabling NVIDIA DRM modeset..."
-        sudo "$HOME/.config/scripts/enable-nvidia-modeset.sh"
+        sudo pacman -S --needed --noconfirm "${amd_packages[@]}"
+        print_success "AMD drivers installed"
     fi
 
-    print_success "NVIDIA drivers installed"
+    # Install Intel drivers
+    if [ -n "$has_intel" ]; then
+        print_step "Installing Intel drivers..."
+
+        local intel_packages=(
+            mesa
+            lib32-mesa
+            vulkan-intel
+            lib32-vulkan-intel
+            intel-media-driver
+            libva-intel-driver
+        )
+
+        sudo pacman -S --needed --noconfirm "${intel_packages[@]}"
+        print_success "Intel drivers installed"
+    fi
+
+    # If no GPU detected
+    if [ -z "$has_nvidia" ] && [ -z "$has_amd" ] && [ -z "$has_intel" ]; then
+        print_warning "No dedicated GPU detected, installing basic Mesa drivers..."
+        sudo pacman -S --needed --noconfirm mesa lib32-mesa
+    fi
 }
 
 install_display_manager() {
@@ -193,10 +244,12 @@ install_display_manager() {
     print_step "Enabling SDDM service..."
     sudo systemctl enable sddm
 
-    # Fix NVIDIA with SDDM if script exists
-    if [ -x "$HOME/.config/scripts/fix-sddm-nvidia.sh" ] && lspci | grep -i nvidia &> /dev/null; then
-        print_step "Applying NVIDIA fixes for SDDM..."
-        sudo "$HOME/.config/scripts/fix-sddm-nvidia.sh"
+    # Fix NVIDIA with SDDM if script exists and NVIDIA GPU detected
+    if lspci | grep -i nvidia &> /dev/null; then
+        if [ -x "$HOME/.config/scripts/fix-sddm-nvidia.sh" ]; then
+            print_step "Applying NVIDIA fixes for SDDM..."
+            sudo "$HOME/.config/scripts/fix-sddm-nvidia.sh"
+        fi
     fi
 
     print_success "SDDM installed and enabled"
@@ -244,7 +297,7 @@ setup_terminal_tools() {
         fzf
         ripgrep
         fd
-        exa
+        eza
         bat
     )
 
@@ -349,7 +402,7 @@ setup_icons_fonts() {
         noto-fonts-emoji \
         ttf-dejavu \
         ttf-liberation \
-        ttf-font-awesome
+        otf-font-awesome
 
     # Run icon fix if script exists
     if [ -x "$HOME/.config/scripts/fix-icons.sh" ]; then
@@ -580,7 +633,7 @@ main() {
     install_base_packages
     install_yay
     install_sway_wayland
-    install_nvidia_drivers
+    detect_and_install_gpu_drivers
     install_display_manager
     setup_zsh
     setup_terminal_tools
