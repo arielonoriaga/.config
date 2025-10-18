@@ -247,6 +247,15 @@ bindsym $mod+r mode "resize"
     bindsym Shift+Print exec ~/.config/scripts/screenshot.sh fullscreen
     bindsym $mod+Print exec ~/.config/scripts/screenshot.sh window
 
+    # Screen recording key bindings
+    bindsym $mod+Shift+r exec ~/.config/scripts/screenrecord.sh area
+    bindsym $mod+Shift+Ctrl+r exec ~/.config/scripts/screenrecord.sh fullscreen
+    bindsym $mod+Shift+Alt+r exec ~/.config/scripts/screenrecord.sh area-no-audio
+    bindsym $mod+Shift+F12 exec ~/.config/scripts/screenrecord.sh fullscreen noaudio
+
+    # OBS Studio
+    bindsym $mod+o exec ~/.config/scripts/obs.sh
+
 #
 # Status Bar:
 #
@@ -297,3 +306,4 @@ exec_always {
 }
 
 include /etc/sway/config.d/*
+
