@@ -63,7 +63,8 @@ fi
 [[ -f /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
 
 get_cpu_temp() {
   temp=$(sensors | grep 'Package id 0' | awk '{print $4}')

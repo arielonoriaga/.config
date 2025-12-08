@@ -3,6 +3,10 @@
 # Brave browser launcher with anti-flickering flags for NVIDIA + Wayland
 export ELECTRON_OZONE_PLATFORM_HINT=auto
 
+# CRITICAL FIX: Unset GBM_BACKEND for screen sharing to work with PipeWire
+# The nvidia-drm backend breaks WebRTC screen capture on Wayland
+unset GBM_BACKEND
+
 # NVIDIA-specific flags to prevent scrolling flickers
 NVIDIA_FLAGS=(
     --disable-gpu-sandbox
@@ -14,11 +18,12 @@ NVIDIA_FLAGS=(
     --enable-features=VaapiVideoDecoder,VaapiVideoEncoder
 )
 
-# Wayland-specific flags
+# Wayland-specific flags with screen sharing support
 WAYLAND_FLAGS=(
     --enable-wayland-ime
-    --ozone-platform-hint=auto
+    --ozone-platform=wayland
     --enable-wayland-fractional-scale-v1
+    --enable-features=WebRTCPipeWireCapturer,WaylandWindowDecorations
 )
 
 # Low-latency scrolling and rendering optimization flags
