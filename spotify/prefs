@@ -1,0 +1,15 @@
+autologin.username="arielonoriaga"
+autologin.saved_credentials="{\"arielonoriaga\":[\"arielonoriaga\",\"fA1UzdNifFtH7Z4MvmEA9tr4fotWW4Pq3XeDm7Aum7iGoEkTk+YJgKHGnDsH1us2TfJleAbHWNMlwVQdP20fHu4EdxxyKq8Zcn48BAehRqH0JTJmhJ7LUtVeMWqHZAEj/IlOYx1vRzLkXu6pOw/4AVbgy+WxtaNCJ7IndAfjNjwgdKDB4jdSRIkFOAfp0lIraBmcIgIv+ZX8PNwK6ui8O5POJX4MdcH6nKzBOUQHoDD0aovxEe5w8A3BuoV3Y8uT9r4GywyjtRALwLRcvbp2oQ==\"]}"
+autologin.canonical_username="arielonoriaga"
+autologin.blob="fA1UzdNifFtH7Z4MvmEA9tr4fotWW4Pq3XeDm7Aum7iGoEkTk+YJgKHGnDsH1us2TfJleAbHWNMlwVQdP20fHu4EdxxyKq8Zcn48BAehRqH0JTJmhJ7LUtVeMWqHZAEj/IlOYx1vRzLkXu6pOw/4AVbgy+WxtaNCJ7IndAfjNjwgdKDB4jdSRIkFOAfp0lIraBmcIgIv+ZX8PNwK6ui8O5POJX4MdcH6nKzBOUQHoDD0aovxEe5w8A3BuoV3Y8uT9r4GywyjtRALwLRcvbp2oQ=="
+app.window.state.saved=true
+app.window.position.width=1896
+es.send-on-startup=true
+core.clock_delta=0
+app.window.position.x=12
+app.window.state=2
+app.window.position.saved=true
+app.window.position.height=1030
+app.window.position.y=38
+storage.last-location="/home/ariel/.cache/spotify/Storage"
+app.last-launched-version="1.2.74.477.g3be53afe"

@@ -1,10 +1,8 @@
 [screencast]
-output_name=
 max_fps=30
-chooser_cmd=slurp -f %o -or
-chooser_type=simple
-restore_token=
+chooser_type=none
+output_name=HDMI-A-2
 
 [screencopy]
-chooser_cmd=slurp -f %o -or
+chooser_cmd=slurp -f %o -o
 chooser_type=simple

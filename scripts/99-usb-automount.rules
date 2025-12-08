@@ -1,14 +1,15 @@
 # Udev rule for auto-mounting USB/SD devices
 # Copy to /etc/udev/rules.d/ with sudo privileges
+# Note: Scripts are run asynchronously to avoid blocking udev
 
 # Auto-mount USB storage devices
-KERNEL=="sd[a-z][0-9]", SUBSYSTEM=="block", ENV{ID_FS_TYPE}!="", RUN+="/home/ariel/.config/scripts/auto-mount-usb.sh add %E{DEVNAME}"
+KERNEL=="sd[a-z][0-9]", SUBSYSTEM=="block", ENV{ID_FS_TYPE}!="", RUN+="/usr/bin/systemd-run --no-block /home/ariel/.config/scripts/auto-mount-usb.sh add %E{DEVNAME}"
 
 # Auto-unmount USB storage devices on removal
-KERNEL=="sd[a-z][0-9]", SUBSYSTEM=="block", ACTION=="remove", RUN+="/home/ariel/.config/scripts/auto-mount-usb.sh remove %E{DEVNAME}"
+KERNEL=="sd[a-z][0-9]", SUBSYSTEM=="block", ACTION=="remove", RUN+="/usr/bin/systemd-run --no-block /home/ariel/.config/scripts/auto-mount-usb.sh remove %E{DEVNAME}"
 
 # Auto-mount MMC/SD card devices
-KERNEL=="mmcblk[0-9]p[0-9]", SUBSYSTEM=="block", ENV{ID_FS_TYPE}!="", RUN+="/home/ariel/.config/scripts/auto-mount-usb.sh add %E{DEVNAME}"
+KERNEL=="mmcblk[0-9]p[0-9]", SUBSYSTEM=="block", ENV{ID_FS_TYPE}!="", RUN+="/usr/bin/systemd-run --no-block /home/ariel/.config/scripts/auto-mount-usb.sh add %E{DEVNAME}"
 
 # Auto-unmount MMC/SD card devices on removal
-KERNEL=="mmcblk[0-9]p[0-9]", SUBSYSTEM=="block", ACTION=="remove", RUN+="/home/ariel/.config/scripts/auto-mount-usb.sh remove %E{DEVNAME}"
+KERNEL=="mmcblk[0-9]p[0-9]", SUBSYSTEM=="block", ACTION=="remove", RUN+="/usr/bin/systemd-run --no-block /home/ariel/.config/scripts/auto-mount-usb.sh remove %E{DEVNAME}"

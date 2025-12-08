@@ -1,0 +1,9 @@
+{
+  "userId": "68eb0f4e-acb1-4a4b-a4a0-7feb93e6ea71",
+  "analyticsConsent": false,
+  "askedConsent": true,
+  "cache": {
+    "servers": {}
+  },
+  "apiKey": "{\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{\"tools\":true,\"prompts\":true,\"resources\":true,\"logging\":false,\"elicitation\":{},\"roots\":{\"listChanged\":false}},\"clientInfo\":{\"name\":\"cursor-vscode\",\"version\":\"1.0.0\"}},\"jsonrpc\":\"2.0\",\"id\":0}"
+}
