@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     'git', 'clone', '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
@@ -137,7 +137,7 @@ require('lazy').setup({
           additional_vim_regex_highlighting = false,
           disable = function(_, buf)
             local max = 50 * 1024
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+            local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
             return ok and stats and stats.size > max
           end,
         },
@@ -182,6 +182,7 @@ require('lazy').setup({
       { ';', function() require('telescope.builtin').git_files() end, desc = 'Git files' },
       { '<C-f>', function() require('telescope.builtin').live_grep() end, desc = 'Live grep' },
       { '<leader>f', function() require('telescope.builtin').live_grep({ default_text = vim.fn.expand('<cword>') }) end, desc = 'Search word under cursor' },
+      { 'gr', function() require('telescope.builtin').lsp_references() end, desc = 'LSP references' },
     },
     config = function()
       local telescope = require('telescope')
@@ -216,11 +217,6 @@ require('lazy').setup({
         }
       })
 
-      -- LSP keymaps with Telescope
-      local builtin = require('telescope.builtin')
-      vim.keymap.set('n', 'gd', builtin.lsp_definitions, { noremap = true, silent = true })
-      vim.keymap.set('n', 'gr', builtin.lsp_references, { noremap = true, silent = true })
-      vim.keymap.set('n', 'gi', builtin.lsp_implementations, { noremap = true, silent = true })
     end
   },
 
