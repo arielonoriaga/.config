@@ -10,8 +10,6 @@ require('plugin_config')
 require('config')
 require('maps')
 
--- Load VimScript configs last
-vim.cmd('so ~/.config/nvim/maps.vim')
 
 -- vim.lsp.set_log_level("debug")
 vim.cmd("highlight ColorColumn guibg=#533c5b")
