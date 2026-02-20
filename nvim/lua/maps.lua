@@ -1,3 +1,8 @@
+-- Floaterm settings (migrated from maps.vim)
+vim.g.floaterm_height = 0.9
+vim.g.floaterm_width = 0.9
+vim.g.floaterm_autoclose = 2
+
 local function map(mode, shortcut, command)
   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
@@ -91,6 +96,11 @@ vim.keymap.set('n', '<leader>dic', function ()
 end, { noremap = true, silent = true, desc = 'Display incoming Callhierarchy' })
 
 
+vim.keymap.set('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', { noremap = true, silent = true, desc = 'Go to definition' })
+vim.keymap.set('n', 'gi', '<cmd>Lspsaga goto_implementation<CR>', { noremap = true, silent = true, desc = 'Go to implementation' })
+vim.keymap.set('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', { noremap = true, silent = true, desc = 'Peek definition' })
+vim.keymap.set('n', 'gt', '<cmd>Lspsaga goto_type_definition<CR>', { noremap = true, silent = true, desc = 'Go to type definition' })
+
 vim.keymap.set('n', 'K', function ()
   vim.lsp.buf.hover()
 end, { noremap = true, silent = true, desc = 'Display hover doc' })
@@ -103,3 +113,7 @@ end, { noremap = true, silent = true, desc = 'Display outgoing Callhierarchy' })
 
 -- Terminal mode mappings for floatterm
 vim.keymap.set('t', '<C-r>', '<C-r>', { noremap = false, silent = true, desc = 'Enable Ctrl+R in terminal' })
+
+-- Floaterm toggle (migrated from maps.vim)
+vim.keymap.set('n', '<F12>', '<cmd>FloatermToggle --name=cmd<CR>', { noremap = true, silent = true, desc = 'Toggle terminal' })
+vim.keymap.set('t', '<F12>', '<C-\\><C-n><cmd>FloatermToggle --name=cmd<CR>', { noremap = true, silent = true, desc = 'Toggle terminal' })
