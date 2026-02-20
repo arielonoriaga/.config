@@ -3,45 +3,27 @@ vim.g.floaterm_height = 0.9
 vim.g.floaterm_width = 0.9
 vim.g.floaterm_autoclose = 2
 
-local function map(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
-end
+vim.keymap.set('n', '<leader>lg', '<cmd>LazyGit<CR>', { noremap = true, silent = true, desc = 'LazyGit' })
 
-local function nmap(shortcut, command)
-  map('n', shortcut, command)
-end
+vim.keymap.set('n', '<leader>ld', '<cmd>FloatermNew --name=lazydocker lazydocker<CR>', { noremap = true, silent = true, desc = 'LazyDocker' })
 
-local function vmap(shortcut, command)
-  map('v', shortcut, command)
-end
+vim.keymap.set('n', '<C-q>', ':q<CR>', { noremap = true, silent = true, desc = 'Quit' })
+vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true, desc = 'Save' })
 
-nmap('<leader>lg', '<cmd>LazyGit<CR>')
+vim.keymap.set('n', 'dd', '"_dd', { noremap = true, silent = true, desc = 'Delete line (no yank)' })
 
-nmap('<leader>ld', '<cmd>FloatermNew --name=lazydocker lazydocker<CR>')
+vim.keymap.set('n', 'fn', ":let @+=expand('%:t:r')<CR>", { noremap = true, silent = true, desc = 'Copy filename' })
 
-nmap('<C-q>', ':q<CR>')
-nmap('<C-s>', ':w<CR>')
+vim.keymap.set('v', 'cl', "yA<cr>console.log('')<esc>hi<C-o>P<esc>2li, <C-o>P<esc>", { noremap = true, silent = true, desc = 'Console.log selection' })
 
-nmap('dd', '"_dd')
+vim.keymap.set('n', '<leader>crp', ":let @+=expand('%')<CR>", { noremap = true, silent = true, desc = 'Copy relative path' })
+vim.keymap.set('n', '<leader>crpt', ":let @+=expand('%:r:r')<CR>", { noremap = true, silent = true, desc = 'Copy path (no ext)' })
 
-nmap('fn', ":let @+=expand('%:t:r')<CR>")
+vim.keymap.set('n', '<leader>rs', ':noh<CR>', { noremap = true, silent = true, desc = 'Clear search highlight' })
 
-vmap('cl', "yA<cr>console.log('')<esc>hi<C-o>P<esc>2li, <C-o>P<esc>")
+vim.keymap.set('n', '<leader>dts', ':let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar>:noh<CR>', { noremap = true, silent = true, desc = 'Delete trailing spaces' })
 
-nmap('<leader>crp', ":let @+=expand('%')<CR>")
-nmap('<leader>crpt', ":let @+=expand('%:r:r')<CR>")
-
-nmap('<leader>reload', ':source ~/.vimrc<CR>')
-nmap('<leader>rs', ':noh<CR>')
-
-nmap('<leader>dts', ':let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar>:noh<CR>')
-
-vim.api.nvim_set_keymap(
-    'n',
-    '<leader>o',
-    ':!thunar %:p:h<CR><CR>',
-    { noremap = true, silent = true }
-)
+vim.keymap.set('n', '<leader>o', ':!thunar %:p:h<CR><CR>', { noremap = true, silent = true, desc = 'Open file manager' })
 
 vim.keymap.set('n', "<F10>", ":EslintFixAll<CR>", { desc = "Run eslint fix", noremap = true, silent = true })
 
