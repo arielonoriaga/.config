@@ -13,7 +13,7 @@ local ui = {
   scrolloff      = 8,
   number         = true,
   numberwidth    = 2,
-  -- relativenumber = true,
+  relativenumber = true,
   signcolumn     = "yes",
 }
 
@@ -71,8 +71,6 @@ opt.wildmode     = "longest:full,full"
 
 vim.o.clipboard = vim.fn.has("macunix") == 1 and "unnamed" or "unnamedplus"
 
--- LSP completion
-vim.o.omnifunc = "v:lua.vim.lsp.omnifunc"
 
 -- Performance: Disable some built-in plugins
 vim.g.loaded_python3_provider = 0
