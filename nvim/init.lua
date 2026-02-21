@@ -7,7 +7,6 @@ vim.g.mapleader = ','
 require('sets')
 require('plugins')
 require('plugin_config')
-require('config')
 require('maps')
 
 
