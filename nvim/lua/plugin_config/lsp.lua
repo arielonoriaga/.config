@@ -97,32 +97,10 @@ lspconfig.vtsls.setup({
   filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'vue' },
 })
 
-lspconfig.vue_ls.setup({
+-- vue_ls uses the native vim.lsp API (lspconfig has it as "vue_ls" in lsp/ not configs/)
+-- The native lsp/vue_ls.lua already provides the tsserver/request handler with retry logic
+vim.lsp.config('vue_ls', {
   capabilities = require('blink.cmp').get_lsp_capabilities(),
-  on_init = function(client)
-    client.handlers['tsserver/request'] = function(_, result, context)
-      local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })
-      if #clients == 0 then
-        vim.notify('Could not find `vtsls` lsp client, `vue_ls` would not work without it.', vim.log.levels.ERROR)
-        return
-      end
-      local ts_client = clients[1]
-
-      local param = unpack(result)
-      local id, command, payload = unpack(param)
-      ts_client:exec_cmd({
-        title = 'vue_request_forward',
-        command = 'typescript.tsserverRequest',
-        arguments = {
-          command,
-          payload,
-        },
-      }, { bufnr = context.bufnr }, function(_, r)
-          local response_data = { { id, r.body } }
-          ---@diagnostic disable-next-line: param-type-mismatch
-          client:notify('tsserver/response', response_data)
-        end)
-    end
-  end,
   filetypes = { 'vue' },
 })
+vim.lsp.enable('vue_ls')
