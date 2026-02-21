@@ -9,14 +9,15 @@ lspconfig.oxlint = {
   },
 }
 
-lspconfig.rust_analyzer.setup({
+vim.lsp.config('rust_analyzer', {
   settings = {
     ['rust-analyzer'] = {
       cargo = { allFeatures = true },
       checkOnSave = { command = "clippy" },
-    }
-  }
+    },
+  },
 })
+vim.lsp.enable('rust_analyzer')
 
 vim.lsp.config('lua_ls', {
   capabilities = require('blink.cmp').get_lsp_capabilities(),
