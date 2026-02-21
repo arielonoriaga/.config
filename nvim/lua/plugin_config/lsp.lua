@@ -18,7 +18,7 @@ lspconfig.rust_analyzer.setup({
   }
 })
 
-lspconfig.lua_ls.setup({
+vim.lsp.config('lua_ls', {
   capabilities = require('blink.cmp').get_lsp_capabilities(),
   settings = {
     Lua = {
@@ -32,6 +32,7 @@ lspconfig.lua_ls.setup({
     },
   },
 })
+vim.lsp.enable('lua_ls')
 
 lspconfig.eslint.setup({
   capabilities = require('blink.cmp').get_lsp_capabilities(),
@@ -66,11 +67,12 @@ lspconfig.eslint.setup({
   },
 })
 
+vim.lsp.enable('ts_ls', false)
+
 -- Vue + TypeScript setup
 local vue_language_server_path = '/home/ariel/.local/share/pnpm/global/5/node_modules/@vue/language-server'
 
--- Configure vtsls only for Vue files (with TypeScript plugin)
-local vtsls_config = {
+lspconfig.vtsls.setup({
   capabilities = require('blink.cmp').get_lsp_capabilities(),
   settings = {
     vtsls = {
@@ -85,12 +87,16 @@ local vtsls_config = {
         },
       },
     },
+    typescript = {
+      preferences = {
+        includePackageJsonAutoImports = 'on',
+      },
+    },
   },
-  filetypes = { 'vue' },
-}
+  filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'vue' },
+})
 
--- Configure Volar for Vue files
-local vue_ls_config = {
+lspconfig.vue_ls.setup({
   capabilities = require('blink.cmp').get_lsp_capabilities(),
   on_init = function(client)
     client.handlers['tsserver/request'] = function(_, result, context)
@@ -118,8 +124,4 @@ local vue_ls_config = {
     end
   end,
   filetypes = { 'vue' },
-}
-
-vim.lsp.config('vtsls', vtsls_config)
-vim.lsp.config('vue_ls', vue_ls_config)
-vim.lsp.enable({'vtsls', 'vue_ls'})
+})
