@@ -278,9 +278,22 @@ require('lazy').setup({
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
-    opts = {
-      presets = { operators = false },
-    },
+    config = function()
+      require('which-key').setup({
+        plugins = {
+          marks = true,
+          registers = true,
+          spelling = {
+            enabled = true,
+            suggestions = 20,
+          },
+        },
+        win = {
+          title = false,
+        },
+        preset = 'helix',
+      })
+    end,
   },
 
   -- Autopairs
@@ -310,9 +323,34 @@ require('lazy').setup({
   {
     'nvim-lualine/lualine.nvim',
     event = 'UIEnter',
-    config = function ()
-    	require("lualine").setup()
-    end
+    config = function()
+      require('lualine').setup({
+        options = {
+          theme = 'nord',
+          section_separators = { left = '', right = '' },
+          component_separators = { left = '', right = '' },
+        },
+        sections = {
+          lualine_a = {{
+            'mode',
+            fmt = function(str) return str:sub(1,1) end
+          }},
+          lualine_b = { 'diff', 'diagnostics' },
+          lualine_c = { 'filename' },
+          lualine_x = {},
+          lualine_y = { 'progress' },
+          lualine_z = {},
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = { 'filename' },
+          lualine_x = { 'location' },
+          lualine_y = {},
+          lualine_z = {},
+        },
+      })
+    end,
   },
 
   -- Completion and snippets
