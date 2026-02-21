@@ -78,6 +78,23 @@ require('lazy').setup({
     end
   },
 
+
+  -- Cursor Agent integration
+  {
+    "aug6th/cursoragent.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = {
+      "CursorAgent",
+      "CursorAgentAsk",
+      "CursorAgentPlan",
+      "CursorAgentResume",
+      "CursorAgentBuffer",
+      "CursorAgentSelection",
+    },
+    config = function()
+      require("cursoragent").setup({})
+    end,
+  },
   -- UI and utilities
   {
     'glepnir/lspsaga.nvim',
