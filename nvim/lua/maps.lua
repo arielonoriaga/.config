@@ -99,3 +99,11 @@ vim.keymap.set('t', '<C-r>', '<C-r>', { noremap = false, silent = true, desc = '
 -- Floaterm toggle (migrated from maps.vim)
 vim.keymap.set('n', '<F12>', '<cmd>FloatermToggle --name=cmd<CR>', { noremap = true, silent = true, desc = 'Toggle terminal' })
 vim.keymap.set('t', '<F12>', '<C-\\><C-n><cmd>FloatermToggle --name=cmd<CR>', { noremap = true, silent = true, desc = 'Toggle terminal' })
+
+-- Cursor Agent (<leader>cu namespace)
+vim.keymap.set('n', '<leader>cu', '<cmd>CursorAgent<CR>', { noremap = true, silent = true, desc = 'Cursor Agent' })
+vim.keymap.set('n', '<leader>cua', '<cmd>CursorAgentAsk<CR>', { noremap = true, silent = true, desc = 'Cursor Agent Ask' })
+vim.keymap.set('n', '<leader>cup', '<cmd>CursorAgentPlan<CR>', { noremap = true, silent = true, desc = 'Cursor Agent Plan' })
+vim.keymap.set('n', '<leader>cur', '<cmd>CursorAgentResume<CR>', { noremap = true, silent = true, desc = 'Cursor Agent Resume' })
+vim.keymap.set('n', '<leader>cub', '<cmd>CursorAgentBuffer<CR>', { noremap = true, silent = true, desc = 'Cursor Agent Buffer' })
+vim.keymap.set('v', '<leader>cus', '<cmd>CursorAgentSelection<CR>', { noremap = true, silent = true, desc = 'Cursor Agent Selection' })
