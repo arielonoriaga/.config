@@ -1,0 +1,14 @@
+2025/09/15-15:04:49.966 c1ef Creating DB /home/ariel/.config/thorium/Default/Local Extension Settings/cgbcahbpdhpcegmbfconppldiemgcoii since it was missing.
+2025/09/15-15:04:49.971 c1ef Reusing MANIFEST /home/ariel/.config/thorium/Default/Local Extension Settings/cgbcahbpdhpcegmbfconppldiemgcoii/MANIFEST-000001
+2025/09/15-15:04:54.632 c1ef Level-0 table #5: started
+2025/09/15-15:04:54.673 c1ef Level-0 table #5: 4609928 bytes OK
+2025/09/15-15:04:54.676 c1ef Delete type=0 #3
+2025/09/15-15:05:00.699 c1f0 Level-0 table #7: started
+2025/09/15-15:05:00.736 c1f0 Level-0 table #7: 5324296 bytes OK
+2025/09/15-15:05:00.738 c1f0 Delete type=0 #4
+2025/09/15-15:06:08.134 c1f0 Level-0 table #9: started
+2025/09/15-15:06:08.152 c1f0 Level-0 table #9: 4555505 bytes OK
+2025/09/15-15:06:08.153 c1f0 Delete type=0 #6
+2025/09/15-15:06:11.574 c1f1 Level-0 table #11: started
+2025/09/15-15:06:11.665 c1f1 Level-0 table #11: 5674730 bytes OK
+2025/09/15-15:06:11.667 c1f1 Delete type=0 #8
