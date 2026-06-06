@@ -1,0 +1,6 @@
+[Unit]
+Description=Purge stale cargo target dirs from /tmp ramdisk
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/scripts/clean-tmp-cargo -d 1

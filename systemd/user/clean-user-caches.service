@@ -1,0 +1,6 @@
+[Unit]
+Description=Prune dev-tool caches (pnpm/bun/npm/yay) + stale trash
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/scripts/clean-user-caches

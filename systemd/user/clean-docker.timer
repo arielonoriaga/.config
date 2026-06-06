@@ -1,0 +1,9 @@
+[Unit]
+Description=Weekly prune of unused docker images + build cache
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+
+[Install]
+WantedBy=timers.target

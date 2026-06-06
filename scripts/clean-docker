@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# clean-docker — reclaim docker disk: remove images not used by any container
+# and prune build cache. Does NOT touch volumes (data). Run weekly.
+set -uo pipefail
+export PATH="/usr/local/bin:/usr/bin:/bin"
+command -v docker >/dev/null || { echo "docker not found"; exit 0; }
+
+echo "==> docker image prune (dangling + unused)"
+docker image prune -af || true
+echo "==> docker builder prune"
+docker builder prune -f || true
+echo "==> done"
+docker system df 2>/dev/null || true

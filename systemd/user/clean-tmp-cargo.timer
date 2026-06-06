@@ -1,0 +1,9 @@
+[Unit]
+Description=Daily purge of stale cargo target dirs from /tmp
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
