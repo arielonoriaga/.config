@@ -35,3 +35,7 @@ Electron
 /about-gpu-2026-02-06T12-44-20-412Z.txt
 /mimeapps.list
 /test.json
+
+# ssh keypair — never commit
+nvim/wizards
+nvim/wizards.pub

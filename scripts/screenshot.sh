@@ -22,7 +22,13 @@ case "${1:-area}" in
         ;;
     "window")
         # Take window screenshot
-        grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" "$FILEPATH"
+        # Window geometry source depends on the compositor.
+        if [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
+            GEOM=$(hyprctl clients -j | jq -r '.[] | select(.mapped and .hidden == false) | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
+        else
+            GEOM=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')
+        fi
+        grim -g "$(echo "$GEOM" | slurp)" "$FILEPATH"
         ;;
     *)
         echo "Usage: $0 [fullscreen|area|window]"

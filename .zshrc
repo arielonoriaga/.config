@@ -44,7 +44,7 @@ pathadd() {
 export BUN_INSTALL="$HOME/.bun"
 
 # bun completions
-[ -s "/home/ariel/.bun/_bun" ] && source "/home/ariel/.bun/_bun"
+[ -s "/home/exo/.bun/_bun" ] && source "/home/exo/.bun/_bun"
 
 pathadd "/opt/nvim"
 pathadd "$HOME/.config/scripts"
@@ -60,7 +60,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-[[ -f /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh
+[[ -f /home/exo/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /home/exo/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source /usr/share/fzf/completion.zsh
@@ -141,7 +141,8 @@ export __NV_PRIME_RENDER_OFFLOAD=1
 export __GLX_VENDOR_LIBRARY_NAME=nvidia
 export WLR_DRM_DEVICES=/dev/dri/card1
 
-if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
+# Only autostart X on a bare tty1 — not inside an existing Wayland session
+if [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && [ "$(fgconsole 2>/dev/null)" = "1" ]; then
   startx
 fi
 
@@ -165,7 +166,7 @@ setopt HIST_SAVE_NO_DUPS         # When writing out history, don’t write dupli
 setopt HIST_FIND_NO_DUPS         # Don’t show duplicates in search
 
 # pnpm
-export PNPM_HOME="/home/ariel/.local/share/pnpm"
+export PNPM_HOME="/home/exo/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;

@@ -71,7 +71,7 @@ lspconfig.eslint.setup({
 vim.lsp.enable('ts_ls', false)
 
 -- Vue + TypeScript setup
-local vue_language_server_path = '/home/ariel/.local/share/pnpm/global/5/node_modules/@vue/language-server'
+local vue_language_server_path = '/home/exo/.local/share/pnpm/global/5/node_modules/@vue/language-server'
 
 lspconfig.vtsls.setup({
   capabilities = require('blink.cmp').get_lsp_capabilities(),

@@ -73,7 +73,7 @@ require('lazy').setup({
           enter_insert = true,
           hide_signcolumn = true,
         },
-        command = "/home/ariel/.claude/local/claude"
+        command = "claude"
       })
     end
   },
@@ -137,6 +137,9 @@ require('lazy').setup({
   -- Treesitter and related
   {
     'nvim-treesitter/nvim-treesitter',
+    -- Config below uses the master-branch API (nvim-treesitter.configs).
+    -- The 'main' branch is a rewrite with an incompatible API, so pin master.
+    branch = 'master',
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },
     config = function()
@@ -204,8 +207,9 @@ require('lazy').setup({
     config = function()
       local telescope = require('telescope')
 
-      telescope.load_extension("fzf")
-      telescope.load_extension("file_browser")
+      -- fzf needs a compiled libfzf.so; fall back to the built-in sorter if absent
+      pcall(telescope.load_extension, "fzf")
+      pcall(telescope.load_extension, "file_browser")
 
       telescope.setup({
         defaults = {

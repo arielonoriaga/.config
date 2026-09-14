@@ -3,7 +3,8 @@ local w_pct = 0.95
 
 local telescope = require('telescope')
 
-telescope.load_extension('fzf')
+-- fzf needs a compiled libfzf.so; fall back to the built-in sorter if absent
+pcall(telescope.load_extension, 'fzf')
 
 telescope.setup({
   defaults = {
