@@ -8,8 +8,8 @@ Column {
     width: 300
 
     property var hosts: []
-    property int running: 0
-    property int queued: 0
+    property var jobsByHost: ({})
+    property var queuedJobs: []
 
     function heatColor(fraction) {
         if (fraction >= 0.8) return "#ff8fa3";
@@ -38,6 +38,10 @@ Column {
         const state = root.availability(host);
         if (state === "available" || state === "full") return state + " · " + host.mode + " " + host.capPercent + "%";
         return state;
+    }
+
+    function jobColor(label) {
+        return label.startsWith("cargo") ? "#f5b48a" : "#a3b8ff";
     }
 
     readonly property var nextSwitch: ({ "auto": "free", "free": "off", "off": "auto", "shared": "auto" })
@@ -70,8 +74,10 @@ Column {
             freeCpus: h.free_cpus || 0,
             switchState: h.switch || "auto"
         }));
-        root.running = (report.running || []).length;
-        root.queued = (report.queued || []).length;
+        const byHost = {};
+        for (const job of report.running || []) (byHost[job.host] = byHost[job.host] || []).push(job);
+        root.jobsByHost = byHost;
+        root.queuedJobs = report.queued || [];
     }
 
     Process {
@@ -183,12 +189,54 @@ Column {
                 color: Theme.dim
                 font { family: Theme.font; pixelSize: 11 }
             }
+            Row {
+                visible: modelData.reachable
+                spacing: 5
+                readonly property var jobs: root.jobsByHost[modelData.name] || []
+                Text {
+                    text: parent.jobs.length > 0 ? "in use" : "○ idle"
+                    color: parent.jobs.length > 0 ? Theme.text : Theme.faint
+                    font { family: Theme.font; pixelSize: 11 }
+                }
+                Repeater {
+                    model: parent.jobs
+                    Rectangle {
+                        required property var modelData
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: 8
+                        height: 8
+                        radius: 4
+                        color: root.jobColor(modelData.label)
+                        SequentialAnimation on opacity {
+                            loops: Animation.Infinite
+                            NumberAnimation { to: 0.7; duration: 900; easing.type: Easing.InOutSine }
+                            NumberAnimation { to: 1; duration: 900; easing.type: Easing.InOutSine }
+                        }
+                    }
+                }
+            }
         }
     }
 
-    Text {
-        text: root.running + " building · " + root.queued + " queued"
-        color: Theme.faint
-        font { family: Theme.font; pixelSize: 11 }
+    Row {
+        spacing: 5
+        Text {
+            text: root.queuedJobs.length > 0 ? "queue" : "queue empty"
+            color: Theme.faint
+            font { family: Theme.font; pixelSize: 11 }
+        }
+        Repeater {
+            model: root.queuedJobs
+            Rectangle {
+                required property var modelData
+                anchors.verticalCenter: parent.verticalCenter
+                width: 8
+                height: 8
+                radius: 4
+                color: "transparent"
+                border.width: 1.5
+                border.color: root.jobColor(modelData.label)
+            }
+        }
     }
 }
