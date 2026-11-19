@@ -1,0 +1,14 @@
+# font as a direct file path skips fontconfig at startup — tofi's biggest speed win
+font = /home/ariel/.local/share/fonts/JetBrainsMonoNerd/JetBrainsMonoNLNerdFont-Regular.ttf
+font-size = 14
+
+width = 600
+height = 400
+border-width = 2
+outline-width = 0
+corner-radius = 8
+padding-top = 12
+padding-left = 12
+result-spacing = 6
+
+drun-launch = true

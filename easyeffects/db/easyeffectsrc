@@ -1,0 +1,16 @@
+[StreamInputs]
+inputDevice=alsa_input.usb-Razer_Razer_USB_Sound_Card_00000000-00.analog-stereo
+plugins=rnnoise#0,loudness#0
+visiblePage=pluginsPage
+visiblePlugin=rnnoise#0
+
+[StreamOutputs]
+outputDevice=alsa_output.usb-Razer_Razer_USB_Sound_Card_00000000-00.analog-stereo
+plugins=bass_enhancer#0,loudness#0
+visiblePage=pluginsPage
+visiblePlugin=loudness#0
+
+[Window]
+height=1056
+visiblePage=inputPage
+width=1896

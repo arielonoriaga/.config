@@ -1,0 +1,6 @@
+client.focused          {{color4}}   {{color4}}    {{background}}   {{color5}}   {{color4}}
+client.focused_inactive {{color8}}   {{color8}}    {{foreground}}   {{color5}}   {{color8}}
+client.unfocused        {{color0}}   {{background}}    {{foreground}}   {{color5}}   {{color0}}
+client.urgent           {{color1}}   {{color1}}    {{background}}   {{color5}}   {{color1}}
+client.placeholder      {{color0}}   {{color0}}    {{foreground}}   {{color5}}   {{color0}}
+client.background       {{background}}
