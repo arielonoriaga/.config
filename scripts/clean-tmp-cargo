@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# clean-tmp-cargo — purge stale cargo target dirs left on the /tmp ramdisk.
+# /tmp is tmpfs (RAM), so cargo target/ artifacts dumped there eat memory until
+# removed. Deletes matching dirs whose mtime is older than AGE_DAYS.
+#
+# Usage:
+#   clean-tmp-cargo            # purge dirs older than 1 day
+#   clean-tmp-cargo -n         # dry-run: list what would be deleted
+#   clean-tmp-cargo -d 3       # age threshold 3 days
+set -euo pipefail
+
+AGE_DAYS=1
+DRY=0
+while getopts "nd:h" opt; do
+  case "$opt" in
+    n) DRY=1 ;;
+    d) AGE_DAYS="$OPTARG" ;;
+    h) sed -n '2,12p' "$0"; exit 0 ;;
+    *) exit 2 ;;
+  esac
+done
+
+# Match cargo target/build dirs by name. Anchored to top-level /tmp entries only.
+mapfile -d '' targets < <(
+  find /tmp -maxdepth 1 -type d \
+    \( -name '*target*' -o -name 'cargo-*' -o -name 'cargo-test-*' \) \
+    -mtime "+$((AGE_DAYS - 1))" -print0 2>/dev/null
+)
+
+if [[ ${#targets[@]} -eq 0 ]]; then
+  echo "clean-tmp-cargo: nothing stale (> ${AGE_DAYS}d) in /tmp"
+  exit 0
+fi
+
+freed=0
+for d in "${targets[@]}"; do
+  sz=$(du -sb "$d" 2>/dev/null | cut -f1 || echo 0)
+  human=$(du -sh "$d" 2>/dev/null | cut -f1 || echo '?')
+  if [[ $DRY -eq 1 ]]; then
+    echo "would remove  $human  $d"
+  else
+    rm -rf "$d" && echo "removed  $human  $d"
+  fi
+  freed=$((freed + sz))
+done
+
+printf '%s %.1f GiB across %d dir(s)\n' \
+  "$([[ $DRY -eq 1 ]] && echo 'would free' || echo 'freed')" \
+  "$(awk "BEGIN{print $freed/1073741824}")" "${#targets[@]}"

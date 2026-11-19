@@ -1,0 +1,13 @@
+id: 01KR233637PR0RRHJNZ0V3BR8F
+name: character
+method: GET
+url: '{{BASE_URL}}/character/1'
+query: []
+headers: []
+body:
+  kind: none
+auth: null
+notes: null
+follow_redirects: true
+max_redirects: 10
+timeout_ms: null

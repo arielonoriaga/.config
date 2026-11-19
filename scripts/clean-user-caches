@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# clean-user-caches — prune dev-tool caches + stale trash. Safe; each tool
+# re-populates its cache on demand. Run weekly via systemd --user timer.
+set -uo pipefail
+export PATH="$HOME/.bun/bin:$HOME/.local/share/pnpm:$HOME/.npm-global/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin"
+
+log() { printf '==> %s\n' "$*"; }
+
+if command -v pnpm >/dev/null; then log "pnpm store prune"; pnpm store prune || true; fi
+if [ -d "$HOME/.bun/install/cache" ]; then
+  log "clearing bun install cache"
+  rm -rf "$HOME/.bun/install/cache/"* 2>/dev/null || true
+fi
+if command -v npm  >/dev/null; then log "npm cache clean";  npm cache clean --force || true; fi
+
+# AUR build cache (cloned PKGBUILDs + built pkgs) — re-cloned on next build.
+if [ -d "$HOME/.cache/yay" ]; then
+  log "clearing ~/.cache/yay build dirs"
+  rm -rf "$HOME/.cache/yay/"*/ 2>/dev/null || true
+fi
+
+# Empty trash entries older than 30 days.
+TRASH="$HOME/.local/share/Trash"
+if [ -d "$TRASH" ]; then
+  log "trash: removing entries older than 30d"
+  find "$TRASH/files" -mindepth 1 -maxdepth 1 -mtime +30 -exec rm -rf {} + 2>/dev/null || true
+  find "$TRASH/info"  -mindepth 1 -maxdepth 1 -mtime +30 -name '*.trashinfo' -delete 2>/dev/null || true
+fi
+
+log "done"

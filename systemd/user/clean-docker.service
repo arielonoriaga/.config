@@ -1,0 +1,6 @@
+[Unit]
+Description=Prune unused docker images + build cache (keeps volumes)
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/scripts/clean-docker

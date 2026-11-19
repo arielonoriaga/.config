@@ -142,6 +142,33 @@ require('lazy').setup({
     branch = 'master',
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },
+    init = function()
+      -- nvim 0.12 dropped the `all = false` option of add_directive/add_predicate,
+      -- so handlers now always get capture -> node LIST. nvim-treesitter master
+      -- (archived) still indexes them as a single node, which blows up on e.g. a
+      -- ```bash fence with a heredoc (bash/injections.scm `#downcase!`):
+      --   treesitter.lua:197: attempt to call method 'range' (a nil value)
+      -- Re-implement the removed option for whoever asks for it.
+      if vim.fn.has('nvim-0.12') == 1 then
+        local query = require('vim.treesitter.query')
+        for _, fn in ipairs({ 'add_directive', 'add_predicate' }) do
+          local add = query[fn]
+          query[fn] = function(name, handler, opts)
+            if type(opts) == 'table' and opts.all == false then
+              local inner = handler
+              handler = function(match, ...)
+                local last = {}
+                for id, nodes in pairs(match) do
+                  last[id] = nodes[#nodes]
+                end
+                return inner(last, ...)
+              end
+            end
+            return add(name, handler, opts)
+          end
+        end
+      end
+    end,
     config = function()
       require('nvim-treesitter.configs').setup({
         sync_install = false,

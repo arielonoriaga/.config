@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# bump-zram — resize the zram0 swap device via zram-generator.conf.
+# Real RAM cost tracks actual compressed data, not the ceiling, so raising
+# the size is cheap until you actually fill it (needs sudo; briefly swaps
+# off zram0, so current swapped data pages back into RAM during the resize).
+#
+# Usage:
+#   bump-zram          # size to 8192 MiB
+#   bump-zram 12288     # size to a specific MiB value
+set -euo pipefail
+
+SIZE_MB="${1:-8192}"
+CONF=/etc/systemd/zram-generator.conf
+
+sudo tee "$CONF" >/dev/null <<EOF
+[zram0]
+zram-size = ${SIZE_MB}
+compression-algorithm = zstd
+EOF
+
+sudo swapoff /dev/zram0
+sudo systemctl restart systemd-zram-setup@zram0.service
+
+zramctl
+free -h

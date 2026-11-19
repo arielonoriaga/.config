@@ -1,0 +1,6 @@
+client.focused          #76867B   #76867B    #020103   #B06B49   #76867B
+client.focused_inactive #ABA000   #ABA000    #FFFB5E   #B06B49   #ABA000
+client.unfocused        #020103   #020103    #FFFB5E   #B06B49   #020103
+client.urgent           #0F021C   #0F021C    #020103   #B06B49   #0F021C
+client.placeholder      #020103   #020103    #FFFB5E   #B06B49   #020103
+client.background       #020103
