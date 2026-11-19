@@ -1,0 +1,15 @@
+color=1e1e2e
+font=Inter
+font-size=20
+indicator-radius=100
+indicator-thickness=10
+ring-color=89b4fa
+key-hl-color=a6e3a1
+text-color=cdd6f4
+inside-color=1e1e2e
+separator-color=00000000
+bs-hl-color=f38ba8
+ring-wrong-color=f38ba8
+inside-wrong-color=1e1e2e
+ring-ver-color=f9e2af
+inside-ver-color=1e1e2e

@@ -35,3 +35,35 @@ Electron
 /about-gpu-2026-02-06T12-44-20-412Z.txt
 /mimeapps.list
 /test.json
+/GIMP
+/google-chrome
+/google-chrome-for-testing/Crash Reports
+/gtk-3.0
+/inkscape
+/rbw
+/vercel-plugin
+/create-next-app-nodejs
+/.test-agent/
+
+# laptop: credentials, browser/app state, backups — never commit
+/Claude/
+/Codex/
+/antigravity/
+/droidcam-obs-client/
+/elevenlabs/
+/ez-realstate/
+/higgsfield/
+/huggian-deploy.env
+/opencode/
+/qBittorrent/
+/temp
+/zen/
+/spotify/
+/uv/
+/work_game_envs.json
+/lazy-multi-gm/creds.json
+/lazyfetch/environments/
+/pre-aurora-backup-*/
+/waybar/backup-*/
+/sway/config.before-*
+*.bak-*
