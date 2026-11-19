@@ -83,7 +83,7 @@ def scene(w, h, seed):
     rng = random.Random(seed)
     sky = (f'<rect width="{w}" height="{h}" fill="url(#sky)"/>'
            f'<rect y="{h * 0.45:.0f}" width="{w}" height="{h * 0.55:.0f}" fill="url(#glow)"/>')
-    star_layer = stars(rng, w, h) + constellation(50, 105)
+    star_layer = stars(rng, w, h)
     ridge_layer = mountains(random.Random(seed + 1), w, h)
     return svg(w, h, sky + star_layer + ridge_layer)
 

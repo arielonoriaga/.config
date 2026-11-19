@@ -8,6 +8,8 @@ Item {
 
     SystemClock { id: clock; precision: SystemClock.Minutes }
 
+    Sky { anchors.fill: parent }
+
     Column {
         anchors.horizontalCenter: parent.horizontalCenter
         y: 52
