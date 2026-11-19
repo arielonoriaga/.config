@@ -1,0 +1,6 @@
+@define-color bar-bg alpha(#020103, 0.8);
+@define-color main-bg alpha(#ABA000, 0.6);
+@define-color main-fg #FFFB5E;
+@define-color text-color #FFFB5E;
+@define-color accent-color alpha(#76867B, 0.8);
+@define-color hover-color alpha(#76867B, 0.2);

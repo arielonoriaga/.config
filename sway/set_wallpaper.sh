@@ -13,6 +13,9 @@ fi
 WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.bmp" -o -iname "*.webp" \) | shuf -n 1)
 
 if [ -n "$WALLPAPER" ]; then
+    # Regenerate color scheme from the chosen wallpaper
+    command -v wallust >/dev/null 2>&1 && wallust run --skip-sequences "$WALLPAPER"
+
     # Kill any existing swaybg processes
     pkill swaybg 2>/dev/null
     

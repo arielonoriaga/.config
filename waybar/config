@@ -1,42 +1,76 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 30,
+  "height": 22,
   "spacing": 4,
-  "output": "eDP-1",
-  "modules-left": ["sway/workspaces"],
+  "modules-left": [
+    "sway/workspaces",
+    "wlr/taskbar"
+  ],
   "modules-center": [],
-  "modules-right": ["network", "battery", "clock"],
+  "modules-right": [
+    "custom/msi-fans",
+    "temperature",
+    "network",
+    "battery",
+    "clock"
+  ],
   "reload_style_on_change": true,
-  
   "sway/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
     "format": "{name}"
   },
-
+  "wlr/taskbar": {
+    "format": "{icon} {name}",
+    "icon-size": 16,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "all-outputs": false
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "\uf2c9 {temperatureC}\u00b0C",
+    "format-critical": "\uf2c9 {temperatureC}\u00b0C"
+  },
   "network": {
-    "format-wifi": "󰖩 {essid}",
-    "format-ethernet": "󰈀",
-    "format-disconnected": "󰖪",
+    "format-wifi": "\udb81\udda9 {essid}",
+    "format-ethernet": "\udb80\ude00",
+    "format-disconnected": "\udb81\uddaa",
     "tooltip-format": "{ifname}: {ipaddr}"
   },
-
   "battery": {
     "states": {
       "warning": 30,
       "critical": 15
     },
     "format": "{icon} {capacity}%",
-    "format-charging": "󰂄 {capacity}%",
-    "format-plugged": "󰂄 {capacity}%",
-    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "format-charging": "\udb80\udc84 {capacity}%",
+    "format-plugged": "\udb80\udc84 {capacity}%",
+    "format-icons": [
+      "\udb80\udc7a",
+      "\udb80\udc7b",
+      "\udb80\udc7c",
+      "\udb80\udc7d",
+      "\udb80\udc7e",
+      "\udb80\udc7f",
+      "\udb80\udc80",
+      "\udb80\udc81",
+      "\udb80\udc82",
+      "\udb80\udc79"
+    ]
   },
-
   "clock": {
-    "format": "{:%H:%M}",
+    "format": "\uf017 {:%H:%M}",
     "tooltip-format": "{:%Y-%m-%d}",
     "timezone": "America/Argentina/Buenos_Aires"
+  },
+  "custom/msi-fans": {
+    "exec": "python3 \"$HOME/.config/waybar/scripts/msi-fans.py\"",
+    "return-type": "json",
+    "interval": 5,
+    "format": "{}",
+    "tooltip": true
   }
 }
-
