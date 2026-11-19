@@ -6,7 +6,7 @@ TERM = "xterm-256color"
 
 [window]
 blur = true
-opacity = 0.9
+opacity = 0.82
 dynamic_padding = false
 decorations = "None"
 resize_increments = false
