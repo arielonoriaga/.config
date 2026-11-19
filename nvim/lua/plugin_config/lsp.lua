@@ -34,9 +34,14 @@ local eslint_owns_only_lint_and_fixes = {
   'implementationProvider', 'renameProvider', 'hoverProvider', 'signatureHelpProvider',
 }
 
+local upstream_eslint_on_attach = vim.lsp.config.eslint.on_attach
+
 vim.lsp.config('eslint', {
   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte', 'astro' },
   on_attach = function(client, bufnr)
+    if upstream_eslint_on_attach then
+      upstream_eslint_on_attach(client, bufnr)
+    end
     for _, capability in ipairs(eslint_owns_only_lint_and_fixes) do
       client.server_capabilities[capability] = false
     end
