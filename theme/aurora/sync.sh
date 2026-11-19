@@ -14,7 +14,7 @@ peer() {
 }
 
 shared_files() {
-  cd "$HOME" && find "${SHARED[@]}" -type f -not -path '*/__pycache__/*' 2>/dev/null | LC_ALL=C sort
+  cd "$HOME" && find "${SHARED[@]}" -type f -not -path '*/__pycache__/*' -not -name '*.tmp.*' 2>/dev/null | LC_ALL=C sort
 }
 
 manifest() { cd "$HOME" && shared_files | xargs -d '\n' md5sum; }
@@ -79,7 +79,7 @@ reconcile() {
     only_in "$theirs" "$mine" | "${SSH[@]}" "$(peer)" "$SELF remove"
     paths="$(differing "$mine" "$theirs")"
     [ -n "$paths" ] || exit 0
-    printf '%s\n' "$paths" | tar -C "$HOME" -cf - -T - | "${SSH[@]}" "$(peer)" "$SELF receive"
+    printf '%s\n' "$paths" | tar -C "$HOME" --ignore-failed-read -cf - -T - | "${SSH[@]}" "$(peer)" "$SELF receive"
   else
     only_in "$mine" "$theirs" | remove
     paths="$(differing "$theirs" "$mine")"
@@ -98,7 +98,7 @@ case "${1:-reconcile}" in
   fingerprint) fingerprint ;;
   newest) newest ;;
   manifest) manifest ;;
-  pack-files) tar -C "$HOME" -cf - -T - ;;
+  pack-files) tar -C "$HOME" --ignore-failed-read -cf - -T - ;;
   receive) receive ;;
   remove) remove ;;
   reload) reload ;;
