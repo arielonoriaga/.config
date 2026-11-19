@@ -34,11 +34,6 @@ Column {
         return Theme.faint;
     }
 
-    function availabilityLabel(host) {
-        const state = root.availability(host);
-        if (state === "available" || state === "full") return state + " · " + host.mode + " " + host.capPercent + "%";
-        return state;
-    }
 
     function jobColor(label) {
         return label.startsWith("cargo") ? "#f5b48a" : "#a3b8ff";
@@ -46,11 +41,16 @@ Column {
 
     readonly property var nextSwitch: ({ "auto": "free", "free": "off", "off": "auto", "shared": "auto" })
 
-    function switchLabel(state) {
-        if (state === "free") return "on";
-        if (state === "off") return "off";
-        if (state === "shared") return "shared";
-        return "auto";
+    function switchLabel(host) {
+        if (host.switchState === "free") return "on";
+        if (host.switchState === "off") return "off";
+        if (host.switchState === "shared") return "shared";
+        return "auto·" + host.mode;
+    }
+
+    function hostStats(host) {
+        if (!host.reachable) return "offline";
+        return host.busyCores.toFixed(1) + "/" + host.cores + "c · " + host.freeMem.toFixed(1) + "G · " + host.sessions + "◆";
     }
 
     function switchCommand(host, state) {
@@ -67,6 +67,8 @@ Column {
             busy: h.reachable && h.cores > 0 ? Math.min(1, h.busy_cores / h.cores) : 0,
             cores: h.cores || 0,
             busyCores: h.busy_cores || 0,
+            ourCores: Math.max(0, (h.busy_cores || 0) - (h.foreign_cores || 0)),
+            foreignCores: h.foreign_cores || 0,
             freeMem: h.free_mem_gb || 0,
             sessions: h.claude_sessions || 0,
             mode: h.mode || "",
@@ -91,151 +93,151 @@ Column {
 
     Timer { interval: 10 * 1000; running: true; repeat: true; onTriggered: fetch.running = true }
 
-    Text {
-        text: "Machines"
-        color: Theme.text
-        font { family: Theme.font; pixelSize: 18; weight: Font.Medium }
+    Item {
+        width: root.width
+        height: 22
+        Text {
+            id: title
+            anchors.verticalCenter: parent.verticalCenter
+            text: "Machines"
+            color: Theme.text
+            font { family: Theme.font; pixelSize: 16; weight: Font.Medium }
+        }
+        Row {
+            anchors { right: parent.right; verticalCenter: parent.verticalCenter }
+            spacing: 4
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                text: root.queuedJobs.length > 0 ? "queue" : "queue empty"
+                color: Theme.faint
+                font { family: Theme.font; pixelSize: 10 }
+            }
+            Repeater {
+                model: root.queuedJobs
+                JobDot { required property var modelData; tint: root.jobColor(modelData.label); waiting: true }
+            }
+        }
     }
 
     Repeater {
         model: root.hosts
         Column {
+            id: hostRow
             required property var modelData
+            readonly property var jobs: root.jobsByHost[modelData.name] || []
+            readonly property string state: root.availability(modelData)
             width: root.width
-            spacing: 4
+            spacing: 3
 
             Item {
                 width: parent.width
-                height: 20
+                height: 18
                 Row {
-                    spacing: 8
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: 6
                     Rectangle {
-                        width: 8
-                        height: 8
-                        radius: 4
-                        anchors.verticalCenter: hostName.verticalCenter
-                        color: root.availabilityColor(root.availability(modelData))
-                    }
-                    Text {
-                        id: hostName
-                        text: modelData.name
-                        color: Theme.text
-                        font { family: Theme.font; pixelSize: 15; weight: Font.DemiBold }
-                    }
-                    Text {
-                        anchors.baseline: hostName.baseline
-                        text: root.availabilityLabel(modelData)
-                        color: root.availabilityColor(root.availability(modelData))
-                        font { family: Theme.font; pixelSize: 11; weight: Font.Medium }
-                    }
-                }
-                Rectangle {
-                    id: toggle
-                    anchors { right: busyText.left; rightMargin: 10; verticalCenter: parent.verticalCenter }
-                    width: toggleText.implicitWidth + 14
-                    height: 16
-                    radius: 8
-                    readonly property bool forced: modelData.switchState !== "auto"
-                    color: toggleArea.containsMouse ? Qt.rgba(1, 1, 1, 0.22) : Qt.rgba(1, 1, 1, forced ? 0.16 : 0.08)
-                    border.width: forced ? 1 : 0
-                    border.color: root.availabilityColor(modelData.switchState === "off" ? "off" : "available")
-                    Text {
-                        id: toggleText
-                        anchors.centerIn: parent
-                        text: setter.running ? "…" : root.switchLabel(modelData.switchState)
-                        color: toggle.forced ? Theme.text : Theme.dim
-                        font { family: Theme.font; pixelSize: 10; weight: Font.Medium }
-                    }
-                    MouseArea {
-                        id: toggleArea
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        enabled: modelData.reachable && !setter.running
-                        onClicked: {
-                            setter.command = root.switchCommand(modelData.name, modelData.switchState);
-                            setter.running = true;
-                        }
-                    }
-                    Process {
-                        id: setter
-                        onExited: fetch.running = true
-                    }
-                }
-                Text {
-                    id: busyText
-                    anchors.right: parent.right
-                    text: modelData.reachable ? Math.round(modelData.busy * 100) + "%" : "offline"
-                    color: modelData.reachable ? root.heatColor(modelData.busy) : Theme.faint
-                    font { family: Theme.font; pixelSize: 15; weight: Font.DemiBold }
-                }
-            }
-            Item {
-                width: parent.width
-                height: 4
-                Rectangle { anchors.fill: parent; radius: 2; color: Qt.rgba(1, 1, 1, 0.14) }
-                Rectangle {
-                    width: parent.width * modelData.busy
-                    height: parent.height
-                    radius: 2
-                    color: root.heatColor(modelData.busy)
-                    Behavior on width { NumberAnimation { duration: 600; easing.type: Easing.OutCubic } }
-                }
-            }
-            Text {
-                visible: modelData.reachable
-                text: modelData.busyCores.toFixed(1) + "/" + modelData.cores + " cores · " + modelData.freeMem.toFixed(1) + " GB free · "
-                      + modelData.sessions + (modelData.sessions === 1 ? " session" : " sessions")
-                color: Theme.dim
-                font { family: Theme.font; pixelSize: 11 }
-            }
-            Row {
-                visible: modelData.reachable
-                spacing: 5
-                readonly property var jobs: root.jobsByHost[modelData.name] || []
-                Text {
-                    text: parent.jobs.length > 0 ? "in use" : "○ idle"
-                    color: parent.jobs.length > 0 ? Theme.text : Theme.faint
-                    font { family: Theme.font; pixelSize: 11 }
-                }
-                Repeater {
-                    model: parent.jobs
-                    Rectangle {
-                        required property var modelData
                         anchors.verticalCenter: parent.verticalCenter
                         width: 8
                         height: 8
                         radius: 4
-                        color: root.jobColor(modelData.label)
-                        SequentialAnimation on opacity {
-                            loops: Animation.Infinite
-                            NumberAnimation { to: 0.7; duration: 900; easing.type: Easing.InOutSine }
-                            NumberAnimation { to: 1; duration: 900; easing.type: Easing.InOutSine }
+                        color: root.availabilityColor(hostRow.state)
+                    }
+                    Text {
+                        text: modelData.name
+                        color: modelData.reachable ? Theme.text : Theme.faint
+                        font { family: Theme.font; pixelSize: 13; weight: Font.DemiBold }
+                    }
+                    Row {
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: 3
+                        Text {
+                            visible: hostRow.jobs.length === 0 && modelData.reachable
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: "○"
+                            color: Theme.faint
+                            font { family: Theme.font; pixelSize: 10 }
+                        }
+                        Repeater {
+                            model: hostRow.jobs
+                            JobDot { required property var modelData; tint: root.jobColor(modelData.label) }
+                        }
+                    }
+                }
+                Row {
+                    anchors { right: parent.right; verticalCenter: parent.verticalCenter }
+                    spacing: 8
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: root.hostStats(modelData)
+                        color: Theme.dim
+                        font { family: Theme.font; pixelSize: 10 }
+                    }
+                    Rectangle {
+                        id: toggle
+                        anchors.verticalCenter: parent.verticalCenter
+                        readonly property bool forced: modelData.switchState !== "auto"
+                        width: toggleText.implicitWidth + 12
+                        height: 15
+                        radius: 7.5
+                        color: toggleArea.containsMouse ? Qt.rgba(1, 1, 1, 0.22) : Qt.rgba(1, 1, 1, forced ? 0.16 : 0.08)
+                        border.width: forced ? 1 : 0
+                        border.color: root.availabilityColor(modelData.switchState === "off" ? "off" : "available")
+                        Text {
+                            id: toggleText
+                            anchors.centerIn: parent
+                            text: setter.running ? "…" : root.switchLabel(modelData)
+                            color: toggle.forced ? Theme.text : Theme.dim
+                            font { family: Theme.font; pixelSize: 9; weight: Font.Medium }
+                        }
+                        MouseArea {
+                            id: toggleArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            enabled: modelData.reachable && !setter.running
+                            onClicked: {
+                                setter.command = root.switchCommand(modelData.name, modelData.switchState);
+                                setter.running = true;
+                            }
+                        }
+                        Process {
+                            id: setter
+                            onExited: fetch.running = true
                         }
                     }
                 }
             }
-        }
-    }
 
-    Row {
-        spacing: 5
-        Text {
-            text: root.queuedJobs.length > 0 ? "queue" : "queue empty"
-            color: Theme.faint
-            font { family: Theme.font; pixelSize: 11 }
-        }
-        Repeater {
-            model: root.queuedJobs
-            Rectangle {
-                required property var modelData
-                anchors.verticalCenter: parent.verticalCenter
-                width: 8
-                height: 8
-                radius: 4
-                color: "transparent"
-                border.width: 1.5
-                border.color: root.jobColor(modelData.label)
+            Item {
+                width: parent.width
+                height: 4
+                readonly property real perCore: modelData.cores > 0 ? width / modelData.cores : 0
+                Rectangle { anchors.fill: parent; radius: 2; color: Qt.rgba(1, 1, 1, 0.12) }
+                Rectangle {
+                    id: ours
+                    height: parent.height
+                    radius: 2
+                    width: Math.min(parent.width, modelData.ourCores * parent.perCore)
+                    color: "#f5b48a"
+                    Behavior on width { NumberAnimation { duration: 600; easing.type: Easing.OutCubic } }
+                }
+                Rectangle {
+                    x: ours.width
+                    height: parent.height
+                    radius: 2
+                    width: Math.min(parent.width - ours.width, modelData.foreignCores * parent.perCore)
+                    color: Qt.rgba(1, 1, 1, 0.45)
+                    Behavior on width { NumberAnimation { duration: 600; easing.type: Easing.OutCubic } }
+                }
+                Rectangle {
+                    visible: modelData.reachable && modelData.mode !== "off"
+                    x: parent.width * modelData.capPercent / 100 - 1
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 2
+                    height: 8
+                    radius: 1
+                    color: root.availabilityColor(hostRow.state)
+                }
             }
         }
     }
