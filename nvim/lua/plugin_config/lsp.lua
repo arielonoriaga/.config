@@ -7,11 +7,24 @@ vim.diagnostic.config({
   float = { border = 'rounded', source = true },
 })
 
+local function format_on_save(bufnr, client)
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    group = vim.api.nvim_create_augroup('FormatOnSave' .. bufnr, { clear = true }),
+    buffer = bufnr,
+    callback = function()
+      vim.lsp.buf.format({ bufnr = bufnr, id = client.id, timeout_ms = 2000 })
+    end,
+  })
+end
+
 vim.lsp.config('rust_analyzer', {
+  on_attach = function(client, bufnr)
+    format_on_save(bufnr, client)
+  end,
   settings = {
     ['rust-analyzer'] = {
-      cargo = { allFeatures = true },
-      checkOnSave = { command = 'clippy' },
+      cargo = { features = 'all', targetDir = true },
+      check = { command = 'clippy' },
     },
   },
 })

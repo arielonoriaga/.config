@@ -115,6 +115,7 @@ require('lazy').setup({
     branch = 'master',
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },
+    cmd = { 'TSInstall', 'TSInstallSync', 'TSUpdate', 'TSUpdateSync' },
     init = function()
       require('compat.treesitter_all_false').install()
     end,
@@ -123,7 +124,7 @@ require('lazy').setup({
         sync_install = false,
         ensure_installed = {
           "lua", "javascript", "typescript", "html", "css", "json", "bash",
-          "markdown", "markdown_inline", "tsx",
+          "markdown", "markdown_inline", "tsx", "rust", "toml",
         },
         modules = {},
         ignore_install = {},
