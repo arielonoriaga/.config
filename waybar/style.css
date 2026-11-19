@@ -1,16 +1,11 @@
-@define-color bar-bg rgba(30, 30, 46, 0.8);
-@define-color main-bg rgba(49, 50, 68, 0.6);
-@define-color main-fg rgba(205, 214, 244, 1);
-@define-color text-color rgba(186, 194, 222, 1);
-@define-color accent-color rgba(137, 180, 250, 0.8);
-@define-color hover-color rgba(137, 180, 250, 0.2);
-@define-color warning-color rgba(249, 226, 175, 1);
-@define-color critical-color rgba(243, 139, 168, 1);
-@define-color good-color rgba(166, 227, 161, 1);
+@define-color fg #f3ecfb;
+@define-color dim rgba(243, 236, 251, 0.6);
+@define-color faint rgba(243, 236, 251, 0.35);
+@import "palette.css";
 
 * {
-  font-family: "JetBrainsMonoNL Nerd Font", monospace;
-  font-size: 14px;
+  font-family: "GeistMono Nerd Font", "JetBrainsMonoNL Nerd Font", sans-serif;
+  font-size: 13px;
   font-weight: 500;
   border: none;
   border-radius: 0;
@@ -18,142 +13,55 @@
 }
 
 window#waybar {
-  background: @bar-bg;
-  border: 2px solid rgba(137, 180, 250, 0.3);
-  border-radius: 5px;
-  margin: 0;
-  padding: 0;
-  transition: all 0.3s ease;
+  background: @glass;
+  color: @fg;
+  border-radius: 17px;
+  border: 1px solid @edge;
+  transition: background-color 400ms ease;
 }
 
-/* Workspaces styling */
-#workspaces {
-  background: @main-bg;
+tooltip {
+  background: @tooltip_bg;
+  border: 1px solid @edge;
   border-radius: 12px;
-  padding: 4px 8px;
-  margin: 4px 0;
 }
+
+tooltip label { color: @fg; }
+
+#workspaces { margin-left: 6px; }
 
 #workspaces button {
-  padding: 4px 8px;
-  margin: 2px;
-  border-radius: 8px;
-  color: rgba(205, 214, 244, 0.6);
-  /* background: transparent; */
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 20px;
-}
-
-#workspaces button.focused {
-  color: @accent-color;
-  /* background: rgba(137, 180, 250, 0.3); */
-  box-shadow: 0 2px 8px rgba(137, 180, 250, 0.2);
+  color: @faint;
+  background: transparent;
+  padding: 0 7px;
+  font-size: 15px;
+  transition: color 200ms ease, text-shadow 200ms ease;
 }
 
 #workspaces button.active {
-  color: @accent-color;
-  background: rgba(137, 180, 250, 0.3);
-  box-shadow: 0 2px 8px rgba(137, 180, 250, 0.2);
+  color: #ffffff;
+  text-shadow: 0 0 8px @accent_glow;
 }
 
 #workspaces button:hover {
-  color: @accent-color;
-  background: @hover-color;
+  color: @fg;
+  background: @hover;
+  box-shadow: none;
+  border-radius: 10px;
 }
 
-/* Clock - center time display */
-#clock {
-  color: @accent-color;
-  background: @main-bg;
-  font-weight: 600;
-  font-size: 13px;
-  padding: 8px 12px;
-  margin: 0 8px;
-  border-radius: 12px;
+#cpu, #memory, #network, #tray, #pulseaudio, #battery, #temperature, #custom-msi-fans, #custom-power {
+  color: @dim;
+  padding: 0 10px;
 }
 
-/* Power button */
+#pulseaudio.muted, #network.disconnected { color: @accent; }
+
+#battery.warning, #temperature.critical { color: #f5d08a; }
+#battery.critical { color: #f48fb1; }
+#battery.charging, #battery.plugged { color: @fg; }
+
 #custom-power {
-  color: rgba(255,255,255,0.6);
-  background: transparent;
-  padding: 6px 12px;
-  font-size: 14px;
-  border-radius: 8px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-#custom-power:hover {
-  color: @critical-color;
-  background: rgba(243, 139, 168, 0.1);
-}
-
-/* Network module */
-#network {
-  color: @text-color;
-  background: transparent;
-  padding: 8px 12px;
-  margin: 0;
-}
-
-#network.disconnected {
-  color: @critical-color;
-}
-
-/* Battery module */
-#battery {
-  color: @text-color;
-  background: transparent;
-  padding: 8px 12px;
-  margin: 0;
-}
-
-#battery.warning {
-  color: @warning-color;
-}
-
-#battery.critical {
-  color: @critical-color;
-}
-
-#battery.good {
-  color: @good-color;
-}
-
-/* CPU and Memory modules */
-#cpu, #memory {
-  color: @text-color;
-  background: @main-bg;
-  padding: 4px 12px;
-  margin: 4px;
-  border-radius: 8px;
-}
-
-#cpu:hover, #memory:hover {
-  background: @hover-color;
-}
-
-/* Update workspaces for hyprland */
-#workspaces {
-  background: transparent;
-  padding: 0;
-  margin: 0;
-}
-
-#workspaces button {
-  padding: 0;
-  margin: 0;
-  border-radius: 0;
-  color: @text-color;
-  background: transparent;
-  min-width: 20px;
-}
-
-#workspaces button.active {
-  color: @main-bg;
-  background: @accent-color;
-}
-
-#workspaces button:hover {
-  color: @main-bg;
-  background: @hover-color;
+  color: @accent;
+  padding: 0 16px 0 10px;
 }

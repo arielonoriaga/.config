@@ -1,0 +1,17 @@
+[Unit]
+Description=Keep the Aurora theme in sync with the other machine
+
+[Path]
+PathChanged=%h/.config/quickshell
+PathChanged=%h/.config/theme/aurora
+PathChanged=%h/.config/waybar/style.css
+PathChanged=%h/.config/mako
+PathChanged=%h/.config/fuzzel
+PathChanged=%h/.config/alacritty
+PathChanged=%h/.config/hypr/hyprland.lua
+PathChanged=%h/Pictures/Backgrounds
+PathChanged=%h/Pictures/Backgrounds/aurora
+Unit=aurora-sync.service
+
+[Install]
+WantedBy=default.target

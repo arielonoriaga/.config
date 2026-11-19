@@ -1,0 +1,7 @@
+[Unit]
+Description=Reconcile the Aurora theme with the other machine (newest wins)
+
+[Service]
+Type=oneshot
+ExecStartPre=/usr/bin/sleep 3
+ExecStart=%h/.config/theme/aurora/sync.sh reconcile

@@ -1,9 +1,12 @@
+[general]
+import = ["~/.local/state/aurora/alacritty.toml"]
+
 [env]
 TERM = "xterm-256color"
 
 [window]
 blur = true
-opacity = 0.92
+opacity = 0.9
 dynamic_padding = false
 decorations = "None"
 resize_increments = false
@@ -35,39 +38,20 @@ multiplier = 3
 [mouse]
 hide_when_typing = true
 
-# Catppuccin Mocha colors to match waybar
-[colors.primary]
-background = '#1e1e2e'
-foreground = '#cdd6f4'
-
-[colors.cursor]
-text = '#1e1e2e'
-cursor = '#f5e0dc'
-
-[colors.vi_mode_cursor]
-text = '#1e1e2e'
-cursor = '#b4befe'
-
-[colors.selection]
-text = '#1e1e2e'
-background = '#f5e0dc'
-
 [colors.normal]
-black   = '#45475a'
-red     = '#f38ba8'
-green   = '#a6e3a1'
-yellow  = '#f9e2af'
-blue    = '#89b4fa'
-magenta = '#f5c2e7'
-cyan    = '#94e2d5'
-white   = '#bac2de'
+red     = '#f48fb1'
+green   = '#a8e6cf'
+yellow  = '#ffe0a3'
+blue    = '#a3b8ff'
+magenta = '#d7a8f5'
+cyan    = '#9ee6f0'
+white   = '#d8cdea'
 
 [colors.bright]
-black   = '#585b70'
-red     = '#f38ba8'
-green   = '#a6e3a1'
-yellow  = '#f9e2af'
-blue    = '#89b4fa'
-magenta = '#f5c2e7'
-cyan    = '#94e2d5'
-white   = '#a6adc8'
+red     = '#f8a9c6'
+green   = '#bdf0dc'
+yellow  = '#ffeac0'
+blue    = '#bccbff'
+magenta = '#e4c1f9'
+cyan    = '#b8eef5'
+white   = '#f3ecfb'
