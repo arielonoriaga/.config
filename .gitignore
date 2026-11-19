@@ -100,3 +100,8 @@ nvim/wizards.pub
 /sway/config.before-*
 *.bak-*
 *.pre-host-link
+
+# generated from the wallpaper palette; app history
+/htop/htop_history
+/theme/aurora/wallpaper-*.svg
+/waybar/palette.css
