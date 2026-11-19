@@ -1,3 +1,13 @@
+# Auto-start tmux first — don't pay for a config the exec throws away
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
+
+# p10k instant prompt — must stay at the top, paints the prompt before plugins load
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
@@ -11,10 +21,8 @@ else
   compinit -C -d ${ZDOTDIR:-${HOME}}/.zcompdump
 fi
 
-compinit
-
 # Load plugins with async/defer for better performance
-zinit ice lucid wait'0' atinit'zpcompinit'
+zinit ice lucid wait'0'
 zinit light zdharma-continuum/fast-syntax-highlighting
 
 zinit ice lucid wait'0'
@@ -48,40 +56,19 @@ export BUN_INSTALL="$HOME/.bun"
 
 pathadd "/opt/nvim"
 pathadd "$HOME/.config/scripts"
-pathadd "$PNPM_HOME"
 pathadd "$HOME/.npm-global/bin"
-
-export PATH=$PATH:/usr/local/go/bin
 pathadd "$HOME/.local/bin"
 pathadd "$HOME/.config/yarn/global/node_modules/.bin"
 pathadd "$BUN_INSTALL/bin"
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-[[ -f /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /home/ariel/.cache/pnpm/dlx/gjohq4w7nmxx2i3abs2heyqjpm/1948af4e31b-2dcb9/node_modules/.pnpm/tabtab@2.2.2/node_modules/tabtab/.completions/electron-forge.zsh
+export PATH=$PATH:/usr/local/go/bin
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 
-get_cpu_temp() {
-  temp=$(sensors | grep 'Package id 0' | awk '{print $4}')
-  echo "${temp:1}"
-}
-
 export COMPOSE_DOCKER_CLI_BUILD=1
 export DOCKER_BUILDKIT=1
-
-function custom_cpu_temp {
-  local temp=$(get_cpu_temp)
-  if [[ -n $temp ]]; then
-    echo "CPU: $temp°C"
-  fi
-}
-
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=('custom_cpu_temp')
 
 ENABLE_CORRECTION="false"
 ZSH_DISABLE_COMPFIX="true"
@@ -96,7 +83,7 @@ hostinger() {
 #alias
 alias cfg="v ~/.zshrc"
 alias v="nvim"
-alias copy="xclip -selection c"
+alias copy="wl-copy"
 alias deletebranchs="git branch --merged | grep -v '^*\smain$' | grep -v '^*\smaster$' | grep -v '^*\sdev$' | xargs git branch -d"
 # alias ds="docker stop $(docker ps -q)"
 alias ld='lazydocker'
@@ -104,16 +91,14 @@ alias lg='lazygit'
 alias neofolder="cd ~/.config && v"
 alias o='open .'
 alias open="browse"
-alias p='cd ~/Projects/'
-alias proyInit="npx license mit > LICENSE && npx gitignore node && git init && npm init -y"
-alias pw='cd ~/Projects/Wizards/'
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias tree="git log --all --graph --decorate --oneline --simplify-by-decoration"
 alias wifipass="nmcli device wifi show-password"
-alias bx="cd ~/Projects/black-box"
 alias ls="ls --color -la"
-
-# Remove duplicate p10k config loading (already loaded via ~/.p10k.zsh on line 48)
+alias cc="claude --dangerously-skip-permissions"
+alias nvidia-run="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia"
+alias cci="~/.claude/hooks/improve/queue.sh browse"
+alias lzm="lazy-multi-gm"
 
 # Lazy load NVM to improve startup time
 export NVM_DIR="$HOME/.nvm"
@@ -136,48 +121,48 @@ npm() {
   npm "$@"
 }
 
-# NVIDIA GPU environment variables for better performance
-export __NV_PRIME_RENDER_OFFLOAD=1
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-export WLR_DRM_DEVICES=/dev/dri/card1
-
-if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
-  startx
-fi
-
-# Auto-start tmux
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
-fi
-
 # Where to save history
 HISTFILE=~/.zsh_history
-HISTSIZE=10000        # Commands stored in memory
-SAVEHIST=10000        # Commands written to file
+HISTSIZE=10000
+SAVEHIST=10000
 
 # Zsh options to manage history behavior
-setopt HIST_IGNORE_ALL_DUPS      # Don’t record a command if it’s a duplicate
-setopt HIST_REDUCE_BLANKS        # Remove superfluous spaces
-setopt INC_APPEND_HISTORY        # Append commands as they are typed
-setopt SHARE_HISTORY             # Share history across all sessions
-setopt EXTENDED_HISTORY          # Timestamp each command
-setopt HIST_SAVE_NO_DUPS         # When writing out history, don’t write duplicates
-setopt HIST_FIND_NO_DUPS         # Don’t show duplicates in search
-
-# pnpm
-export PNPM_HOME="/home/ariel/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_FIND_NO_DUPS
 
 export EDITOR=nvim
 
 setopt COMPLETE_ALIASES
 export PATH="$HOME/Desktop/custom-cli:$PATH"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# OpenClaw Completion
+source "/home/ariel/.openclaw/completions/openclaw.zsh"
 
+# opencode
+export PATH=/home/ariel/.opencode/bin:$PATH
+[ -f ~/.secrets.zsh ] && source ~/.secrets.zsh  # keys live outside git
+
+# cycle all swap (swapon -a is fstab-only, misses zram) — use instead of `swapoff -a && swapon -a`
+reswap() {
+  sudo swapoff -a
+  sudo systemctl restart systemd-zram-setup@zram0.service  # zram (not in fstab)
+  sudo swapon -a                                           # /swapfile from fstab
+  swapon --show
+}
+
+# pnpm
+export PNPM_HOME="/home/ariel/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
+
+# Rust build cache — moved to NVMe, see system-tune.sh
+export SCCACHE_DIR=/var/cache/cargo-builds/sccache
+export SCCACHE_CACHE_SIZE=50G
