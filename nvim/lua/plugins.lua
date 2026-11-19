@@ -147,7 +147,7 @@ require('lazy').setup({
         sync_install = false,
         ensure_installed = {
           "lua", "javascript", "typescript", "html", "css", "json", "bash",
-          "markdown", "markdown_inline", "vue", "tsx",
+          "markdown", "markdown_inline", "tsx",
         },
         modules = {},
         ignore_install = {},
@@ -278,7 +278,8 @@ require('lazy').setup({
     'neovim/nvim-lspconfig',
     event = { "BufReadPre", "BufNewFile" },
   },
-  { 'williamboman/mason.nvim', cmd = 'Mason' },
+  -- Not lazy: setup() puts mason/bin on PATH, which LSP servers need at startup.
+  { 'williamboman/mason.nvim', lazy = false, opts = {} },
   { 'williamboman/mason-lspconfig.nvim', event = 'BufReadPre', dependencies = { 'williamboman/mason.nvim' } },
 
   -- UI enhancements

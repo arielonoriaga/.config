@@ -1,13 +1,10 @@
-local lspconfig = require("lspconfig")
+-- All servers use the vim.lsp.config/enable API (Neovim 0.11+).
+-- nvim-lspconfig is still required as a plugin: it ships the lsp/*.lua server
+-- definitions these calls read. We just no longer require('lspconfig').
 
-lspconfig.oxlint = {
-  default_config = {
-    cmd = { "oxlint", "lsp" },
-    filetypes = { "vue" },
-    root_dir = lspconfig.util.root_pattern("package.json", ".git"),
-    single_file_support = true,
-  },
-}
+local function caps()
+  return require('blink.cmp').get_lsp_capabilities()
+end
 
 vim.lsp.config('rust_analyzer', {
   settings = {
@@ -20,7 +17,7 @@ vim.lsp.config('rust_analyzer', {
 vim.lsp.enable('rust_analyzer')
 
 vim.lsp.config('lua_ls', {
-  capabilities = require('blink.cmp').get_lsp_capabilities(),
+  capabilities = caps(),
   settings = {
     Lua = {
       diagnostics = {
@@ -35,11 +32,11 @@ vim.lsp.config('lua_ls', {
 })
 vim.lsp.enable('lua_ls')
 
-lspconfig.eslint.setup({
-  capabilities = require('blink.cmp').get_lsp_capabilities(),
+vim.lsp.config('eslint', {
+  capabilities = caps(),
   filetypes = {
     'javascript', 'javascriptreact', 'typescript', 'typescriptreact',
-    'vue', 'svelte', 'astro'
+    'svelte', 'astro'
   },
   on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
@@ -67,40 +64,20 @@ lspconfig.eslint.setup({
     },
   },
 })
+vim.lsp.enable('eslint')
 
+-- ts_ls stays off; vtsls handles TypeScript.
 vim.lsp.enable('ts_ls', false)
 
--- Vue + TypeScript setup
-local vue_language_server_path = '/home/exo/.local/share/pnpm/global/5/node_modules/@vue/language-server'
-
-lspconfig.vtsls.setup({
-  capabilities = require('blink.cmp').get_lsp_capabilities(),
+vim.lsp.config('vtsls', {
+  capabilities = caps(),
   settings = {
-    vtsls = {
-      tsserver = {
-        globalPlugins = {
-          {
-            name = '@vue/typescript-plugin',
-            location = vue_language_server_path,
-            languages = { 'vue' },
-            configNamespace = 'typescript',
-          },
-        },
-      },
-    },
     typescript = {
       preferences = {
         includePackageJsonAutoImports = 'on',
       },
     },
   },
-  filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact', 'vue' },
+  filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
 })
-
--- vue_ls uses the native vim.lsp API (lspconfig has it as "vue_ls" in lsp/ not configs/)
--- The native lsp/vue_ls.lua already provides the tsserver/request handler with retry logic
-vim.lsp.config('vue_ls', {
-  capabilities = require('blink.cmp').get_lsp_capabilities(),
-  filetypes = { 'vue' },
-})
-vim.lsp.enable('vue_ls')
+vim.lsp.enable('vtsls')

@@ -79,7 +79,7 @@ end, { noremap = true, silent = true, desc = 'Display incoming Callhierarchy' })
 
 
 vim.keymap.set('n', 'gd', '<cmd>Lspsaga goto_definition<CR>', { noremap = true, silent = true, desc = 'Go to definition' })
-vim.keymap.set('n', 'gi', '<cmd>Lspsaga goto_implementation<CR>', { noremap = true, silent = true, desc = 'Go to implementation' })
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation,{ noremap = true, silent = true, desc = 'Go to implementation' })
 vim.keymap.set('n', 'gp', '<cmd>Lspsaga peek_definition<CR>', { noremap = true, silent = true, desc = 'Peek definition' })
 vim.keymap.set('n', 'gt', '<cmd>Lspsaga goto_type_definition<CR>', { noremap = true, silent = true, desc = 'Go to type definition' })
 

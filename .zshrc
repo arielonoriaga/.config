@@ -141,9 +141,12 @@ export __NV_PRIME_RENDER_OFFLOAD=1
 export __GLX_VENDOR_LIBRARY_NAME=nvidia
 export WLR_DRM_DEVICES=/dev/dri/card1
 
-# Only autostart X on a bare tty1 — not inside an existing Wayland session
+# Autostart Hyprland on a bare tty1 — not inside an existing session.
+# Was `startx`, which fell through to /etc/X11/xinit/xinitrc and launched
+# awesome (X11) over the top of everything.
+# tty2-tty6 stay plain shells, so a failed start never locks you out.
 if [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && [ "$(fgconsole 2>/dev/null)" = "1" ]; then
-  startx
+  exec hyprland
 fi
 
 # Auto-start tmux
