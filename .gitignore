@@ -39,3 +39,30 @@ Electron
 # ssh keypair — never commit
 nvim/wizards
 nvim/wizards.pub
+/.test-agent/
+
+# per-machine desktop files (monitors, host overrides) and editor backups
+/hypr/host.lua
+/hypr/host.conf
+/hypr/*.bak
+/hypr/*.bak-*
+/hypr/legacy-conf
+/theme-backup-*/
+
+# credentials and app state — never commit
+/Bitwarden CLI/
+/rbw/
+/vaultwarden/
+/tailscale/
+/ez-vapid/
+/ez-offsite-backup/
+/zeroclaw-mail/
+/kdeconnect/
+/huggian-print-agent/
+/huggian-support/
+/google-chrome-for-testing/
+/google-chrome-for-testing-headless/
+/door-run/
+/Wallflower Games/
+/vercel-plugin/
+/godot/*.bak-*
