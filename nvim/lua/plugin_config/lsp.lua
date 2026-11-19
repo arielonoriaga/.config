@@ -1,83 +1,92 @@
--- All servers use the vim.lsp.config/enable API (Neovim 0.11+).
--- nvim-lspconfig is still required as a plugin: it ships the lsp/*.lua server
--- definitions these calls read. We just no longer require('lspconfig').
+vim.lsp.config('*', { capabilities = require('blink.cmp').get_lsp_capabilities() })
 
-local function caps()
-  return require('blink.cmp').get_lsp_capabilities()
-end
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  severity_sort = true,
+  float = { border = 'rounded', source = true },
+})
 
 vim.lsp.config('rust_analyzer', {
   settings = {
     ['rust-analyzer'] = {
       cargo = { allFeatures = true },
-      checkOnSave = { command = "clippy" },
+      checkOnSave = { command = 'clippy' },
     },
   },
 })
-vim.lsp.enable('rust_analyzer')
 
 vim.lsp.config('lua_ls', {
-  capabilities = caps(),
   settings = {
     Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
+      runtime = { version = 'LuaJIT' },
+      diagnostics = { globals = { 'vim' } },
       workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
+        library = { vim.env.VIMRUNTIME },
         checkThirdParty = false,
       },
     },
   },
 })
-vim.lsp.enable('lua_ls')
+
+local eslint_owns_only_lint_and_fixes = {
+  'documentFormattingProvider', 'documentRangeFormattingProvider', 'definitionProvider', 'referencesProvider',
+  'implementationProvider', 'renameProvider', 'hoverProvider', 'signatureHelpProvider',
+}
 
 vim.lsp.config('eslint', {
-  capabilities = caps(),
-  filetypes = {
-    'javascript', 'javascriptreact', 'typescript', 'typescriptreact',
-    'svelte', 'astro'
-  },
+  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte', 'astro' },
   on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-    client.server_capabilities.definitionProvider = false
-    client.server_capabilities.referencesProvider = false
-    client.server_capabilities.implementationProvider = false
-    client.server_capabilities.renameProvider = false
-    client.server_capabilities.hoverProvider = false
-    client.server_capabilities.signatureHelpProvider = false
-
+    for _, capability in ipairs(eslint_owns_only_lint_and_fixes) do
+      client.server_capabilities[capability] = false
+    end
     if client.server_capabilities.codeActionProvider then
-      local group = vim.api.nvim_create_augroup('EslintAutofix', { clear = true })
       vim.api.nvim_create_autocmd('BufWritePre', {
-        group = group,
+        group = vim.api.nvim_create_augroup('EslintAutofix' .. bufnr, { clear = true }),
         buffer = bufnr,
-        command = 'EslintFixAll',
+        command = 'LspEslintFixAll',
       })
     end
   end,
   settings = {
-    codeActionOnSave = {
-      enable = true,
-      mode = 'all',
-    },
+    codeActionOnSave = { enable = true, mode = 'all' },
   },
 })
-vim.lsp.enable('eslint')
-
--- ts_ls stays off; vtsls handles TypeScript.
-vim.lsp.enable('ts_ls', false)
 
 vim.lsp.config('vtsls', {
-  capabilities = caps(),
   settings = {
     typescript = {
-      preferences = {
-        includePackageJsonAutoImports = 'on',
-      },
+      preferences = { includePackageJsonAutoImports = 'on' },
     },
   },
-  filetypes = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
 })
-vim.lsp.enable('vtsls')
+
+local upstream_oxlint_root_dir = vim.lsp.config.oxlint.root_dir
+
+local function oxlint_installed_for(root)
+  return vim.fn.executable(vim.fs.joinpath(root, 'node_modules/.bin/oxlint')) == 1 or vim.fn.executable('oxlint') == 1
+end
+
+vim.lsp.config('oxlint', {
+  root_dir = function(bufnr, on_dir)
+    upstream_oxlint_root_dir(bufnr, function(root)
+      if oxlint_installed_for(root) then
+        on_dir(root)
+      end
+    end)
+  end,
+})
+
+local function has_binary(name)
+  local cmd = vim.lsp.config[name].cmd
+  return type(cmd) ~= 'table' or vim.fn.executable(cmd[1]) == 1
+end
+
+local function typescript_server()
+  local native_typescript_7 = vim.fs.joinpath(vim.fn.stdpath('data'), 'mason/bin/tsc')
+  return vim.fn.executable(native_typescript_7) == 1 and 'tsc' or 'vtsls'
+end
+
+vim.lsp.enable(vim.tbl_filter(has_binary, {
+  'rust_analyzer', 'lua_ls', 'eslint', 'oxlint', 'tailwindcss', typescript_server(),
+}))

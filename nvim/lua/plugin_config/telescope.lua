@@ -2,12 +2,12 @@ local h_pct = 0.9
 local w_pct = 0.95
 
 local telescope = require('telescope')
-
--- fzf needs a compiled libfzf.so; fall back to the built-in sorter if absent
-pcall(telescope.load_extension, 'fzf')
+local actions = require('telescope.actions')
 
 telescope.setup({
   defaults = {
+    vimgrep_arguments = { 'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' },
+    file_ignore_patterns = { 'node_modules', '%.git/', 'dist', 'build' },
     prompt_prefix = "❯ ",
     selection_caret = "❯ ",
     layout_config = {
@@ -43,13 +43,13 @@ telescope.setup({
       i = {
         ["<C-j>"] = "move_selection_next",
         ["<C-k>"] = "move_selection_previous",
-        ["<Esc>"] = require('telescope.actions').close,
+        ["<Esc>"] = actions.close,
         ["<C-h>"] = "which_key",
       },
       n = {
         ["<C-j>"] = "move_selection_next",
         ["<C-k>"] = "move_selection_previous",
-        ["<Esc>"] = require('telescope.actions').close,
+        ["<Esc>"] = actions.close,
         ["<C-h>"] = "which_key",
       },
     },
@@ -63,3 +63,6 @@ telescope.setup({
     }
   }
 })
+
+pcall(telescope.load_extension, 'fzf')
+pcall(telescope.load_extension, 'file_browser')

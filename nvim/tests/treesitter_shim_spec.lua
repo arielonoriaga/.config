@@ -1,21 +1,3 @@
--- Regression test for the nvim-0.12 add_directive/add_predicate `all = false`
--- shim in ../lua/plugins.lua (nvim-treesitter spec `init`).
---
--- nvim 0.12 dropped the `all = false` option: predicate/directive handlers
--- now always receive capture -> node LIST instead of a single node. The
--- archived nvim-treesitter master still assumes a single node, which crashes
--- on real buffers (treesitter.lua:197: attempt to call method 'range' (a nil
--- value)) e.g. on a ```bash fence with a heredoc. plugins.lua re-implements
--- the removed option by monkey-patching query.add_directive/add_predicate to
--- collapse the node list down to its last element before calling the real
--- handler, but only when nvim is >= 0.12.
---
--- This test extracts and runs the ACTUAL `init` function source out of
--- plugins.lua (not a copy) so it can't silently drift from the real code,
--- then exercises the shim against a mocked query module.
---
--- Run: nvim -l nvim/tests/treesitter_shim_spec.lua
-
 local function fail(msg)
   io.stderr:write('FAIL: ' .. msg .. '\n')
   os.exit(1)
@@ -27,27 +9,13 @@ local function assert_eq(actual, expected, msg)
   end
 end
 
-local plugins_path = vim.fn.stdpath('config') .. '/lua/plugins.lua'
-local f = assert(io.open(plugins_path, 'r'))
-local src = f:read('*a')
-f:close()
+package.path = vim.fn.stdpath('config') .. '/lua/?.lua;' .. package.path
 
-local start_pat = "'nvim%-treesitter/nvim%-treesitter',.-init = function%(%)"
-local start_idx = src:find(start_pat)
-if not start_idx then
-  fail('could not locate nvim-treesitter init function in plugins.lua — source shape changed, update this test')
+local function init_fn()
+  package.loaded['compat.treesitter_all_false'] = nil
+  require('compat.treesitter_all_false').install()
 end
-local body_start = src:find('function%(%)', start_idx) + #'function()'
-local end_marker = src:find('\n%s*end,%s*\n%s*config = function%(%)', body_start)
-if not end_marker then
-  fail('could not locate end of nvim-treesitter init function in plugins.lua — source shape changed, update this test')
-end
-local fn_body = src:sub(body_start, end_marker - 1)
 
-local init_fn = assert(load('return function()\n' .. fn_body .. '\nend', 'extracted_init'))()
-
--- Build a fresh mock `vim.treesitter.query` and force the shim to run its
--- nvim-0.12 branch, regardless of the nvim actually running this test.
 local function make_query_mock()
   local calls = {}
   local mock = {}

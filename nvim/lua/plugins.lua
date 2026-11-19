@@ -9,7 +9,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  -- Core dependencies
   { 'MunifTanjim/nui.nvim' },
   { 'nvim-lua/plenary.nvim' },
 
@@ -34,36 +33,11 @@ require('lazy').setup({
     end,
   },
 
-  -- Claude Code integration (requires Claude Code CLI)
-  -- {
-  --   "coder/claudecode.nvim",
-  --   dependencies = { "folke/snacks.nvim" },
-  --   config = true,
-  --   keys = {
-  --     { "<leader>a", nil, desc = "AI/Claude Code" },
-  --     { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-  --     { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-  --     { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
-  --     { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-  --     { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-  --     { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
-  --     {
-  --       "<leader>as",
-  --       "<cmd>ClaudeCodeTreeAdd<cr>",
-  --       desc = "Add file",
-  --       ft = { "NvimTree", "neo-tree", "oil" },
-  --     },
-  --     -- Diff management
-  --     { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-  --     { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
-  --   },
-  -- },
-
   {
     "greggh/claude-code.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- Required for git operations
-    },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = { "ClaudeCode", "ClaudeCodeContinue", "ClaudeCodeResume", "ClaudeCodeVerbose", "ClaudeCodeVersion" },
+    keys = { { "<C-,>", "<cmd>ClaudeCode<CR>", desc = "Claude Code" } },
     config = function()
       require("claude-code").setup({
         window = {
@@ -79,7 +53,6 @@ require('lazy').setup({
   },
 
 
-  -- Cursor Agent integration
   {
     "aug6th/cursoragent.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -91,11 +64,18 @@ require('lazy').setup({
       "CursorAgentBuffer",
       "CursorAgentSelection",
     },
+    keys = {
+      { "<leader>cu", "<cmd>CursorAgent<CR>", desc = "Cursor Agent" },
+      { "<leader>cua", "<cmd>CursorAgentAsk<CR>", desc = "Cursor Agent Ask" },
+      { "<leader>cup", "<cmd>CursorAgentPlan<CR>", desc = "Cursor Agent Plan" },
+      { "<leader>cur", "<cmd>CursorAgentResume<CR>", desc = "Cursor Agent Resume" },
+      { "<leader>cub", "<cmd>CursorAgentBuffer<CR>", desc = "Cursor Agent Buffer" },
+      { "<leader>cus", "<cmd>CursorAgentSelection<CR>", mode = "v", desc = "Cursor Agent Selection" },
+    },
     config = function()
       require("cursoragent").setup({})
     end,
   },
-  -- UI and utilities
   {
     'glepnir/lspsaga.nvim',
     config = function ()
@@ -121,53 +101,22 @@ require('lazy').setup({
     end,
     event = 'LspAttach'
   },
-  { 'kdheepak/lazygit.nvim', cmd = 'LazyGit' },
+  { 'kdheepak/lazygit.nvim', cmd = 'LazyGit', keys = { { '<leader>lg', '<cmd>LazyGit<CR>', desc = 'LazyGit' } } },
   { 'machakann/vim-sandwich', event = 'BufRead' },
   {
     'nvim-pack/nvim-spectre',
     cmd = 'Spectre',
-    config = function ()
-      local spectre = require('spectre')
-      vim.keymap.set('n', '<leader>S', function ()
-        spectre.open()
-      end, { desc = "Open Spectre" })
-    end
+    keys = { { '<leader>S', function() require('spectre').open() end, desc = 'Open Spectre' } },
   },
 
   -- Treesitter and related
   {
     'nvim-treesitter/nvim-treesitter',
-    -- Config below uses the master-branch API (nvim-treesitter.configs).
-    -- The 'main' branch is a rewrite with an incompatible API, so pin master.
     branch = 'master',
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },
     init = function()
-      -- nvim 0.12 dropped the `all = false` option of add_directive/add_predicate,
-      -- so handlers now always get capture -> node LIST. nvim-treesitter master
-      -- (archived) still indexes them as a single node, which blows up on e.g. a
-      -- ```bash fence with a heredoc (bash/injections.scm `#downcase!`):
-      --   treesitter.lua:197: attempt to call method 'range' (a nil value)
-      -- Re-implement the removed option for whoever asks for it.
-      if vim.fn.has('nvim-0.12') == 1 then
-        local query = require('vim.treesitter.query')
-        for _, fn in ipairs({ 'add_directive', 'add_predicate' }) do
-          local add = query[fn]
-          query[fn] = function(name, handler, opts)
-            if type(opts) == 'table' and opts.all == false then
-              local inner = handler
-              handler = function(match, ...)
-                local last = {}
-                for id, nodes in pairs(match) do
-                  last[id] = nodes[#nodes]
-                end
-                return inner(last, ...)
-              end
-            end
-            return add(name, handler, opts)
-          end
-        end
-      end
+      require('compat.treesitter_all_false').install()
     end,
     config = function()
       require('nvim-treesitter.configs').setup({
@@ -178,7 +127,7 @@ require('lazy').setup({
         },
         modules = {},
         ignore_install = {},
-        auto_install = false,  -- Disabled for performance
+        auto_install = false,
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false,
@@ -189,10 +138,6 @@ require('lazy').setup({
           end,
         },
         indent = { enable = true },
-        context_commentstring = {
-          enable = true,
-          enable_autocmd = false,
-        },
       })
     end
   },
@@ -207,6 +152,16 @@ require('lazy').setup({
   {
     'JoosepAlviste/nvim-ts-context-commentstring',
     lazy = true,
+    opts = { enable_autocmd = false },
+    init = function()
+      local get_option = vim.filetype.get_option
+      vim.filetype.get_option = function(filetype, option)
+        if option ~= 'commentstring' then
+          return get_option(filetype, option)
+        end
+        return require('ts_context_commentstring.internal').calculate_commentstring() or get_option(filetype, option)
+      end
+    end,
   },
 
   -- Telescope and extensions
@@ -232,43 +187,10 @@ require('lazy').setup({
       { 'gr', function() require('telescope.builtin').lsp_references() end, desc = 'LSP references' },
     },
     config = function()
-      local telescope = require('telescope')
-
-      -- fzf needs a compiled libfzf.so; fall back to the built-in sorter if absent
-      pcall(telescope.load_extension, "fzf")
-      pcall(telescope.load_extension, "file_browser")
-
-      telescope.setup({
-        defaults = {
-          vimgrep_arguments = {
-            "rg",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case"
-          },
-          file_ignore_patterns = { "node_modules", ".git/", "dist", "build" },
-          sorting_strategy = "ascending",
-          layout_config = {
-            prompt_position = "top"
-          },
-        },
-        extensions = {
-          fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = "smart_case",
-          }
-        }
-      })
-
-    end
+      require('plugin_config.telescope')
+    end,
   },
 
-  -- File explorer and icons
   {
     'nvim-tree/nvim-tree.lua',
     cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
@@ -294,24 +216,44 @@ require('lazy').setup({
           dotfiles = false,
         },
       })
-
-      -- Keymaps moved to lazy keys configuration
     end
   },
   { 'nvim-tree/nvim-web-devicons', lazy = true },
 
-  -- LSP and Mason
   {
     'neovim/nvim-lspconfig',
-    event = { "BufReadPre", "BufNewFile" },
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = { 'williamboman/mason-lspconfig.nvim' },
+    config = function()
+      require('plugin_config.lsp')
+    end,
   },
-  -- Not lazy: setup() puts mason/bin on PATH, which LSP servers need at startup.
-  { 'williamboman/mason.nvim', lazy = false, opts = {} },
-  { 'williamboman/mason-lspconfig.nvim', event = 'BufReadPre', dependencies = { 'williamboman/mason.nvim' } },
+  { 'williamboman/mason.nvim', cmd = { 'Mason', 'MasonInstall', 'MasonUpdate', 'MasonUninstall', 'MasonLog' }, opts = {} },
+  {
+    'williamboman/mason-lspconfig.nvim',
+    lazy = true,
+    dependencies = { 'williamboman/mason.nvim' },
+    opts = {
+      ensure_installed = { 'lua_ls', 'vtsls', 'eslint', 'tailwindcss' },
+      automatic_enable = false,
+    },
+  },
 
-  -- UI enhancements
   { 'stevearc/dressing.nvim', event = 'VeryLazy' },
-  { 'voldikss/vim-floaterm', cmd = 'FloatermToggle' },
+  {
+    'voldikss/vim-floaterm',
+    cmd = { 'FloatermToggle', 'FloatermNew' },
+    keys = {
+      { '<F12>', '<cmd>FloatermToggle --name=cmd<CR>', desc = 'Toggle terminal' },
+      { '<F12>', '<C-\\><C-n><cmd>FloatermToggle --name=cmd<CR>', mode = 't', desc = 'Toggle terminal' },
+      { '<leader>ld', '<cmd>FloatermNew --name=lazydocker lazydocker<CR>', desc = 'LazyDocker' },
+    },
+    init = function()
+      vim.g.floaterm_height = 0.9
+      vim.g.floaterm_width = 0.9
+      vim.g.floaterm_autoclose = 2
+    end,
+  },
   {
     'lewis6991/gitsigns.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -345,7 +287,6 @@ require('lazy').setup({
     end,
   },
 
-  -- Autopairs
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -368,14 +309,13 @@ require('lazy').setup({
     end,
   },
 
-  -- Statusline and bufferline
   {
     'nvim-lualine/lualine.nvim',
     event = 'UIEnter',
     config = function()
       require('lualine').setup({
         options = {
-          theme = 'nord',
+          theme = 'auto',
           section_separators = { left = '', right = '' },
           component_separators = { left = '', right = '' },
         },
@@ -402,10 +342,9 @@ require('lazy').setup({
     end,
   },
 
-  -- Completion and snippets
   {
     'saghen/blink.cmp',
-    lazy = false,
+    event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = 'rafamadriz/friendly-snippets',
     version = '1.*',
     opts = {
@@ -459,16 +398,6 @@ require('lazy').setup({
     },
   },
 
-  -- Commenting
-  {
-    'numToStr/Comment.nvim',
-    event = 'BufRead',
-    config = function()
-      require('Comment').setup()
-    end,
-  },
-
-  -- Notifications and UI messages
   {
     'folke/noice.nvim',
     dependencies = {
@@ -476,32 +405,42 @@ require('lazy').setup({
       'rcarriga/nvim-notify',
     },
     event = 'VeryLazy',
+    config = function()
+      require('plugin_config.noice')
+    end,
   },
 
-  -- Color schemes
-  { 'zaldih/themery.nvim', lazy = true, cmd = 'Themery' },
+  {
+    'zaldih/themery.nvim',
+    cmd = 'Themery',
+    keys = { { '<F4>', '<cmd>Themery<CR>', desc = 'Pick colorscheme' } },
+    config = function()
+      require('plugin_config.themery')
+    end,
+  },
   { 'ayu-theme/ayu-vim', lazy = true },
   { 'sainnhe/gruvbox-material', lazy = true },
   { 'catppuccin/nvim', name = 'catppuccin', lazy = true },
   { "akinsho/horizon.nvim", version = "*", lazy = true },
   { "sainnhe/sonokai", lazy = true },
-  {
-      "scottmckendry/cyberdream.nvim",
-      lazy = false,
-      priority = 1000,
-  },
+  { "scottmckendry/cyberdream.nvim", lazy = true },
   {
     'egerhether/heatherfield.nvim',
     lazy = true,
-    config = function()
-      require('heatherfield').setup()
-    end,
+    opts = {},
   },
   {
     'neanias/everforest-nvim',
+    main = 'everforest',
     lazy = true,
-    config = function()
-      require('everforest').setup()
-    end,
+    opts = {},
+  },
+}, {
+  install = { colorscheme = { 'cyberdream' } },
+  change_detection = { notify = false },
+  performance = {
+    rtp = {
+      disabled_plugins = { 'gzip', 'matchit', 'netrwPlugin', 'tarPlugin', 'tohtml', 'tutor', 'zipPlugin', 'rplugin' },
+    },
   },
 })
