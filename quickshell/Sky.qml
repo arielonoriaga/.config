@@ -1,13 +1,15 @@
 import QtQuick
 import QtQuick.Shapes
+import "Zodiac.js" as Zodiac
 
 Item {
     id: sky
 
     readonly property real unit: width / 1920
     readonly property point origin: Qt.point(50 * unit, 105 * unit)
-    readonly property var nodes: [[0, 10], [45, 18], [75, 0], [105, 38], [130, 40], [165, 28], [190, 30], [205, 60], [220, 78], [60, 50], [40, 72]]
-    readonly property var edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [1, 9], [9, 10], [3, 9]]
+    property var sign: Zodiac.current(new Date())
+    readonly property var nodes: sign.nodes
+    readonly property var edges: sign.edges
     readonly property int traceStepMs: 450
     readonly property int traceGlowMs: 2400
     readonly property int tracePeriodMs: 14000
@@ -68,8 +70,8 @@ Item {
         }
 
         Shape {
-            x: 115 - 140
-            y: 40 - 140
+            x: sky.sign.width / 2 - 140
+            y: sky.sign.height / 2 - 140
             width: 280
             height: 280
             preferredRendererType: Shape.CurveRenderer
@@ -119,6 +121,13 @@ Item {
             }
         }
 
+        Text {
+            y: -26
+            text: sky.sign.name + "  ·  " + sky.sign.range
+            color: Qt.rgba(1, 1, 1, 0.42)
+            font { family: Theme.font; pixelSize: 11; letterSpacing: 1.5 }
+        }
+
         Repeater {
             model: sky.nodes
             Rectangle {
@@ -126,9 +135,10 @@ Item {
                 required property int index
                 x: modelData[0] - width / 2
                 y: modelData[1] - height / 2
-                width: 4.4
-                height: 4.4
-                radius: 2.2
+                readonly property bool brightest: index === sky.sign.bright
+                width: brightest ? 6.5 : 4.4
+                height: width
+                radius: width / 2
                 color: "white"
                 SequentialAnimation on opacity {
                     loops: Animation.Infinite
@@ -172,6 +182,13 @@ Item {
                 NumberAnimation { target: meteor; property: "opacity"; to: 0; duration: 850 }
             }
         }
+    }
+
+    Timer {
+        running: true
+        repeat: true
+        interval: 60 * 60 * 1000
+        onTriggered: sky.sign = Zodiac.current(new Date())
     }
 
     Timer {
