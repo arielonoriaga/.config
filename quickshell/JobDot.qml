@@ -10,10 +10,5 @@ Rectangle {
     color: waiting ? "transparent" : tint
     border.width: waiting ? 1.5 : 0
     border.color: tint
-    SequentialAnimation on opacity {
-        running: !waiting
-        loops: Animation.Infinite
-        NumberAnimation { to: 0.7; duration: 900; easing.type: Easing.InOutSine }
-        NumberAnimation { to: 1; duration: 900; easing.type: Easing.InOutSine }
-    }
+    opacity: waiting ? 1 : 0.7 + 0.3 * Ticker.wave(1.8)
 }

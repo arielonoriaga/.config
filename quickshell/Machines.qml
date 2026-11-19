@@ -91,7 +91,7 @@ Column {
         }
     }
 
-    Timer { interval: 10 * 1000; running: true; repeat: true; onTriggered: fetch.running = true }
+    Timer { interval: (Ticker.desktopVisible ? 10 : 60) * 1000; running: true; repeat: true; onTriggered: fetch.running = true }
 
     Item {
         width: root.width

@@ -41,33 +41,17 @@ Item {
             height: modelData.size
             radius: width / 2
             color: "white"
-            opacity: 0.1
-            SequentialAnimation on opacity {
-                loops: Animation.Infinite
-                PauseAnimation { duration: modelData.delay }
-                NumberAnimation { to: modelData.peak; duration: modelData.period / 2; easing.type: Easing.InOutSine }
-                NumberAnimation { to: 0.1; duration: modelData.period / 2; easing.type: Easing.InOutSine }
-            }
+            opacity: 0.1 + (modelData.peak - 0.1) * Ticker.wave(modelData.period / 1000, modelData.delay / 1000)
         }
     }
 
     Item {
         id: constellation
-        x: sky.origin.x
-        y: sky.origin.y
+        x: sky.origin.x + 10 * Ticker.wave(60)
+        y: sky.origin.y + 5 * Ticker.wave(46)
         scale: sky.unit
         transformOrigin: Item.TopLeft
 
-        SequentialAnimation on x {
-            loops: Animation.Infinite
-            NumberAnimation { from: sky.origin.x; to: sky.origin.x + 10; duration: 30000; easing.type: Easing.InOutSine }
-            NumberAnimation { to: sky.origin.x; duration: 30000; easing.type: Easing.InOutSine }
-        }
-        SequentialAnimation on y {
-            loops: Animation.Infinite
-            NumberAnimation { from: sky.origin.y; to: sky.origin.y + 5; duration: 23000; easing.type: Easing.InOutSine }
-            NumberAnimation { to: sky.origin.y; duration: 23000; easing.type: Easing.InOutSine }
-        }
 
         Shape {
             x: sky.sign.width / 2 - 140
@@ -87,11 +71,7 @@ Item {
                 }
                 PathAngleArc { centerX: 140; centerY: 140; radiusX: 140; radiusY: 140; startAngle: 0; sweepAngle: 360 }
             }
-            SequentialAnimation on opacity {
-                loops: Animation.Infinite
-                NumberAnimation { from: 0.55; to: 1; duration: 5000; easing.type: Easing.InOutSine }
-                NumberAnimation { to: 0.55; duration: 5000; easing.type: Easing.InOutSine }
-            }
+            opacity: 0.55 + 0.45 * Ticker.wave(10)
         }
 
         Repeater {
@@ -110,14 +90,10 @@ Item {
                 antialiasing: true
                 transformOrigin: Item.Left
                 rotation: Math.atan2(to[1] - from[1], to[0] - from[0]) * 180 / Math.PI
-                opacity: 0.2
-                SequentialAnimation on opacity {
-                    loops: Animation.Infinite
-                    PauseAnimation { duration: lead }
-                    NumberAnimation { to: 0.75; duration: 500; easing.type: Easing.OutQuad }
-                    NumberAnimation { to: 0.2; duration: sky.traceGlowMs; easing.type: Easing.InOutSine }
-                    PauseAnimation { duration: sky.tracePeriodMs - lead - 500 - sky.traceGlowMs }
-                }
+                readonly property real sinceLit: ((Ticker.seconds * 1000 - lead) % sky.tracePeriodMs + sky.tracePeriodMs) % sky.tracePeriodMs
+                opacity: sinceLit < 500 ? 0.2 + 0.55 * sinceLit / 500
+                       : sinceLit < 500 + sky.traceGlowMs ? 0.75 - 0.55 * (sinceLit - 500) / sky.traceGlowMs
+                       : 0.2
             }
         }
 
@@ -140,12 +116,7 @@ Item {
                 height: width
                 radius: width / 2
                 color: "white"
-                SequentialAnimation on opacity {
-                    loops: Animation.Infinite
-                    PauseAnimation { duration: index * 370 }
-                    NumberAnimation { from: 0.85; to: 0.45; duration: 1800; easing.type: Easing.InOutSine }
-                    NumberAnimation { to: 0.95; duration: 1800; easing.type: Easing.InOutSine }
-                }
+                opacity: 0.45 + 0.5 * Ticker.wave(3.6, index * 0.37)
             }
         }
     }
@@ -196,7 +167,7 @@ Item {
         repeat: true
         interval: 15000 + Math.floor(Math.random() * 30000)
         onTriggered: {
-            meteor.launch();
+            if (Ticker.desktopVisible) meteor.launch();
             interval = 15000 + Math.floor(Math.random() * 30000);
         }
     }
