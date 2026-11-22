@@ -372,11 +372,8 @@ install_claude_and_iron_stack() {
   clone_or_pull_repo "iron-memories" "$HOME/.local/share/iron/git-vault" "private" || true
 
   if [[ -x "$LOCAL_BIN/iron" ]]; then
-    local -a import_args=(--db "$HOME/.local/share/iron/memory.db" memory import)
-    [[ -d "$HOME/.claude" ]] && import_args+=(--claude-root "$HOME/.claude")
-    [[ -f "$HOME/.cavemem/data.db" ]] && import_args+=(--cavemem-db "$HOME/.cavemem/data.db")
-    if [[ "${#import_args[@]}" -gt 4 ]]; then
-      "$LOCAL_BIN/iron" "${import_args[@]}" >/dev/null || warn "Initial iron memory import skipped"
+    if [[ -d "$HOME/.claude" ]]; then
+      "$LOCAL_BIN/iron" --db "$HOME/.local/share/iron/memory.db" memory import --claude-root "$HOME/.claude" >/dev/null || warn "Initial iron memory import skipped"
     fi
     if command -v claude >/dev/null 2>&1; then
       claude mcp get iron-memory >/dev/null 2>&1 || \
@@ -404,7 +401,7 @@ Description=Refresh imported Iron memory sources
 Type=oneshot
 UMask=0077
 Nice=10
-ExecStart=/bin/sh -c 'args="--db %h/.local/share/iron/memory.db memory import"; [ -d "%h/.claude" ] && args="$args --claude-root %h/.claude"; [ -f "%h/.cavemem/data.db" ] && args="$args --cavemem-db %h/.cavemem/data.db"; exec "%h/.local/bin/iron" $args'
+ExecStart=%h/.local/bin/iron --db %h/.local/share/iron/memory.db memory import --claude-root %h/.claude
 EOF
 
   cat > "$unit_dir/iron-memory-refresh.timer" <<'EOF'
