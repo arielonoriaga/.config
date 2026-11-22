@@ -80,7 +80,7 @@ check_status() {
   check_group "Core CLI" git zsh tmux nvim rg fd fzf jq duckdb shellcheck gh tailscale docker
   check_group "Toolchains" rustup cargo sccache bun uv node python3
   check_group "Security Arsenal" gitleaks osv-scanner zizmor semgrep actionlint ast-grep cargo-audit cargo-deny trivy hadolint yq rbw
-  check_group "AI & Iron Stack" claude iron fallow hyperfine sd xh
+  check_group "AI & Iron Stack" claude iron browser-use fallow hyperfine sd xh
 
   log "Repositories & Memory Vaults"
   local path
@@ -304,6 +304,10 @@ install_cli_arsenal() {
 
   uv tool list 2>/dev/null | grep -q '^semgrep ' || uv tool install semgrep
   uv tool list 2>/dev/null | grep -q '^zizmor '  || uv tool install zizmor
+  if ! uv tool list 2>/dev/null | grep -q '^browser-use '; then
+    uv tool install browser-use==1.0.7
+  fi
+  ANONYMIZED_TELEMETRY=false BROWSER_USE_NO_UPDATE_CHECK=1 "$LOCAL_BIN/browser-use" skill install >/dev/null 2>&1 || true
 
   local arch
   arch="$(uname -m)"
@@ -377,6 +381,10 @@ install_claude_and_iron_stack() {
     if command -v claude >/dev/null 2>&1; then
       claude mcp get iron-memory >/dev/null 2>&1 || \
         claude mcp add-json iron-memory "{\"type\":\"stdio\",\"command\":\"$LOCAL_BIN/iron\",\"args\":[\"mcp\"]}" --scope user || true
+      if [[ -x "$LOCAL_BIN/browser-use" ]]; then
+        claude mcp get browser-use >/dev/null 2>&1 || \
+          claude mcp add-json browser-use "{\"type\":\"stdio\",\"command\":\"$LOCAL_BIN/browser-use\",\"args\":[\"--cli-mcp\"],\"env\":{\"ANONYMIZED_TELEMETRY\":\"false\",\"BROWSER_USE_NO_UPDATE_CHECK\":\"1\"}}" --scope user || true
+      fi
     fi
   fi
   ok "Claude & Iron Stack configured"
